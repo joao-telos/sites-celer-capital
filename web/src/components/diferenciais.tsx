@@ -34,7 +34,7 @@ export function Diferenciais() {
               Por que a Celer
               <span className="h-px w-5 bg-gold" aria-hidden="true" />
             </p>
-            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-navy sm:text-3xl lg:text-4xl">
+            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
               O que muda quando você não vai ao banco.
             </h2>
           </div>

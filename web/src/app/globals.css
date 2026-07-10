@@ -5,24 +5,50 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
-  Coolvetica — fonte de marca real da Celer (Adobe Fonts, ativa só dentro dos
-  apps Adobe no PC do usuário; não é um Google Font nem está instalada como
-  fonte de sistema — não encontrada em Windows\Fonts nem no cache do Creative
-  Cloud). O usuário vai exportar o arquivo e me enviar.
-  TODO: assim que o arquivo chegar, salvar em web/public/fonts/coolvetica.woff2
-  (ou .otf/.ttf) — o @font-face abaixo já aponta pra esse caminho.
-  Até lá: local() tenta usar a fonte se o navegador de quem visita já tiver
-  ela instalada (só o PC do usuário, por enquanto); o arquivo em /fonts/ ainda
-  não existe, então cai no fallback sans-serif pra todo mundo até resolvermos.
+  Coolvetica — fonte de marca real da Celer. Arquivo recebido do cliente
+  (família "Rg" / Regular — não as variantes Condensed/Compressed/Crammed)
+  e convertido de OTF pra WOFF2 (fonttools) em web/public/fonts/. Só os 5
+  cortes realmente usados no site foram convertidos — nunca sintetizar
+  bold/itálico a partir de um corte que não é o real (por isso 4 pesos +
+  itálico, não só um @font-face com font-weight:400 pra tudo).
 */
 @font-face {
   font-family: "Coolvetica";
-  src:
-    local("Coolvetica"),
-    local("Coolvetica Rg"),
-    url("/fonts/coolvetica.woff2") format("woff2"),
-    url("/fonts/coolvetica.otf") format("opentype");
+  src: url("/fonts/coolvetica-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("/fonts/coolvetica-regular.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("/fonts/coolvetica-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("/fonts/coolvetica-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("/fonts/coolvetica-bold-italic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
   font-display: swap;
 }
 

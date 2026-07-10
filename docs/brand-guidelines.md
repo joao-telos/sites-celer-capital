@@ -15,7 +15,7 @@ Toda vez que este documento (ou qualquer copy) precisar descrever "o que a Celer
 Depois de ver a v1 implementada, o usuário pediu uma correção de rumo visual significativa em relação ao que este documento descrevia originalmente. As seções 3–6 abaixo já foram atualizadas para refletir isso, mas o resumo da mudança:
 
 1. **Logo real substitui o conceito do manual.** O manual oficial (PDF) descrevia duas letras "C" sobrepostas em geometria hexagonal. O cliente forneceu arquivos de logo reais (`3_celerlogo.webp`, `7_celerlogo.webp`) com um design diferente: um ícone oval contendo um gráfico de barras ascendentes (formando um "C" por espaço negativo) + wordmark "celer." / "capital" em minúsculas. **Esse é o logo válido agora** — a descrição da seção 5 foi reescrita para refletir isso. Os arquivos fornecidos só existem na versão branca/clara (funcionam sobre fundo escuro; não existe ainda uma versão navy/dourada para uso sobre fundo claro).
-2. **Coolvetica substitui Cormorant Garamond como fonte de display.** É a fonte de marca real do cliente (Adobe Fonts). Ver seção 4 para o estado da implementação (arquivo ainda não obtido).
+2. **Coolvetica substitui Cormorant Garamond como fonte de display.** É a fonte de marca real do cliente (Adobe Fonts). Arquivo já recebido e integrado (5 cortes: Light/Regular/Bold + itálico normal e bold) — ver seção 4.
 3. **Sistema de "cor única de fundo" substitui a alternância Navy→Black→Cream.** O usuário quer o site majoritariamente numa cor clara única (cream), com variação vinda de **cards com tons suaves** (soft tints), não de seções inteiras em cores diferentes — nas referências que inspiraram esse pivô (Clause, Finpay), o padrão é fundo claro dominante + 1-2 seções escuras como pontuação, não alternância seção-a-seção. Hero e CTA Final são os dois "bookends" escuros (navy/ink) mantidos de propósito; todo o resto do site é cream.
 4. **Cantos arredondados em tudo.** Botões viraram pill (`rounded-full`), cards `rounded-2xl`/`rounded-3xl`. O antigo padrão "institucional flat" (`rounded-none`) foi abandonado.
 5. **Blocos centralizados.** Títulos de seção e containers centralizados na página (Hero virou coluna única centralizada, sem o split assimétrico 55/45 da v1). Parágrafos longos dentro de cards continuam alinhados à esquerda — só os blocos/títulos centralizam, não todo texto corrido.
@@ -26,7 +26,7 @@ Depois de ver a v1 implementada, o usuário pediu uma correção de rumo visual 
 - **Primary Color:** #011E2E (Navy) — só Hero e CTA Final; o resto do site é #F7F4EF (Cream)
 - **Secondary Color:** #996515 (Gold)
 - **Accent Color:** #096993 (Teal)
-- **Primary Font (display):** Coolvetica (fonte real do cliente — arquivo pendente, ver seção 4)
+- **Primary Font (display):** Coolvetica (fonte real do cliente — integrada, ver seção 4)
 - **Secondary Font (corpo/UI):** Roboto
 - **Voice:** Direta, Sólida, Parceira
 
@@ -137,29 +137,31 @@ Paleta institucional fixa (manual de marca oficial) — **não gerar tons/varia�
 
 **Histórico:** o manual de marca (PDF) especifica **Distrampler** (clássica, serifada) como tipografia de destaque. Isso foi substituído por **Cormorant Garamond** na v1 (Google Font, licença aberta), e depois **substituído de novo por Coolvetica na v2 (2026-07-10)** — Coolvetica é a fonte de marca real usada pelo cliente (ativa no Adobe Creative Cloud dele), não Distrampler nem Cormorant Garamond.
 
-**Estado atual da implementação:** Coolvetica **não é Google Font** e não foi encontrada em nenhuma pasta de fontes do sistema nem no cache do Adobe Creative Cloud (fontes do Adobe Fonts em geral só ficam ativas dentro dos apps Adobe, não são exportadas como arquivo pro sistema/navegador por padrão). O `@font-face` já está configurado em `web/src/app/globals.css` apontando para `/fonts/coolvetica.woff2` (e `.otf` como fallback) — **falta o cliente exportar o arquivo e salvá-lo em `web/public/fonts/`**. Até lá, todo texto com `font-heading`/`font-display` cai no fallback `'Arial Narrow', sans-serif` (Coolvetica é uma fonte condensada, então o fallback tenta preservar esse registro).
+**Estado da implementação (atualizado 2026-07-10):** o cliente enviou a família completa da Coolvetica (34 arquivos OTF). Só os 5 cortes realmente usados foram convertidos pra WOFF2 (via `fonttools`) e integrados em `web/public/fonts/` — família "Rg"/Regular, não as variantes Condensed/Compressed/Crammed/Heavy/UltraLight, que não têm uso no site:
+
+| Peso/estilo | Arquivo fonte | Arquivo web |
+|---|---|---|
+| Light (300) | `Coolvetica-Light-Regular.otf` | `coolvetica-light.woff2` |
+| Regular (400) | `Coolvetica-Regular.otf` | `coolvetica-regular.woff2` |
+| Regular Italic (400i) | `Coolvetica-Italic.otf` | `coolvetica-italic.woff2` |
+| Bold (700) | `Coolvetica-Bold.otf` | `coolvetica-bold.woff2` |
+| Bold Italic (700i) | `Coolvetica-Bold-Italic.otf` | `coolvetica-bold-italic.woff2` |
+
+**Regra importante:** nunca usar `font-semibold` (600) na fonte de display — não existe um corte 600 real, e o navegador teria que *sintetizar* um bold falso a partir do 400, o que fica visivelmente ruim numa fonte com personalidade forte como a Coolvetica. Use sempre `font-bold` (700, corte real) para ênfase forte, ou `font-light` (300) para o tratamento "stat/valor em destaque".
 
 ```css
-@font-face {
-  font-family: "Coolvetica";
-  src: local("Coolvetica"), local("Coolvetica Rg"),
-       url("/fonts/coolvetica.woff2") format("woff2"),
-       url("/fonts/coolvetica.otf") format("opentype");
-  font-display: swap;
-}
-
 --font-display: 'Coolvetica', 'Arial Narrow', sans-serif; /* headlines, valores em destaque */
 --font-body: 'Roboto', system-ui, sans-serif;              /* corpo, UI, navegação, labels — inalterado */
 ```
 
-Roboto continua carregado via `next/font/google` (auto-hospedado pelo Next.js, sem `<link>` manual).
+Roboto continua carregado via `next/font/google` (auto-hospedado pelo Next.js, sem `<link>` manual). Os dois cortes acima da dobra (Regular + Bold) têm `<link rel="preload">` no `<head>` (`web/src/app/layout.tsx`), já que aparecem no Hero em toda visita.
 
 ### Escala tipográfica
 
 | Elemento | Fonte | Peso | Tamanho (Desktop/Mobile) | Line Height | Tracking |
 |---|---|---|---|---|---|
-| Hero H1 | Coolvetica | 600 | 56px / 34px | 1.05 | -0.5px |
-| H2 (seção) | Coolvetica | 600 | 28–36px / 26px | 1.2 | 0 |
+| Hero H1 | Coolvetica | **700** (não 600 — sem corte real) | 56px / 34px | 1.05 | -0.5px |
+| H2 (seção) | Coolvetica | **700** | 28–36px / 26px | 1.2 | 0 |
 | H3 (card/item) | Roboto | 700 | 15–16px / 15px | 1.3 | 0.2px |
 | Eyebrow / tag | Roboto | 700 | 9–10px | 1 | 3px, uppercase |
 | Body | Roboto | 300–400 | 14–16px / 14px | 1.7–1.8 | 0 |
@@ -168,10 +170,11 @@ Roboto continua carregado via `next/font/google` (auto-hospedado pelo Next.js, s
 | Botão / CTA | Roboto | 700 | 10–11px | 1 | 1–1.5px, uppercase |
 
 ### Uso do itálico
-Itálico dourado no display (dentro do H1) marca a palavra de maior carga emocional da headline — convenção já estabelecida ("não deveria *esperar*"). Usar com moderação: no máximo 1 palavra/expressão em itálico por headline. **Atenção:** o fallback atual (`Arial Narrow`) pode não ter um itálico bem desenhado enquanto o arquivo real da Coolvetica não chega — revisar visualmente assim que a fonte for trocada.
+Itálico dourado no display (dentro do H1) marca a palavra de maior carga emocional da headline — convenção já estabelecida ("não deveria *esperar*"). Usar com moderação: no máximo 1 palavra/expressão em itálico por headline. Usa o corte itálico real (`coolvetica-bold-italic.woff2`), nunca um itálico sintético/inclinado via CSS.
 
 ### Regras
 - Nunca usar a fonte de display abaixo de 20px (perde o impacto em tamanhos pequenos)
+- Nunca usar `font-semibold`/600 na fonte de display — só existem cortes 300/400/700, `font-bold` é o corte real pra ênfase forte
 - Corpo de texto sempre em Roboto, nunca na fonte de display — legibilidade prática para o público que "não para para ler texto longo" (Tagueamento)
 
 ---
@@ -260,7 +263,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 
 ## Extractable Fields
 - `colors.primary` = Navy #011E2E (bookends only) · `colors.background` = Cream #F7F4EF (site-wide default) · `colors.secondary` = Gold #996515 · `colors.accent` = Teal #096993
-- `typography.heading` = Coolvetica (arquivo pendente, fallback Arial Narrow) · `typography.body` = Roboto
+- `typography.heading` = Coolvetica (integrada — Light/Regular/Bold + itálico, `font-bold` não `font-semibold`) · `typography.body` = Roboto
 - `voice.traits` = Ágil sem apressada, Direta sem fria, Sólida sem distante, Parceira não fornecedora, Justa não paternalista
 - `voice.prohibited` = instituição financeira, assessoria de investimentos, parceiro de investimentos, referência ao latim
 - `logo.variants` = só branco/claro disponível, uso restrito a fundo escuro (Hero, CTA Final)

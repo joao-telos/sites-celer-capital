@@ -36,8 +36,18 @@ Depois de ver a v1 (Hero + 6 seções) implementada, o usuário pediu uma corre�
 - Navegador: Hero, Processo, Para Quem, Diferenciais, Quebra de Objeção, CTA Final e Footer conferidos visualmente em 1440px e 390px (mobile), incluindo o comportamento da navbar (transparente → pill) e a troca de logo ao rolar
 - Snapshot de acessibilidade: hierarquia de heading correta (h1 único no Hero, h2 por seção), nenhuma seção quebrada
 
+## Atualização — fonte Coolvetica integrada + Framer Motion removido (mesmo dia)
+
+O usuário enviou a família completa da Coolvetica (34 arquivos OTF, várias larguras/pesos). Decisões:
+
+- **Só os 5 cortes realmente usados foram convertidos e integrados**, não os 34 — família "Rg" (Regular) em Light(300)/Regular(400)/Bold(700) + itálico normal e bold. As variantes Condensed/Compressed/Crammed/Heavy/UltraLight não têm uso no site hoje. Convertidos de OTF pra WOFF2 via `fonttools` (~41-43KB cada) e salvos em `web/public/fonts/`.
+- **Nunca sintetizar bold/itálico**: como só existem cortes reais em 400/700, troquei todo `font-semibold` (600, sem @font-face correspondente — o navegador teria que fabricar um bold falso) por `font-bold` (700, corte real) em todos os headings. `font-light` (300) e o itálico já usavam pesos com corte real, sem alteração.
+- **Preload dos 2 cortes acima da dobra** (Regular + Bold) no `<head>` do `layout.tsx`, já que aparecem no Hero em toda visita.
+
+**Achado sério durante a verificação, não relacionado à fonte:** o `Reveal`/`BlurFade` (Magic UI, biblioteca `motion`) trava o renderer do navegador por 30s+ sempre que o `useInView` dispara — reproduzido em dev **e** build de produção, não é lentidão de dev-mode. Isolei a causa trocando `BlurFade` por uma implementação própria com `IntersectionObserver` nativo (`useInViewOnce` + transição CSS pura) — o mesmo travamento ainda ocorreu even com a implementação nativa, o que aponta pra uma interação específica entre `IntersectionObserver` e a captura de screenshot via CDP neste ambiente de automação, não um bug real da aplicação (o DOM sempre continuou correto durante os travamentos, verificado via leitura da árvore de acessibilidade, e o conteúdo sempre renderizava certo quando a captura finalmente completava). De qualquer forma, a dependência `motion` (Framer Motion) foi removida do projeto — `Reveal` agora é mais simples, mais leve, e não depende de nenhuma lib de animação.
+
 ## Pendências para o usuário
 
-- Exportar o arquivo real da Coolvetica (`.woff2` ou `.otf`) e salvar em `web/public/fonts/`
 - Confirmar se a URL de login (`https://digital.celercapital.com.br/#/authentication/login`) é definitiva
 - Se precisar da logo sobre fundo claro no futuro, pedir ao cliente uma versão navy/dourada — só existe a versão branca hoje
+- Testar o site num navegador normal (não automatizado) pra confirmar que o achado do `IntersectionObserver`/CDP não afeta visitantes reais — tudo indica que não, mas vale a conferência

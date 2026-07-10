@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 
-import { BlurFade } from "@/components/ui/blur-fade";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useInViewOnce } from "@/hooks/use-in-view-once";
+import { cn } from "@/lib/utils";
 
 interface RevealProps {
   children: ReactNode;
@@ -11,24 +11,36 @@ interface RevealProps {
   direction?: "up" | "down" | "left" | "right";
 }
 
-/**
- * Wrapper fino sobre o BlurFade do Magic UI que resolve prefers-reduced-motion
- * no ponto de uso — o BlurFade anima via Motion (JS), então a regra CSS
- * global de reduced-motion em globals.css não o alcança sozinha.
- * `TextAnimate` (Magic UI) foi removido do projeto: travava depois de animar
- * só o primeiro segmento (bug reproduzível, não resolvido a fundo — ver
- * commit que trocou o H1 do Hero por este mesmo Reveal).
- */
-export function Reveal({ children, delay = 0, direction }: RevealProps) {
-  const reducedMotion = useReducedMotion();
+const HIDDEN_TRANSLATE: Record<NonNullable<RevealProps["direction"]>, string> = {
+  up: "translate-y-2",
+  down: "-translate-y-2",
+  left: "translate-x-2",
+  right: "-translate-x-2",
+};
 
-  if (reducedMotion) {
-    return <>{children}</>;
-  }
+/**
+ * Scroll-triggered fade/slide-in, plain CSS transition + native
+ * IntersectionObserver — no animation library. Reduced motion is handled
+ * entirely by the global `prefers-reduced-motion` rule in globals.css
+ * (a real CSS transition, unlike the Motion-driven component this replaced).
+ */
+export function Reveal({ children, delay = 0, direction = "up" }: RevealProps) {
+  const { ref, inView } = useInViewOnce<HTMLDivElement>({
+    rootMargin: "0px 0px -10% 0px",
+  });
 
   return (
-    <BlurFade inView delay={delay} direction={direction}>
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${delay}s` }}
+      className={cn(
+        "transition-all duration-500 ease-out",
+        inView
+          ? "translate-x-0 translate-y-0 opacity-100 blur-none"
+          : cn("opacity-0 blur-sm", HIDDEN_TRANSLATE[direction])
+      )}
+    >
       {children}
-    </BlurFade>
+    </div>
   );
 }

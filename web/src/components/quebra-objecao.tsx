@@ -26,7 +26,7 @@ export function QuebraObjecao() {
               Quebra de objeção
               <span className="h-px w-5 bg-gold" aria-hidden="true" />
             </p>
-            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-navy sm:text-3xl lg:text-4xl">
+            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
               Antecipação não é dívida.
             </h2>
             <p className="mx-auto mt-4 max-w-md text-sm leading-[1.7] font-light text-navy/70">

@@ -21,7 +21,7 @@ export function CtaFinal() {
             <span className="h-px w-5 bg-gold" aria-hidden="true" />
             Próximo passo
           </p>
-          <h2 className="font-heading text-2xl leading-[1.15] font-semibold text-white sm:text-3xl lg:text-[2.75rem]">
+          <h2 className="font-heading text-2xl leading-[1.15] font-bold text-white sm:text-3xl lg:text-[2.75rem]">
             Quanto capital está parado nos seus recebíveis agora?
           </h2>
           <p className="mt-5 text-sm leading-[1.8] font-light text-white/40">

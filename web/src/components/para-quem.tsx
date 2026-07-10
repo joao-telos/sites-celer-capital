@@ -43,7 +43,7 @@ export function ParaQuem() {
               Para quem
               <span className="h-px w-5 bg-gold" aria-hidden="true" />
             </p>
-            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-navy sm:text-3xl lg:text-4xl">
+            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
               Situações em que a Celer resolve.
             </h2>
           </div>

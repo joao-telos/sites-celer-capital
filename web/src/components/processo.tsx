@@ -51,7 +51,7 @@ export function Processo() {
               processo completo
               <span className="h-px w-5 bg-gold" aria-hidden="true" />
             </p>
-            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-navy sm:text-3xl lg:text-4xl">
+            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
               Do contrato fechado ao capital na conta.
             </h2>
           </div>
@@ -66,7 +66,7 @@ export function Processo() {
             <Reveal key={step.title} delay={i * 0.1}>
               <li className="grid grid-cols-[40px_1fr] gap-6 pb-11 last:pb-0 sm:gap-7">
                 <span
-                  className={`relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border-[1.5px] font-heading text-xl font-semibold ${DOT_STYLES[step.color]}`}
+                  className={`relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border-[1.5px] font-heading text-xl font-bold ${DOT_STYLES[step.color]}`}
                 >
                   {i + 1}
                 </span>

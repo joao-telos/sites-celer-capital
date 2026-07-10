@@ -24,6 +24,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${roboto.variable} h-full antialiased`}>
+      <head>
+        {/* Coolvetica Regular/Bold aparecem acima da dobra (Hero) em toda visita — preload evita o flash de fallback */}
+        <link
+          rel="preload"
+          href="/fonts/coolvetica-regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/coolvetica-bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
       </body>
