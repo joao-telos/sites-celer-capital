@@ -1,0 +1,48 @@
+{
+  "brand": "Celer Capital",
+  "source": "docs/brand-guidelines.md",
+  "note": "Paleta institucional fixa — não gerar tons/variações fora dos valores listados aqui (regra explícita do manual de marca oficial).",
+  "color": {
+    "navy": { "$value": "#011E2E", "$type": "color", "$description": "Primária — cor dominante de fundo" },
+    "black": { "$value": "#020B14", "$type": "color", "$description": "Fundo alternado, mais denso que navy" },
+    "gold": { "$value": "#996515", "$type": "color", "$description": "Accent — CTAs, eyebrows, dividers (uso escasso, 5-8%)" },
+    "gold-light": { "$value": "#B07A20", "$type": "color", "$description": "Variação de hover/ênfase do gold" },
+    "teal": { "$value": "#096993", "$type": "color", "$description": "Accent terciário — variação pontual" },
+    "teal-light": { "$value": "#61A8C1", "$type": "color", "$description": "Tom claro do teal" },
+    "silver": { "$value": "#A0A5A5", "$type": "color", "$description": "Neutro — texto muted sobre fundo escuro, bordas" },
+    "white": { "$value": "#FFFFFF", "$type": "color" },
+    "cream": { "$value": "#F7F4EF", "$type": "color", "$description": "Fundo claro alternativo, mais quente que branco puro" },
+    "whatsapp-green": { "$value": "#1DA851", "$type": "color", "$description": "Exceção funcional única — reservado ao CTA final do WhatsApp" }
+  },
+  "typography": {
+    "font-display": { "$value": "'Cormorant Garamond', 'Distrampler', serif", "$type": "fontFamily" },
+    "font-body": { "$value": "'Roboto', system-ui, sans-serif", "$type": "fontFamily" },
+    "scale": {
+      "hero-h1": { "size": { "desktop": "56px", "mobile": "34px" }, "weight": 600, "lineHeight": 1.05, "font": "display" },
+      "h2": { "size": { "desktop": "36px", "mobile": "26px" }, "weight": 600, "lineHeight": 1.2, "font": "display" },
+      "h3": { "size": { "desktop": "16px", "mobile": "15px" }, "weight": 700, "lineHeight": 1.3, "font": "body" },
+      "eyebrow": { "size": { "desktop": "10px", "mobile": "9px" }, "weight": 700, "lineHeight": 1, "font": "body", "tracking": "3px", "transform": "uppercase" },
+      "body": { "size": { "desktop": "16px", "mobile": "14px" }, "weight": 400, "lineHeight": 1.75, "font": "body" },
+      "small": { "size": { "desktop": "12px", "mobile": "10px" }, "weight": 400, "lineHeight": 1.5, "font": "body" },
+      "stat-value": { "size": { "desktop": "52px", "mobile": "40px" }, "weight": 300, "lineHeight": 1, "font": "display" },
+      "button": { "size": { "desktop": "11px", "mobile": "10px" }, "weight": 700, "lineHeight": 1, "font": "body", "tracking": "1.5px", "transform": "uppercase" }
+    }
+  },
+  "colorRatio": {
+    "dominant": { "colors": ["navy", "black"], "target": "55-65%" },
+    "neutral": { "colors": ["white", "cream", "silver"], "target": "25-35%" },
+    "accent-gold": { "colors": ["gold"], "target": "5-8%" },
+    "accent-teal": { "colors": ["teal", "teal-light"], "target": "3-5%" },
+    "functional": { "colors": ["whatsapp-green"], "target": "1 elemento por página" }
+  },
+  "logo": {
+    "minWidth": { "full": "120px", "icon": "32px" },
+    "clearSpace": "30px",
+    "approvedCombinations": [
+      { "background": "navy", "mark": "white+gold" },
+      { "background": "gold", "mark": "white+navy" },
+      { "background": "white", "mark": "navy+gold" },
+      { "background": "black", "mark": "white+gold" }
+    ]
+  }
+}

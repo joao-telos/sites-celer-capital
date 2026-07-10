@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celer Capital — LP v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #011E2E;
+  --black:  #020B14;
+  --gold:   #996515;
+  --gold-l: #B07A20;
+  --teal:   #096993;
+  --silver: #A0A5A5;
+  --white:  #FFFFFF;
+  --cream:  #F7F4EF;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Roboto',sans-serif; background:#d0d0d0; -webkit-font-smoothing:antialiased; }
+.page { max-width:900px; margin:0 auto; background:var(--white); box-shadow:0 0 120px rgba(0,0,0,0.35); }
+
+/* annotation */
+.ann {
+  position:absolute; bottom:12px; right:14px; z-index:20;
+  font:700 8px/1 'Roboto',sans-serif; letter-spacing:2px; text-transform:uppercase;
+  padding:4px 9px; border-radius:1px;
+  background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.4); border:1px solid rgba(255,255,255,0.12);
+}
+.ann.light { background:rgba(1,30,46,0.05); color:rgba(1,30,46,0.3); border-color:rgba(1,30,46,0.1); }
+
+/* ─── NAVBAR ─── */
+nav {
+  background:var(--navy);
+  padding:0 48px;
+  height:64px;
+  display:flex; justify-content:space-between; align-items:center;
+  position:relative;
+}
+nav::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, var(--gold) 0%, transparent 55%);
+}
+.logo { display:flex; align-items:center; gap:14px; }
+.logo-mark svg { width:30px; height:30px; }
+.logo-name { display:flex; flex-direction:column; gap:2px; }
+.logo-name .n { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:var(--white); letter-spacing:.5px; }
+.logo-name .s { font-size:7px; font-weight:700; letter-spacing:6px; color:var(--gold); text-transform:uppercase; }
+nav ul { list-style:none; display:flex; gap:32px; align-items:center; }
+nav a { font-size:11px; color:rgba(255,255,255,0.45); text-decoration:none; letter-spacing:.5px; font-weight:400; }
+.na { background:var(--gold); color:white!important; padding:9px 20px; font-weight:700!important; letter-spacing:1px!important; font-size:10px!important; text-transform:uppercase; }
+
+/* ─── HERO ─── */
+.hero {
+  background:var(--navy); min-height:580px;
+  display:grid; grid-template-columns:55% 45%;
+  position:relative; overflow:hidden;
+}
+/* subtle geometric bg */
+.hero::before {
+  content:''; position:absolute; right:-40px; top:-80px;
+  width:480px; height:480px;
+  background:radial-gradient(ellipse at top right, rgba(153,101,21,0.07) 0%, transparent 65%);
+}
+.hero-geo {
+  position:absolute; right:0; top:0; bottom:0; width:45%;
+  background:linear-gradient(160deg, #031a28 0%, #051f30 40%, #07273b 100%);
+  border-left:1px solid rgba(153,101,21,0.15);
+}
+.hero-left {
+  padding:88px 48px 80px;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative; z-index:2;
+}
+.tag {
+  display:flex; align-items:center; gap:10px;
+  font:700 9px/1 'Roboto',sans-serif; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold);
+  margin-bottom:28px;
+}
+.tag::before { content:''; width:24px; height:1px; background:var(--gold); }
+h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:56px; font-weight:600; line-height:1.05;
+  color:var(--white); letter-spacing:-.5px; margin-bottom:28px;
+}
+h1 em { font-style:italic; color:var(--gold); }
+.hero-body {
+  font-size:14px; font-weight:300; color:rgba(255,255,255,0.5);
+  line-height:1.8; max-width:360px; margin-bottom:40px;
+}
+.cta-row { display:flex; align-items:center; gap:20px; }
+.btn {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:13px 28px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  cursor:pointer; border:none;
+}
+.btn-gold { background:var(--gold); color:white; }
+.btn-ghost { background:transparent; border:1px solid rgba(255,255,255,0.18); color:rgba(255,255,255,0.45); font-size:10px; letter-spacing:1px; }
+
+.hero-right {
+  position:relative; z-index:2;
+  display:flex; align-items:center; justify-content:center; padding:48px 32px;
+}
+.hero-stat-block { display:flex; flex-direction:column; gap:2px; width:100%; max-width:220px; }
+.stat-card {
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(153,101,21,0.18);
+  padding:28px 28px 24px;
+}
+.stat-card + .stat-card { border-top:none; }
+.stat-eyebrow { font-size:8px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(153,101,21,0.7); margin-bottom:10px; }
+.stat-val { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:300; color:white; line-height:1; margin-bottom:6px; }
+.stat-val span { font-size:22px; vertical-align:super; margin-right:2px; }
+.stat-desc { font-size:10px; color:rgba(255,255,255,0.3); letter-spacing:.5px; line-height:1.5; font-weight:300; }
+.stat-divider { height:1px; background:rgba(153,101,21,0.12); }
+
+/* ─── PROCESSO ─── */
+.processo {
+  background:var(--black); padding:88px 48px;
+  position:relative; overflow:hidden;
+}
+.processo::before {
+  content:''; position:absolute; right:-100px; top:-100px;
+  width:400px; height:400px;
+  background:radial-gradient(ellipse, rgba(9,105,147,0.06) 0%, transparent 65%);
+  pointer-events:none;
+}
+.sec-header { margin-bottom:60px; }
+.sec-tag { display:flex; align-items:center; gap:10px; font:700 9px/1 'Roboto',sans-serif; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.sec-tag::before { content:''; width:20px; height:1px; background:var(--gold); }
+h2 { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:600; color:white; line-height:1.2; }
+h2.dark { color:var(--navy); }
+
+/* timeline */
+.timeline { position:relative; }
+.timeline::before {
+  content:''; position:absolute; left:19px; top:24px; bottom:24px; width:1px;
+  background:linear-gradient(180deg, var(--gold) 0%, rgba(9,105,147,0.4) 60%, rgba(255,255,255,0.05) 100%);
+}
+.tl-item {
+  display:grid; grid-template-columns:40px 1fr; gap:28px;
+  align-items:start; padding:0 0 44px;
+}
+.tl-item:last-child { padding-bottom:0; }
+.tl-dot {
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:600;
+  position:relative; z-index:1; flex-shrink:0;
+}
+.tl-dot.d1 { background:var(--black); border:1.5px solid var(--gold); color:var(--gold); }
+.tl-dot.d2 { background:rgba(153,101,21,0.15); border:1.5px solid var(--gold); color:var(--gold); }
+.tl-dot.d3 { background:rgba(9,105,147,0.2); border:1.5px solid var(--teal); color:var(--teal); }
+.tl-dot.d4 { background:rgba(9,105,147,0.1); border:1.5px solid rgba(9,105,147,0.5); color:rgba(9,105,147,0.8); }
+.tl-dot.d5 { background:rgba(255,255,255,0.06); border:1.5px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.4); }
+.tl-content { padding-top:8px; }
+.tl-title { font-size:15px; font-weight:600; color:white; margin-bottom:6px; letter-spacing:.2px; }
+.tl-text { font-size:12px; font-weight:300; color:rgba(255,255,255,0.4); line-height:1.7; max-width:500px; }
+
+/* ─── PARA QUEM ─── */
+.para-quem { background:var(--cream); padding:88px 48px; position:relative; }
+.pq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:52px; }
+.pq-item {
+  background:white; padding:36px 32px;
+  border-left:2px solid transparent; transition:.2s;
+  position:relative;
+}
+.pq-item::before {
+  content:attr(data-n);
+  position:absolute; top:28px; right:24px;
+  font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300;
+  color:rgba(1,30,46,0.05); line-height:1;
+}
+.pq-item:nth-child(1) { border-left-color:var(--gold); }
+.pq-item:nth-child(2) { border-left-color:var(--teal); }
+.pq-item:nth-child(3) { border-left-color:rgba(1,30,46,0.3); }
+.pq-item:nth-child(4) { border-left-color:var(--silver); }
+.pq-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px; line-height:1.3; }
+.pq-text { font-size:12px; font-weight:300; color:#666; line-height:1.7; }
+
+/* ─── DIFERENCIAIS ─── */
+.dif { background:var(--navy); padding:88px 48px; position:relative; overflow:hidden; }
+.dif::after {
+  content:''; position:absolute; bottom:-80px; left:-80px;
+  width:320px; height:320px;
+  background:radial-gradient(ellipse, rgba(153,101,21,0.06) 0%, transparent 65%);
+}
+.dif-table { margin-top:52px; border-top:1px solid rgba(255,255,255,0.06); }
+.dif-row {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  padding:28px 0; border-bottom:1px solid rgba(255,255,255,0.06);
+  gap:32px;
+}
+.dif-row-header {
+  padding:12px 0 20px; border-bottom:1px solid rgba(255,255,255,0.08);
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px;
+}
+.col-head { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+.col-head.celer { color:var(--gold); }
+.col-head.banco { color:rgba(255,255,255,0.2); }
+.col-head.blank { }
+.dif-label { font-size:12px; font-weight:600; color:rgba(255,255,255,0.5); align-self:center; }
+.dif-val { font-size:13px; font-weight:400; color:white; align-self:center; line-height:1.5; }
+.dif-val.bad { color:rgba(255,255,255,0.25); font-weight:300; text-decoration:line-through; text-decoration-color:rgba(255,255,255,0.1); }
+
+/* ─── CTA FINAL ─── */
+.cta { background:var(--black); padding:104px 48px; text-align:center; position:relative; overflow:hidden; }
+.cta::before {
+  content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:600px; height:400px;
+  background:radial-gradient(ellipse, rgba(153,101,21,0.09) 0%, transparent 65%);
+}
+.cta-tag { font:700 9px/1 'Roboto',sans-serif; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; position:relative; }
+.cta h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:46px; font-weight:600; color:white; line-height:1.1;
+  margin-bottom:18px; position:relative;
+}
+.cta-sub { font-size:14px; color:rgba(255,255,255,0.38); line-height:1.8; margin-bottom:40px; font-weight:300; position:relative; max-width:400px; margin-left:auto; margin-right:auto; }
+.cta-sub + .cta-sub { margin-top:-24px; }
+.btn-wa { background:#1DA851; color:white; padding:15px 36px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; display:inline-flex; align-items:center; gap:12px; border:none; cursor:pointer; position:relative; }
+.cta-note { font-size:9px; color:rgba(255,255,255,0.18); margin-top:18px; letter-spacing:1px; position:relative; text-transform:uppercase; }
+
+/* ─── FOOTER ─── */
+footer {
+  background:var(--navy); padding:26px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  border-top:1px solid rgba(153,101,21,0.12);
+}
+.ft-left { font-size:10px; color:rgba(255,255,255,0.2); letter-spacing:.5px; line-height:1.9; }
+.ft-right { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(153,101,21,0.5); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ① NAVBAR -->
+<nav>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 30 30" fill="none">
+        <path d="M15 2L26 8.5V21.5L15 28L4 21.5V8.5Z" stroke="#996515" stroke-width="1.2" fill="none"/>
+        <path d="M11 9L11 21M11 9L18 9M11 15L17 15" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M13 11L13 23M13 11L20 11M13 17L19 17" stroke="#996515" stroke-width="1.2" stroke-linecap="round" opacity=".65"/>
+      </svg>
+    </div>
+    <div class="logo-name">
+      <span class="n">Celer</span>
+      <span class="s">Capital</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#">Como Funciona</a></li>
+    <li><a href="#">Para Quem</a></li>
+    <li><a href="#">Diferenciais</a></li>
+    <li><a href="#" class="na">Antecipar Agora</a></li>
+  </ul>
+  <span class="ann">① Navbar</span>
+</nav>
+
+<!-- ② HERO -->
+<section class="hero">
+  <div class="hero-geo"></div>
+  <div class="hero-left">
+    <div class="tag">Securitizadora</div>
+    <h1>O capital que<br>já é seu não<br>deveria <em>esperar.</em></h1>
+    <p class="hero-body">
+      Antecipe seus recebíveis e libere capital imediato para o seu negócio — sem a burocracia bancária, sem perguntas desnecessárias.
+    </p>
+    <div class="cta-row">
+      <button class="btn btn-gold">
+        Antecipar meus recebíveis
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-block">
+      <div class="stat-card">
+        <div class="stat-eyebrow">Antecipe até</div>
+        <div class="stat-val"><span></span>100%</div>
+        <div class="stat-desc">do valor dos seus recebíveis,<br>direto na sua conta.</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-eyebrow">Em até</div>
+        <div class="stat-val" style="font-size:40px">Horas</div>
+        <div class="stat-desc">da análise à liquidação.<br>Sem semanas de espera.</div>
+      </div>
+    </div>
+  </div>
+  <span class="ann">② Hero</span>
+</section>
+
+<!-- ③ PROCESSO -->
+<section class="processo">
+  <div class="sec-header">
+    <div class="sec-tag">O processo completo</div>
+    <h2>Do contrato fechado<br>ao capital na conta.</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot d1">1</div>
+      <div class="tl-content">
+        <div class="tl-title">Seu cliente fecha o contrato com parcelamento</div>
+        <p class="tl-text">Você vende a prazo — nota fiscal, cheque pré, duplicata. O pagamento virá em 30, 60 ou 90 dias. O recebível existe, o caixa ainda não.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot d2">2</div>
+      <div class="tl-content">
+        <div class="tl-title">Você cede os recebíveis à Celer</div>
+        <p class="tl-text">Nos envia os documentos pelo WhatsApp. Analisamos a qualidade dos recebíveis — não o seu histórico bancário.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot d3">3</div>
+      <div class="tl-content">
+        <div class="tl-title">Proposta em horas, não em dias</div>
+        <p class="tl-text">Você recebe a proposta com taxa, prazo e valor líquido. Transparente. Se fizer sentido, confirma na hora.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot d4">4</div>
+      <div class="tl-content">
+        <div class="tl-title">Capital na sua conta</div>
+        <p class="tl-text">O valor é transferido. Seu negócio volta a ter liquidez para operar, crescer ou aproveitar oportunidades.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot d5">5</div>
+      <div class="tl-content">
+        <div class="tl-title">A Celer cuida do restante</div>
+        <p class="tl-text">No vencimento, cobramos diretamente do seu cliente. Você não precisa se preocupar com a gestão da cobrança.</p>
+      </div>
+    </div>
+  </div>
+  <span class="ann">③ Processo — timeline completa</span>
+</section>
+
+<!-- ④ PARA QUEM -->
+<section class="para-quem">
+  <div class="sec-header">
+    <div class="sec-tag dark-tag" style="color:var(--gold)"><span style="width:20px;height:1px;background:var(--gold);display:inline-block;margin-right:10px;"></span>Para quem</div>
+    <h2 class="dark">Situações em que<br>a Celer resolve.</h2>
+  </div>
+  <div class="pq-grid">
+    <div class="pq-item" data-n="01">
+      <div class="pq-title">Caixa apertado, recebíveis a prazo</div>
+      <p class="pq-text">Sua operação vendeu bem, mas o dinheiro só entra no mês que vem. O capital de giro não espera.</p>
+    </div>
+    <div class="pq-item" data-n="02">
+      <div class="pq-title">Oportunidade que não pode esperar</div>
+      <p class="pq-text">Fornecedor com desconto à vista, estoque para repor, contrato novo para bancar. Velocidade é vantagem competitiva.</p>
+    </div>
+    <div class="pq-item" data-n="03">
+      <div class="pq-title">O banco não foi uma opção viável</div>
+      <p class="pq-text">Burocracia excessiva, prazo longo, exigências que travam. A Celer analisa o recebível, não o seu CNPJ na Serasa.</p>
+    </div>
+    <div class="pq-item" data-n="04">
+      <div class="pq-title">Gestão de fluxo de caixa recorrente</div>
+      <p class="pq-text">Empresas que vendem muito a prazo usam antecipação como ferramenta estratégica de capital de giro — não como emergência.</p>
+    </div>
+  </div>
+  <span class="ann light">④ Para quem</span>
+</section>
+
+<!-- ⑤ DIFERENCIAIS -->
+<section class="dif">
+  <div class="sec-header">
+    <div class="sec-tag">Por que a Celer</div>
+    <h2>O que muda quando<br>você não vai ao banco.</h2>
+  </div>
+  <div class="dif-table">
+    <div class="dif-row-header">
+      <div class="col-head blank"></div>
+      <div class="col-head celer">Celer Capital</div>
+      <div class="col-head banco">Banco tradicional</div>
+    </div>
+    <div class="dif-row">
+      <div class="dif-label">Prazo de aprovação</div>
+      <div class="dif-val">Horas</div>
+      <div class="dif-val bad">5 a 15 dias úteis</div>
+    </div>
+    <div class="dif-row">
+      <div class="dif-label">Base da análise</div>
+      <div class="dif-val">Qualidade dos recebíveis</div>
+      <div class="dif-val bad">Histórico de crédito, score, garantias</div>
+    </div>
+    <div class="dif-row">
+      <div class="dif-label">Burocracia</div>
+      <div class="dif-val">Mínima. WhatsApp resolve.</div>
+      <div class="dif-val bad">Formulários, documentações, visitas</div>
+    </div>
+    <div class="dif-row" style="border-bottom:none">
+      <div class="dif-label">Atendimento</div>
+      <div class="dif-val">Direto com quem decide</div>
+      <div class="dif-val bad">Call center, protocolo, fila</div>
+    </div>
+  </div>
+  <span class="ann">⑤ Diferenciais — tabela comparativa</span>
+</section>
+
+<!-- ⑥ CTA -->
+<section class="cta">
+  <div class="cta-tag">Próximo passo</div>
+  <h2>Quanto capital está<br>parado nos seus<br>recebíveis agora?</h2>
+  <p class="cta-sub">Manda uma mensagem. Analisamos sem compromisso e respondemos com o que é possível fazer — rápido.</p>
+  <button class="btn-wa">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Falar pelo WhatsApp
+  </button>
+  <p class="cta-note">Sem compromisso · Sem consulta de crédito · Resposta rápida</p>
+  <span class="ann">⑥ CTA Final</span>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-left">
+    © 2024 Celer Capital · Todos os direitos reservados<br>
+    CNPJ XX.XXX.XXX/0001-XX · Registrada na CVM
+  </div>
+  <div class="ft-right">"Conectando Valor, Crescendo Juntos"</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+/* ============================================
+   Finpay — Reference Clone — Estilos de página
+   ============================================ */
+
+/* ── Botones ── */
+.ref-finpay-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.ref-finpay-btn--primary { background: var(--color-primary); color: var(--color-white); }
+.ref-finpay-btn--ghost   { background: transparent; color: var(--color-text); border-color: var(--color-border); }
+.ref-finpay-btn--outline { background: transparent; color: var(--color-white); border-color: rgba(255,255,255,0.35); }
+
+/* ── Header / Nav ── */
+.ref-finpay-header { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-md) var(--spacing-lg); background: var(--color-bg-alt); }
+.ref-finpay-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; }
+.ref-finpay-logo .img-placeholder { width: 26px; height: 26px; min-height: 0; border-radius: 6px; }
+.ref-finpay-nav { display: flex; align-items: center; gap: var(--spacing-lg); }
+.ref-finpay-nav__links { display: flex; gap: var(--spacing-md); font-size: 0.9rem; }
+.ref-finpay-nav__actions { display: flex; align-items: center; gap: 0.75rem; }
+
+/* ── Hero ── */
+.ref-finpay-hero { padding: var(--spacing-xl) var(--spacing-lg); background: var(--color-bg-alt); }
+.ref-finpay-hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); align-items: center; max-width: 1140px; margin: 0 auto; }
+.ref-finpay-hero__title { font-size: 2.4rem; font-weight: 700; line-height: 1.15; margin-bottom: var(--spacing-sm); }
+.ref-finpay-hero__subtitle { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: var(--spacing-md); max-width: 380px; }
+.ref-finpay-hero__form { display: flex; gap: 0.5rem; margin-bottom: var(--spacing-md); }
+.ref-finpay-hero__form input { flex: 1; padding: 0.7rem 1rem; border-radius: 8px; border: 1px solid var(--color-border); font-size: 0.85rem; }
+.ref-finpay-hero__partners { display: flex; gap: var(--spacing-md); align-items: center; font-weight: 600; color: var(--color-text-muted); font-size: 0.9rem; }
+.ref-finpay-hero__mockup.img-placeholder { min-height: 340px; border-radius: 16px; }
+
+/* ── Experience / Feature icons ── */
+.ref-finpay-experience { padding: var(--spacing-xl) var(--spacing-lg); background: var(--color-bg-alt); }
+.ref-finpay-experience__head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); max-width: 1140px; margin: 0 auto var(--spacing-lg); align-items: start; }
+.ref-finpay-experience__head span { display: block; font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--spacing-xs); }
+.ref-finpay-experience__head h2 { font-size: 1.7rem; }
+.ref-finpay-experience__head p { color: var(--color-text-muted); font-size: 0.9rem; }
+.ref-finpay-experience__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); max-width: 1140px; margin: 0 auto; }
+.ref-finpay-experience__item .img-placeholder { width: 40px; height: 40px; min-height: 0; border-radius: 8px; margin-bottom: var(--spacing-sm); }
+.ref-finpay-experience__item h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+.ref-finpay-experience__item p { font-size: 0.85rem; color: var(--color-text-muted); }
+
+/* ── Why us ── */
+.ref-finpay-whyus { padding: var(--spacing-xl) var(--spacing-lg); }
+.ref-finpay-section-head { text-align: center; margin-bottom: var(--spacing-lg); }
+.ref-finpay-section-head span { display: block; font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--spacing-xs); }
+.ref-finpay-section-head h2 { font-size: 1.6rem; }
+.ref-finpay-whyus__grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: var(--spacing-md); max-width: 1140px; margin: 0 auto; }
+.ref-finpay-whyus__card { background: var(--color-bg-alt); border-radius: 16px; padding: var(--spacing-lg); }
+.ref-finpay-whyus__card--stat strong { font-size: 2.5rem; color: var(--color-primary); display: block; }
+.ref-finpay-whyus__card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); align-items: center; }
+.ref-finpay-whyus__card--wide .img-placeholder { min-height: 160px; border-radius: 10px; }
+.ref-finpay-whyus__flow { display: flex; align-items: center; gap: var(--spacing-sm); margin-top: var(--spacing-sm); }
+.ref-finpay-whyus__flow .img-placeholder { width: 44px; height: 44px; min-height: 0; border-radius: 50%; }
+
+/* ── Reserve account (sección oscura numerada) ── */
+.ref-finpay-steps { background: var(--color-primary-dark); color: var(--color-white); padding: var(--spacing-xl) var(--spacing-lg); }
+.ref-finpay-steps .ref-finpay-section-head span { color: var(--color-primary); }
+.ref-finpay-steps .ref-finpay-section-head h2 { color: var(--color-white); max-width: 480px; margin: 0 auto; }
+.ref-finpay-steps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); max-width: 1140px; margin: 0 auto; }
+.ref-finpay-steps__item { background: rgba(255,255,255,0.05); border-radius: 12px; padding: var(--spacing-md); }
+.ref-finpay-steps__item strong { font-size: 1.8rem; opacity: 0.4; display: block; margin-bottom: var(--spacing-xs); }
+.ref-finpay-steps__item h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+.ref-finpay-steps__item p { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+
+/* ── Mission / stats / pricing ── */
+.ref-finpay-mission { padding: var(--spacing-xl) var(--spacing-lg); }
+.ref-finpay-mission__stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; max-width: 700px; margin: 0 auto var(--spacing-xl); }
+.ref-finpay-mission__stats strong { display: block; font-size: 1.8rem; }
+.ref-finpay-mission__stats span { font-size: 0.85rem; color: var(--color-text-muted); }
+
+.ref-finpay-pricing { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); max-width: 700px; margin: 0 auto; }
+.ref-finpay-pricing__card { border-radius: 16px; padding: var(--spacing-lg); display: flex; align-items: center; justify-content: space-between; }
+.ref-finpay-pricing__card--plus { background: var(--color-bg); }
+.ref-finpay-pricing__card--premium { background: var(--color-primary); color: var(--color-white); }
+.ref-finpay-pricing__card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+.ref-finpay-pricing__card strong { font-size: 1.3rem; }
+
+/* ── CTA final ── */
+.ref-finpay-cta { background: var(--color-primary-dark); color: var(--color-white); border-radius: 20px; margin: 0 var(--spacing-lg) var(--spacing-xl); padding: var(--spacing-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--spacing-md); }
+.ref-finpay-cta h2 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+.ref-finpay-cta p { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+.ref-finpay-cta__actions { display: flex; gap: 0.75rem; }
+
+/* ── Footer ── */
+.ref-finpay-footer { background: var(--color-bg-alt); padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md); }
+.ref-finpay-footer__top { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
+.ref-finpay-footer__brand { font-weight: 700; margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: 0.4rem; }
+.ref-finpay-footer__social { display: flex; gap: 0.6rem; margin-top: var(--spacing-sm); }
+.ref-finpay-footer__col h4 { font-size: 0.85rem; margin-bottom: var(--spacing-sm); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.ref-finpay-footer__col li { font-size: 0.85rem; margin-bottom: 0.5rem; }
+.ref-finpay-footer__bottom { text-align: center; border-top: 1px solid var(--color-border); padding-top: var(--spacing-md); font-size: 0.8rem; color: var(--color-text-muted); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .ref-finpay-hero__grid { grid-template-columns: 1fr; }
+  .ref-finpay-experience__head { grid-template-columns: 1fr; }
+  .ref-finpay-experience__grid { grid-template-columns: 1fr 1fr; }
+  .ref-finpay-steps__grid { grid-template-columns: 1fr; }
+  .ref-finpay-footer__top { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .ref-finpay-nav__links { display: none; } /* TODO: menú hamburguesa */
+  .ref-finpay-hero__title { font-size: 1.7rem; }
+  .ref-finpay-whyus__grid { grid-template-columns: 1fr; }
+  .ref-finpay-whyus__card--wide { grid-template-columns: 1fr; }
+  .ref-finpay-mission__stats { grid-template-columns: 1fr; gap: var(--spacing-sm); }
+  .ref-finpay-pricing { grid-template-columns: 1fr; }
+  .ref-finpay-footer__top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .ref-finpay-experience__grid { grid-template-columns: 1fr; }
+  .ref-finpay-footer__top { grid-template-columns: 1fr; }
+}

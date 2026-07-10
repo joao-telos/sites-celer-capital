@@ -1,0 +1,105 @@
+/*
+  Celer Capital — Design Tokens
+  Fonte: docs/brand-guidelines.md
+  Paleta institucional fixa — não introduzir cores fora desta lista
+  (exceto --whatsapp-green, exceção funcional documentada).
+*/
+
+:root {
+  /* ── Cor — Institucional ── */
+  --navy:        #011E2E;
+  --black:       #020B14;
+  --gold:        #996515;
+  --gold-light:  #B07A20;
+  --teal:        #096993;
+  --teal-light:  #61A8C1;
+  --silver:      #A0A5A5;
+  --white:       #FFFFFF;
+  --cream:       #F7F4EF;
+
+  /* Exceção funcional única — não usar fora do CTA WhatsApp */
+  --whatsapp-green: #1DA851;
+
+  /* ── Tipografia ── */
+  --font-display: 'Cormorant Garamond', 'Distrampler', serif;
+  --font-body:    'Roboto', system-ui, sans-serif;
+
+  /* Escala — desktop */
+  --text-hero:      56px;
+  --text-h2:         36px;
+  --text-h3:         16px;
+  --text-eyebrow:    10px;
+  --text-body:       16px;
+  --text-small:      12px;
+  --text-stat:       52px;
+  --text-button:     11px;
+
+  /* Pesos */
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-bold:      700;
+
+  /* Tracking */
+  --tracking-eyebrow: 3px;
+  --tracking-button:  1.5px;
+
+  /* Espaçamento base (múltiplos de 4px, alinhado à área de proteção de 30px do logo) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-22: 88px; /* padding padrão de seção, usado no mockup */
+}
+
+/* ── Ajustes responsivos (mobile-first breakpoint em 768px) ── */
+@media (max-width: 768px) {
+  :root {
+    --text-hero:   34px;
+    --text-h2:      26px;
+    --text-stat:    40px;
+    --text-eyebrow: 9px;
+    --text-button:  10px;
+  }
+}
+
+/* ── Utilitários de cor de fundo por seção (alternância obrigatória) ── */
+.bg-navy   { background: var(--navy);  color: var(--white); }
+.bg-black  { background: var(--black); color: var(--white); }
+.bg-cream  { background: var(--cream); color: var(--navy); }
+.bg-white  { background: var(--white); color: var(--navy); }
+
+/* ── Tipografia base ── */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Botões ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: var(--text-button);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+  padding: 13px 28px;
+  border: none;
+  cursor: pointer;
+}
+.btn-gold  { background: var(--gold);  color: var(--white); }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.45); }
+.btn-wa    { background: var(--whatsapp-green); color: var(--white); padding: 15px 36px; }
