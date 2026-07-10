@@ -17,8 +17,8 @@ const CELER_POINTS = [
 
 export function QuebraObjecao() {
   return (
-    <section id="nao-e-emprestimo" className="bg-white">
-      <div className="px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
+    <section id="nao-e-emprestimo">
+      <div className="mx-auto max-w-3xl px-6 py-16 sm:px-10 lg:py-24">
         <Reveal>
           <div className="mx-auto mb-14 max-w-xl text-center lg:mb-16">
             <p className="mb-4 flex items-center justify-center gap-2.5 text-[9px] font-bold tracking-[0.3em] text-gold uppercase">
@@ -29,7 +29,7 @@ export function QuebraObjecao() {
             <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-navy sm:text-3xl lg:text-4xl">
               Antecipação não é dívida.
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-sm leading-[1.7] font-light text-[#666]">
+            <p className="mx-auto mt-4 max-w-md text-sm leading-[1.7] font-light text-navy/70">
               É a dúvida mais comum de quem nunca antecipou recebíveis — e a
               resposta é simples: é receber hoje o que já é seu por direito.
             </p>
@@ -38,7 +38,7 @@ export function QuebraObjecao() {
 
         <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
           <Reveal delay={0}>
-            <Card className="h-full gap-0 rounded-none border-0 bg-[#F5F5F2] py-0 shadow-none ring-0">
+            <Card className="h-full gap-0 rounded-3xl border-0 bg-navy/[0.05] py-0 shadow-none ring-0">
               <CardContent className="flex h-full flex-col px-8 py-9">
                 <h3 className="mb-5 text-sm font-bold tracking-wide text-navy/70 uppercase">
                   Empréstimo
@@ -61,7 +61,7 @@ export function QuebraObjecao() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <Card className="h-full gap-0 rounded-none border-0 border-t-4 border-gold bg-navy py-0 shadow-none ring-0">
+            <Card className="h-full gap-0 rounded-3xl border-0 border-t-4 border-gold bg-navy py-0 shadow-none ring-0">
               <CardContent className="flex h-full flex-col px-8 py-9">
                 <h3 className="mb-5 text-sm font-bold tracking-wide text-gold uppercase">
                   Antecipação com a Celer

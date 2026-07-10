@@ -1,6 +1,10 @@
+"use client";
+
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
+import { useScrolled } from "@/hooks/use-scrolled";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -9,47 +13,52 @@ const NAV_LINKS = [
   { href: "#diferenciais", label: "Diferenciais" },
 ];
 
+// TODO: confirmar com o cliente se esta é a URL definitiva de login da plataforma
+const LOGIN_URL = "https://digital.celercapital.com.br/#/authentication/login";
+
 export function Navbar() {
+  const scrolled = useScrolled();
+
   return (
-    <header className="sticky top-0 z-50 border-b border-gold/10 bg-navy/90 backdrop-blur-sm">
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 sm:px-4">
       <nav
         aria-label="Navegação principal"
-        className="flex h-16 items-center justify-between px-6 sm:px-10 lg:px-16"
+        className={cn(
+          "flex w-full items-center justify-between transition-[max-width,margin,padding,border-radius,background-color,box-shadow] duration-300 ease-out",
+          scrolled
+            ? "mt-3 max-w-3xl rounded-full bg-white/90 px-5 py-2 shadow-lg shadow-navy/5 ring-1 ring-navy/[0.06] backdrop-blur-md"
+            : "mt-0 max-w-7xl rounded-none bg-transparent px-3 py-6"
+        )}
       >
-        <a href="#" className="flex items-center gap-3">
-          <svg
-            viewBox="0 0 30 30"
-            fill="none"
-            className="size-7"
-            aria-hidden="true"
-          >
-            <path
-              d="M15 2L26 8.5V21.5L15 28L4 21.5V8.5Z"
-              stroke="var(--color-gold)"
-              strokeWidth="1.2"
-            />
-            <path
-              d="M11 9L11 21M11 9L18 9M11 15L17 15"
-              stroke="white"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-            <path
-              d="M13 11L13 23M13 11L20 11M13 17L19 17"
-              stroke="var(--color-gold)"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              opacity="0.65"
-            />
-          </svg>
-          <span className="flex flex-col leading-tight">
-            <span className="font-heading text-lg font-semibold text-white">
-              Celer
-            </span>
-            <span className="text-[7px] font-bold tracking-[0.35em] text-gold uppercase">
-              Capital
-            </span>
-          </span>
+        <a
+          href="#"
+          aria-label="Celer Capital — página inicial"
+          className={cn(
+            "relative shrink-0 overflow-hidden transition-[width] duration-300 ease-out",
+            scrolled ? "h-8 w-8" : "h-9 w-[150px]"
+          )}
+        >
+          <Image
+            src="/logo/celer-horizontal.png"
+            alt=""
+            fill
+            priority
+            sizes="150px"
+            className={cn(
+              "object-contain object-left transition-opacity duration-300",
+              scrolled ? "opacity-0" : "opacity-100"
+            )}
+          />
+          <Image
+            src="/logo/celer-icon.png"
+            alt=""
+            fill
+            sizes="32px"
+            className={cn(
+              "object-contain object-left transition-opacity duration-300",
+              scrolled ? "opacity-100" : "opacity-0"
+            )}
+          />
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
@@ -57,7 +66,12 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[11px] font-medium tracking-wide text-white/45 transition-colors hover:text-white/80"
+                className={cn(
+                  "text-[11px] font-medium tracking-wide transition-colors",
+                  scrolled
+                    ? "text-navy/50 hover:text-navy"
+                    : "text-white/50 hover:text-white/85"
+                )}
               >
                 {link.label}
               </a>
@@ -65,16 +79,32 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
-          className={cn(
-            buttonVariants({ size: "sm" }),
-            "h-auto rounded-none bg-gold px-4 py-2.5 text-[10px] font-bold tracking-wider text-white uppercase hover:bg-gold-light"
-          )}
-        >
-          Antecipar agora
-          <ArrowRight className="size-3" aria-hidden="true" />
-        </a>
+        <div className="flex items-center gap-2.5">
+          <a
+            href={LOGIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "h-auto rounded-full px-4 py-2 text-[10px] font-bold tracking-wider uppercase transition-colors",
+              scrolled
+                ? "border-navy/15 bg-transparent text-navy/60 hover:bg-navy/5 hover:text-navy"
+                : "border-white/25 bg-transparent text-white/70 hover:bg-white/10 hover:text-white"
+            )}
+          >
+            Login
+          </a>
+          <a
+            href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
+            className={cn(
+              buttonVariants({ size: "sm" }),
+              "h-auto rounded-full bg-gold px-4 py-2 text-[10px] font-bold tracking-wider text-white uppercase hover:bg-gold-light"
+            )}
+          >
+            Antecipar agora
+            <ArrowRight className="size-3" aria-hidden="true" />
+          </a>
+        </div>
       </nav>
     </header>
   );

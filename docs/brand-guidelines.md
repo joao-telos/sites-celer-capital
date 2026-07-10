@@ -8,15 +8,25 @@ O texto institucional do PDF do manual de marca (seção "Apresentação da Empr
 
 **O que a Celer realmente é:** uma **securitizadora** sediada em Curitiba, especializada em **antecipação de recebíveis** (duplicatas, cheques pré, notas fiscais a prazo) para PMEs industriais e distribuidoras. Ela **compra o recebível a desconto e entrega capital imediato** — não gerencia investimentos de terceiros, não é assessoria, não existe uma "carteira" que o cliente do Lado 1 acompanha.
 
-Toda vez que este documento (ou qualquer copy) precisar descrever "o que a Celer é", usar a formulação acima — nunca a linguagem de "instituição financeira"/"parceiro de investimentos" do PDF. Cores, tipografia, logo e o conceito "agilidade + sofisticação clássica" do manual continuam 100% válidos — só a descrição textual do negócio está errada.
+Toda vez que este documento (ou qualquer copy) precisar descrever "o que a Celer é", usar a formulação acima — nunca a linguagem de "instituição financeira"/"parceiro de investimentos" do PDF. Cores e o conceito "agilidade + sofisticação clássica" do manual continuam 100% válidos — só a descrição textual do negócio está errada.
+
+## ⚠️ Pivô visual v2 (2026-07-10 — ler antes de implementar UI)
+
+Depois de ver a v1 implementada, o usuário pediu uma correção de rumo visual significativa em relação ao que este documento descrevia originalmente. As seções 3–6 abaixo já foram atualizadas para refletir isso, mas o resumo da mudança:
+
+1. **Logo real substitui o conceito do manual.** O manual oficial (PDF) descrevia duas letras "C" sobrepostas em geometria hexagonal. O cliente forneceu arquivos de logo reais (`3_celerlogo.webp`, `7_celerlogo.webp`) com um design diferente: um ícone oval contendo um gráfico de barras ascendentes (formando um "C" por espaço negativo) + wordmark "celer." / "capital" em minúsculas. **Esse é o logo válido agora** — a descrição da seção 5 foi reescrita para refletir isso. Os arquivos fornecidos só existem na versão branca/clara (funcionam sobre fundo escuro; não existe ainda uma versão navy/dourada para uso sobre fundo claro).
+2. **Coolvetica substitui Cormorant Garamond como fonte de display.** É a fonte de marca real do cliente (Adobe Fonts). Ver seção 4 para o estado da implementação (arquivo ainda não obtido).
+3. **Sistema de "cor única de fundo" substitui a alternância Navy→Black→Cream.** O usuário quer o site majoritariamente numa cor clara única (cream), com variação vinda de **cards com tons suaves** (soft tints), não de seções inteiras em cores diferentes — nas referências que inspiraram esse pivô (Clause, Finpay), o padrão é fundo claro dominante + 1-2 seções escuras como pontuação, não alternância seção-a-seção. Hero e CTA Final são os dois "bookends" escuros (navy/ink) mantidos de propósito; todo o resto do site é cream.
+4. **Cantos arredondados em tudo.** Botões viraram pill (`rounded-full`), cards `rounded-2xl`/`rounded-3xl`. O antigo padrão "institucional flat" (`rounded-none`) foi abandonado.
+5. **Blocos centralizados.** Títulos de seção e containers centralizados na página (Hero virou coluna única centralizada, sem o split assimétrico 55/45 da v1). Parágrafos longos dentro de cards continuam alinhados à esquerda — só os blocos/títulos centralizam, não todo texto corrido.
 
 ---
 
 ## Quick Reference
-- **Primary Color:** #011E2E (Navy)
+- **Primary Color:** #011E2E (Navy) — só Hero e CTA Final; o resto do site é #F7F4EF (Cream)
 - **Secondary Color:** #996515 (Gold)
 - **Accent Color:** #096993 (Teal)
-- **Primary Font (display):** Cormorant Garamond
+- **Primary Font (display):** Coolvetica (fonte real do cliente — arquivo pendente, ver seção 4)
 - **Secondary Font (corpo/UI):** Roboto
 - **Voice:** Direta, Sólida, Parceira
 
@@ -81,8 +91,8 @@ Paleta institucional fixa (manual de marca oficial) — **não gerar tons/varia�
 ### Primary Colors
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| Navy | #011E2E | rgb(1,30,46) | Cor dominante — navbar, hero, seções institucionais, ~50% da superfície visual |
-| Black | #020B14 | rgb(2,11,20) | Fundo alternado (seções "Processo", "CTA final") — mais denso que o navy, cria ritmo entre seções |
+| Navy | #011E2E | rgb(1,30,46) | Um dos dois "bookends" escuros (Hero) — ver "Sistema de fundo único" abaixo |
+| Black (Ink) | #020B14 | rgb(2,11,20) | O outro bookend escuro (CTA Final) — mais denso que o navy |
 
 ### Secondary Colors
 | Name | Hex | RGB | Usage |
@@ -96,18 +106,19 @@ Paleta institucional fixa (manual de marca oficial) — **não gerar tons/varia�
 |------|-----|-----|-------|
 | Silver | #A0A5A5 | rgb(160,165,165) | Texto muted sobre fundo escuro, bordas sutis |
 | White | #FFFFFF | rgb(255,255,255) | Texto sobre fundo escuro, fundo de seções claras |
-| Cream | #F7F4EF | rgb(247,244,239) | Fundo alternativo claro (seção "Para Quem") — mais quente que branco puro, evita frieza clínica |
+| Cream | #F7F4EF | rgb(247,244,239) | **Fundo único e dominante do site** (pivô v2) — todas as seções exceto Hero e CTA Final. Mais quente que branco puro, evita frieza clínica |
 
 ### Cor funcional (exceção documentada)
 | Name | Hex | Usage |
 |------|-----|-------|
 | WhatsApp Green | #1DA851 | **Única cor fora da paleta institucional aprovada para uso.** Reservada exclusivamente ao botão de CTA final "Falar pelo WhatsApp" — o reconhecimento de marca do WhatsApp supera a consistência de paleta nesse ponto único de conversão. Não usar em mais nenhum outro contexto. |
 
-### Regra de proporção
-- Navy + Black somados: ~55–65% da superfície (dominante)
-- Silver/White/Cream: ~25–35% (texto e respiro)
-- Gold: ~5–8% (destaque — CTAs, linhas, eyebrows)
-- Teal/Teal Light: ~3–5% (variação pontual, nunca dominante)
+### Regra de proporção (pivô v2)
+- Cream: ~80–85% da superfície do site inteiro (dominante — todas as seções exceto os dois bookends)
+- Navy + Black (Hero + CTA Final): os únicos dois momentos escuros da página inteira — não alternar seção a seção como na v1
+- Gold: ~5–8% (destaque — CTAs, linhas, eyebrows), consistente nos dois modos (claro e escuro)
+- Teal/Teal Light: variação pontual em cards/timeline sobre o fundo cream, nunca dominante
+- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda: `bg-gold/[0.07]`, `bg-teal/[0.07]`, `bg-navy/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs)
 - WhatsApp Green: 1 elemento por página (o CTA final)
 
 ### Acessibilidade
@@ -115,7 +126,8 @@ Paleta institucional fixa (manual de marca oficial) — **não gerar tons/varia�
 - Texto branco sobre Black (#020B14): contraste 19.6:1 — AAA
 - Gold (#996515) sobre Navy: contraste 3.4:1 — adequado para texto grande/eyebrows (≥18px), não usar para corpo de texto pequeno
 - Navy sobre Cream (#F7F4EF): contraste 14.9:1 — AAA
-- Nunca usar Silver (#A0A5A5) para texto de corpo sobre branco — contraste insuficiente (2.1:1). Silver é só para uso sobre fundo escuro ou como borda.
+- **Cuidado com opacidade de navy sobre cream para texto de corpo:** `text-navy` abaixo de ~65% de opacidade cai abaixo de 4.5:1 (AA) sobre o fundo cream — testado e corrigido várias vezes durante a implementação (`text-navy/50` ≈ 3.3:1, insuficiente; `text-navy/70` ≈ 6.2:1, seguro). Usar `/65` a `/70` como piso para texto de corpo secundário sobre cream, nunca menos.
+- Nunca usar Silver (#A0A5A5) para texto de corpo sobre branco/cream — contraste insuficiente. Silver é só para uso sobre fundo escuro ou como borda/preenchimento sutil.
 
 ---
 
@@ -123,64 +135,66 @@ Paleta institucional fixa (manual de marca oficial) — **não gerar tons/varia�
 
 ### Fontes oficiais vs. fontes de implementação
 
-O manual de marca especifica **Distrampler** (clássica, serifada) como tipografia de destaque e **Roboto** como secundária. Distrampler não está disponível no Google Fonts / não é praticável para carregamento web performático. **Decisão já validada em iteração anterior:** usar **Cormorant Garamond** como substituto — mesmo registro clássico-serifado, mesma função de transmitir sofisticação, mas com licença web aberta e melhor legibilidade em tela. Distrampler fica reservada para peças institucionais impressas (papelaria, apresentações) onde o arquivo de fonte já existe.
+**Histórico:** o manual de marca (PDF) especifica **Distrampler** (clássica, serifada) como tipografia de destaque. Isso foi substituído por **Cormorant Garamond** na v1 (Google Font, licença aberta), e depois **substituído de novo por Coolvetica na v2 (2026-07-10)** — Coolvetica é a fonte de marca real usada pelo cliente (ativa no Adobe Creative Cloud dele), não Distrampler nem Cormorant Garamond.
+
+**Estado atual da implementação:** Coolvetica **não é Google Font** e não foi encontrada em nenhuma pasta de fontes do sistema nem no cache do Adobe Creative Cloud (fontes do Adobe Fonts em geral só ficam ativas dentro dos apps Adobe, não são exportadas como arquivo pro sistema/navegador por padrão). O `@font-face` já está configurado em `web/src/app/globals.css` apontando para `/fonts/coolvetica.woff2` (e `.otf` como fallback) — **falta o cliente exportar o arquivo e salvá-lo em `web/public/fonts/`**. Até lá, todo texto com `font-heading`/`font-display` cai no fallback `'Arial Narrow', sans-serif` (Coolvetica é uma fonte condensada, então o fallback tenta preservar esse registro).
 
 ```css
---font-heading: 'Cormorant Garamond', 'Distrampler', serif;  /* alias de compatibilidade — igual a font-display */
---font-display: 'Cormorant Garamond', 'Distrampler', serif; /* headlines, valores em destaque, aspas */
---font-body: 'Roboto', system-ui, sans-serif;                /* corpo, UI, navegação, labels */
+@font-face {
+  font-family: "Coolvetica";
+  src: local("Coolvetica"), local("Coolvetica Rg"),
+       url("/fonts/coolvetica.woff2") format("woff2"),
+       url("/fonts/coolvetica.otf") format("opentype");
+  font-display: swap;
+}
+
+--font-display: 'Coolvetica', 'Arial Narrow', sans-serif; /* headlines, valores em destaque */
+--font-body: 'Roboto', system-ui, sans-serif;              /* corpo, UI, navegação, labels — inalterado */
 ```
 
-### Carregamento
-```html
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
-```
+Roboto continua carregado via `next/font/google` (auto-hospedado pelo Next.js, sem `<link>` manual).
 
 ### Escala tipográfica
 
 | Elemento | Fonte | Peso | Tamanho (Desktop/Mobile) | Line Height | Tracking |
 |---|---|---|---|---|---|
-| Hero H1 | Cormorant Garamond | 600 | 56px / 34px | 1.05 | -0.5px |
-| H2 (seção) | Cormorant Garamond | 600 | 36px / 26px | 1.2 | 0 |
+| Hero H1 | Coolvetica | 600 | 56px / 34px | 1.05 | -0.5px |
+| H2 (seção) | Coolvetica | 600 | 28–36px / 26px | 1.2 | 0 |
 | H3 (card/item) | Roboto | 700 | 15–16px / 15px | 1.3 | 0.2px |
 | Eyebrow / tag | Roboto | 700 | 9–10px | 1 | 3px, uppercase |
 | Body | Roboto | 300–400 | 14–16px / 14px | 1.7–1.8 | 0 |
 | Small / caption | Roboto | 400 | 10–12px | 1.5 | 0.5px |
-| Stat / valor em destaque | Cormorant Garamond | 300 | 40–56px | 1 | 0 |
+| Stat / valor em destaque | Coolvetica | 300 | 40–56px | 1 | 0 |
 | Botão / CTA | Roboto | 700 | 10–11px | 1 | 1–1.5px, uppercase |
 
 ### Uso do itálico
-Cormorant Garamond em itálico (`<em>` dentro do H1) marca a palavra de maior carga emocional da headline — convenção já estabelecida no mockup ("não deveria *esperar*"). Usar com moderação: no máximo 1 palavra/expressão em itálico por headline.
+Itálico dourado no display (dentro do H1) marca a palavra de maior carga emocional da headline — convenção já estabelecida ("não deveria *esperar*"). Usar com moderação: no máximo 1 palavra/expressão em itálico por headline. **Atenção:** o fallback atual (`Arial Narrow`) pode não ter um itálico bem desenhado enquanto o arquivo real da Coolvetica não chega — revisar visualmente assim que a fonte for trocada.
 
 ### Regras
-- Nunca usar Cormorant Garamond abaixo de 20px (perde a elegância da serifa em tamanhos pequenos, vira ilegível)
-- Nunca usar peso 700+ em Cormorant Garamond (a família não tem bold pesado que funcione — para ênfase forte, usar Roboto Bold)
-- Corpo de texto sempre em Roboto, nunca serifado — legibilidade prática para o público que "não para para ler texto longo" (Tagueamento)
+- Nunca usar a fonte de display abaixo de 20px (perde o impacto em tamanhos pequenos)
+- Corpo de texto sempre em Roboto, nunca na fonte de display — legibilidade prática para o público que "não para para ler texto longo" (Tagueamento)
 
 ---
 
 ## 5. Logo
 
-### Conceito
-Duas letras "C" sobrepostas em geometria isométrica/hexagonal. A sobreposição representa conexão e cooperação; a estrutura angular representa agilidade e precisão técnica (ressoa com o público industrial — metalurgia, engenharia).
+### Conceito (atualizado v2 — logo real do cliente)
+O manual oficial (PDF) descrevia duas letras "C" sobrepostas em geometria isométrica/hexagonal — esse conceito **não é o logo usado na prática**. O logo real, fornecido pelo cliente (`3_celerlogo.webp` horizontal, `7_celerlogo.webp` vertical), é: um ícone oval contendo um gráfico de barras ascendentes (as barras formam o corte que lê como "C" por espaço negativo dentro do oval) + wordmark "celer." (fonte leve/script-like) sobre "capital" (bold) em minúsculas, sem versalete.
 
-### Variantes de cor (do manual oficial)
-| Fundo | Versão do logo |
-|---|---|
-| Navy (#011E2E) | Marca branca + dourada (padrão institucional) |
-| Gold (#996515) | Marca branca + navy |
-| Branco | Marca navy + dourada, ou monocromática navy |
-| Black (#020B14) | Marca branca + dourada |
+Assets recortados e prontos em `web/public/logo/`:
+- `celer-icon.png` — só o ícone (oval + barras), usado compacto (navbar compilada, favicon)
+- `celer-horizontal.png` — ícone + wordmark lado a lado, usado na navbar expandida
+- `celer-vertical.png` — ícone em cima, wordmark embaixo (empilhado) — ainda sem uso definido no site, disponível para materiais futuros
 
-Versões monocromáticas (100% branco ou 100% navy/preto) disponíveis para contextos de baixo contraste ou impressão P&B.
+### Variantes de cor — limitação atual
+Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os pixels do ícone/wordmark são ~quase-brancos com canal alpha, ficam invisíveis num fundo claro e só aparecem legíveis sobre fundo escuro). **Não existe ainda uma versão navy/dourada** do logo para uso sobre fundo claro. Isso é o motivo pelo qual o Hero e a navbar transparente inicial permanecem em fundo escuro (navy) — é onde essa logo funciona. Se o site precisar do logo sobre fundo claro em algum ponto futuro, é necessário pedir ao cliente uma versão colorida (navy ou gold) do mesmo arquivo.
 
 ### Regras de uso
-- **Nunca** recolorir fora das combinações acima
+- **Nunca** recolorir a logo livremente — se precisar de uma versão em outra cor, pedir ao cliente o arquivo, não improvisar via filtro/CSS
 - **Nunca** aplicar gradiente, sombra ou contorno à marca
 - **Nunca** esticar, comprimir ou rotacionar
 - **Nunca** sobrepor a fundos com muita informação visual sem uma área de proteção sólida
-- Área de proteção mínima: **30px** em todas as direções (padrão digital definido no manual), proporcional ao tamanho de aplicação
-- Tamanho mínimo digital: 120px de largura para o lockup completo (marca + "Celer Capital"); 32px para o símbolo isolado (favicon, ícones de UI)
+- Tamanho mínimo digital: ~120px de largura para o lockup horizontal completo; 32px para o ícone isolado (navbar compilada, favicon)
 
 ### Tagline
 **"Conectando Valor, Crescendo Juntos"** — uso institucional (footer, apresentações, materiais de marca). Não é headline de conversão — é assinatura de marca, não argumento de venda. Manter em Cormorant Garamond itálico, cor Gold, sempre entre aspas quando usada como assinatura.
@@ -191,37 +205,43 @@ Versões monocromáticas (100% branco ou 100% navy/preto) disponíveis para cont
 
 Biblioteca de padrões já validada no mockup v3 — base para os componentes do site final. Cada seção nova do site (além das 6 do mockup) deve reaproveitar estes padrões antes de inventar um novo.
 
-### Botões
+### Botões — todos pill (`rounded-full`), pivô v2
 | Variante | Uso | Estilo |
 |---|---|---|
-| `.btn-gold` | CTA primário (hero, navbar) | Fundo Gold sólido, texto branco, uppercase, tracking 1.5px |
-| `.btn-ghost` | CTA secundário/terciário | Borda translúcida branca, sem fundo |
-| `.btn-wa` | CTA de conversão final (WhatsApp) | Fundo verde WhatsApp — único uso aprovado dessa cor, ícone + texto |
+| Primário (gold) | CTA principal (hero, navbar, CTA final secundário) | `rounded-full`, fundo Gold sólido, texto branco, uppercase |
+| Outline | CTA secundário/terciário, Login | `rounded-full`, borda translúcida, sem fundo |
+| WhatsApp | CTA de conversão final | `rounded-full`, fundo verde WhatsApp — único uso aprovado dessa cor |
 
-### Stat card (hero)
-Bloco vertical empilhado (`stat-card` + `stat-divider`), eyebrow dourado pequeno, valor grande em Cormorant Garamond peso 300, descrição muted. Usado para números-chave confirmados — nunca para dado placeholder em produção.
+### Sistema de fundo único + bookends escuros (substitui a "alternância" da v1)
+O site inteiro usa **Cream como fundo único**, exceto dois momentos deliberadamente escuros (navy/ink): o **Hero** (abertura) e o **CTA Final** (fechamento) — como parênteses ao redor do conteúdo claro. Isso substitui o padrão v1 de alternar Navy→Black→Cream seção a seção. Novas seções: usar Cream, nunca inventar uma terceira cor de fundo de seção inteira.
+
+### Cards com tons suaves (soft tints) — substitui "cards brancos com borda colorida"
+Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco: `bg-gold/[0.07]`, `bg-teal/[0.07]`, `bg-navy/[0.05]`, `bg-silver/[0.12]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ser inteiramente escuro (navy sólido) como accent pontual dentro de uma seção clara — ver seção "Quebra de Objeção" — mas isso é exceção pontual, não o padrão de todos os cards.
 
 ### Timeline numerada
-Linha vertical conectando dots numerados (`tl-dot`), progressão de cor gold → teal → silver/translúcido — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site (não só a seção "Processo").
+Linha vertical conectando dots numerados, progressão de cor gold → teal → silver — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site. Cores dos dots adaptadas para o novo fundo claro (`border-gold bg-gold/10`, etc. em vez dos tons desenhados para fundo escuro da v1).
 
 ### Grid de cards (2×2 ou 2×N)
-Cards brancos com borda esquerda colorida (`border-left`) variando por item, número fantasma grande no canto (`::before` com `attr(data-n)`) em opacidade baixa. Padrão para qualquer conteúdo de "situações/casos de uso" (ex: seção "Para Quem").
+Cards com tom suave de fundo (não branco+borda), número fantasma grande no canto em opacidade baixa. Padrão para qualquer conteúdo de "situações/casos de uso" (ex: seção "Para Quem").
 
 ### Tabela comparativa
-Layout de 3 colunas (rótulo / Celer / concorrente), valores do concorrente com `text-decoration: line-through` e opacidade reduzida. Reaproveitar sempre que for necessário comparar Celer a banco tradicional ou a "fazer nada".
+Layout de 3 colunas (rótulo / Celer / concorrente), dentro de um card `rounded-3xl bg-white` sobre o fundo cream (não mais fundo navy de seção inteira). Valores do concorrente com `text-decoration: line-through` — mas o texto do concorrente precisa de opacidade suficiente pra continuar legível (≥65% de navy sobre branco/cream), o efeito "isso é pior" vem do risco, não de deixar o texto ilegível.
 
-### Padrão de fundo alternado
-As seções alternam Navy → Black → Cream → Navy → Black em sequência, criando ritmo vertical sem depender de linhas divisórias. Novas seções devem entrar nessa alternância, nunca duas seções escuras idênticas seguidas nem duas claras seguidas.
+### Blocos centralizados
+Títulos de seção e containers centralizados na página (`mx-auto text-center` no bloco de intro de cada seção). Parágrafos longos dentro de cards continuam alinhados à esquerda dentro do próprio card — só o bloco como um todo centraliza, não cada linha de texto corrido.
 
 ---
 
 ## 7. Consistência — Checklist antes de publicar
 
 ### Visual
-- [ ] Logo apenas nas combinações de cor aprovadas (seção 5)
+- [ ] Logo só na versão fornecida (branca), só sobre fundo escuro (Hero/CTA Final) — nunca recolorida via CSS
 - [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp)
-- [ ] Cormorant Garamond só em ≥20px, nunca para corpo de texto
-- [ ] Seções escuras/claras alternando (nunca duas iguais seguidas)
+- [ ] Fonte de display só em ≥20px, nunca para corpo de texto
+- [ ] Fundo cream único em todas as seções, exceto os dois bookends escuros (Hero, CTA Final)
+- [ ] Cantos arredondados em botões (pill) e cards (`rounded-2xl`+) — nunca `rounded-none`
+- [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda
+- [ ] Texto navy sobre cream em pelo menos 65% de opacidade (corpo de texto) — abaixo disso cai fora do AA
 - [ ] Dourado usado com escassez (5–8% da superfície) — se está em toda parte, perdeu o efeito de destaque
 
 ### Copy
@@ -239,9 +259,11 @@ As seções alternam Navy → Black → Cream → Navy → Black em sequência, 
 ---
 
 ## Extractable Fields
-- `colors.primary` = Navy #011E2E · `colors.secondary` = Gold #996515 · `colors.accent` = Teal #096993
-- `typography.heading` = Cormorant Garamond · `typography.body` = Roboto
+- `colors.primary` = Navy #011E2E (bookends only) · `colors.background` = Cream #F7F4EF (site-wide default) · `colors.secondary` = Gold #996515 · `colors.accent` = Teal #096993
+- `typography.heading` = Coolvetica (arquivo pendente, fallback Arial Narrow) · `typography.body` = Roboto
 - `voice.traits` = Ágil sem apressada, Direta sem fria, Sólida sem distante, Parceira não fornecedora, Justa não paternalista
 - `voice.prohibited` = instituição financeira, assessoria de investimentos, parceiro de investimentos, referência ao latim
-- `logo.variants` = navy/branco+dourado, gold/branco+navy, branco/navy+dourado, black/branco+dourado
-- `logo.minSize` = 120px (lockup completo) / 32px (símbolo)
+- `logo.variants` = só branco/claro disponível, uso restrito a fundo escuro (Hero, CTA Final)
+- `logo.minSize` = ~120px (lockup horizontal) / 32px (ícone)
+- `layout.radius` = pill (botões) / rounded-2xl–3xl (cards) — nunca rounded-none
+- `layout.background` = single-color (cream), bookends escuros só em Hero e CTA Final

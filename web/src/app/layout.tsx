@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 
-const cormorantGaramond = Cormorant_Garamond({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["300", "600"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
+// Coolvetica (display) é carregada via @font-face em globals.css — não é
+// Google Font, então não passa por next/font/google como o Roboto.
 const roboto = Roboto({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -29,11 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${cormorantGaramond.variable} ${roboto.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-navy">{children}</body>
+    <html lang="pt-BR" className={`${roboto.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        {children}
+      </body>
     </html>
   );
 }

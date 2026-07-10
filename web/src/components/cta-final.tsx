@@ -32,7 +32,7 @@ export function CtaFinal() {
             href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
             className={cn(
               buttonVariants({ size: "lg" }),
-              "mt-9 h-auto rounded-none bg-whatsapp px-9 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-whatsapp/90"
+              "mt-9 h-auto rounded-full bg-whatsapp px-9 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-whatsapp/90"
             )}
           >
             <MessageCircle className="size-4" aria-hidden="true" />

@@ -4,6 +4,28 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  Coolvetica — fonte de marca real da Celer (Adobe Fonts, ativa só dentro dos
+  apps Adobe no PC do usuário; não é um Google Font nem está instalada como
+  fonte de sistema — não encontrada em Windows\Fonts nem no cache do Creative
+  Cloud). O usuário vai exportar o arquivo e me enviar.
+  TODO: assim que o arquivo chegar, salvar em web/public/fonts/coolvetica.woff2
+  (ou .otf/.ttf) — o @font-face abaixo já aponta pra esse caminho.
+  Até lá: local() tenta usar a fonte se o navegador de quem visita já tiver
+  ela instalada (só o PC do usuário, por enquanto); o arquivo em /fonts/ ainda
+  não existe, então cai no fallback sans-serif pra todo mundo até resolvermos.
+*/
+@font-face {
+  font-family: "Coolvetica";
+  src:
+    local("Coolvetica"),
+    local("Coolvetica Rg"),
+    url("/fonts/coolvetica.woff2") format("woff2"),
+    url("/fonts/coolvetica.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 @theme {
   /* Celer Capital — paleta institucional fixa (docs/brand-guidelines.md) */
   --color-navy: #011e2e;
@@ -15,6 +37,8 @@
   --color-silver: #a0a5a5;
   --color-cream: #f7f4ef;
   --color-whatsapp: #1da851; /* exceção funcional única — só no CTA final do WhatsApp */
+
+  --font-display: "Coolvetica", "Arial Narrow", sans-serif;
 }
 
 @theme inline {
@@ -62,7 +86,10 @@
 }
 
 :root {
-  --background: #ffffff;
+  /* Pivô visual (2026-07-10): uma cor única de fundo (cream) no site inteiro —
+     Hero e CTA Final são as duas exceções escuras (navy), como bookends. Ver
+     docs/brand-guidelines.md, seção "Sistema de fundo único". */
+  --background: var(--color-cream);
   --foreground: var(--color-navy);
   --card: #ffffff;
   --card-foreground: var(--color-navy);
@@ -70,22 +97,24 @@
   --popover-foreground: var(--color-navy);
   --primary: var(--color-gold);
   --primary-foreground: #ffffff;
-  --secondary: var(--color-cream);
+  --secondary: color-mix(in oklch, var(--color-navy) 6%, white);
   --secondary-foreground: var(--color-navy);
-  --muted: var(--color-cream);
+  --muted: color-mix(in oklch, var(--color-navy) 6%, white);
   --muted-foreground: #6b6b6b;
   --accent: var(--color-teal);
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: color-mix(in oklch, var(--color-navy) 12%, transparent);
-  --input: color-mix(in oklch, var(--color-navy) 12%, transparent);
+  --border: color-mix(in oklch, var(--color-navy) 10%, transparent);
+  --input: color-mix(in oklch, var(--color-navy) 10%, transparent);
   --ring: var(--color-gold);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  /* Radius global mais arredondado — pedido explícito: bordas de cards,
+     botões e textos/badges sempre arredondadas (referências Clause/Finpay) */
+  --radius: 1.25rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -140,33 +169,6 @@
   html {
     @apply font-sans;
   }
-}
-
-/* Textura pontilhada sutil (inspirada na referência Clause) — só decorativa, nunca a única fonte de informação.
-   Declarada via @utility (Tailwind v4) para poder ser usada com variantes, ex: lg:bg-dot-grid */
-@utility bg-dot-grid {
-  background-image: radial-gradient(
-    color-mix(in oklch, white 14%, transparent) 1px,
-    transparent 1px
-  );
-  background-size: 28px 28px;
-}
-
-/* Indicador de "digitando" do mockup de WhatsApp — toca uma única vez, nunca em loop */
-@keyframes typing-dot-rise {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(-3px);
-    opacity: 1;
-  }
-}
-
-.typing-dot {
-  animation: typing-dot-rise 0.6s ease-in-out 2;
 }
 
 @media (prefers-reduced-motion: reduce) {

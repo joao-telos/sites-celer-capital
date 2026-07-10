@@ -30,27 +30,28 @@ const STEPS = [
 ];
 
 const DOT_STYLES = {
-  gold: "border-gold bg-ink text-gold",
-  teal: "border-teal bg-teal/15 text-teal-light",
-  silver: "border-white/20 bg-white/5 text-white/40",
+  gold: "border-gold bg-gold/10 text-gold",
+  teal: "border-teal bg-teal/10 text-teal",
+  silver: "border-navy/15 bg-navy/5 text-navy/35",
 };
 
 export function Processo() {
   return (
-    <section id="processo" className="relative overflow-hidden bg-ink">
+    <section id="processo" className="relative overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 -top-24 size-[400px] rounded-full bg-[radial-gradient(circle,rgba(9,105,147,0.08)_0%,transparent_65%)]"
       />
 
-      <div className="relative z-10 px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
+      <div className="relative z-10 mx-auto max-w-2xl px-6 py-16 sm:px-10 lg:py-24">
         <Reveal>
-          <div className="mb-14 max-w-xl lg:mb-16">
-            <p className="mb-4 flex items-center gap-2.5 text-[9px] font-bold tracking-[0.3em] text-gold uppercase">
+          <div className="mb-14 text-center lg:mb-16">
+            <p className="mb-4 flex items-center justify-center gap-2.5 text-[9px] font-bold tracking-[0.3em] text-gold uppercase">
               <span className="h-px w-5 bg-gold" aria-hidden="true" />O
               processo completo
+              <span className="h-px w-5 bg-gold" aria-hidden="true" />
             </p>
-            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-white sm:text-3xl lg:text-4xl">
+            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-semibold text-navy sm:text-3xl lg:text-4xl">
               Do contrato fechado ao capital na conta.
             </h2>
           </div>
@@ -59,7 +60,7 @@ export function Processo() {
         <ol className="relative flex flex-col">
           <div
             aria-hidden="true"
-            className="absolute top-6 bottom-6 left-5 w-px bg-gradient-to-b from-gold via-teal/40 to-white/5"
+            className="absolute top-6 bottom-6 left-5 w-px bg-gradient-to-b from-gold via-teal/40 to-navy/5"
           />
           {STEPS.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.1}>
@@ -69,11 +70,11 @@ export function Processo() {
                 >
                   {i + 1}
                 </span>
-                <div className="pt-1.5">
-                  <h3 className="mb-1.5 text-[15px] font-bold tracking-[0.2px] text-white">
+                <div className="pt-1.5 text-left">
+                  <h3 className="mb-1.5 text-[15px] font-bold tracking-[0.2px] text-navy">
                     {step.title}
                   </h3>
-                  <p className="max-w-[500px] text-xs leading-[1.7] font-light text-white/40">
+                  <p className="max-w-[440px] text-xs leading-[1.7] font-light text-navy/70">
                     {step.text}
                   </p>
                 </div>
