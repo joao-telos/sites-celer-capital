@@ -24,9 +24,11 @@ export function Hero() {
         </Badge>
 
         <h1 className="font-heading text-[2.125rem] leading-[1.1] font-bold text-white sm:text-5xl lg:text-[3.5rem]">
-          O capital que já é seu não deveria
+          O capital que já é seu
           <br />
-          <span className="text-gold italic">esperar.</span>
+          <span className="font-light">
+            não deveria <span className="text-gold">esperar.</span>
+          </span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-md text-sm leading-[1.8] font-light text-white/50 sm:text-base">

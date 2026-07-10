@@ -26,7 +26,7 @@ export function Navbar() {
         className={cn(
           "flex w-full items-center justify-between transition-[max-width,margin,padding,border-radius,background-color,box-shadow] duration-300 ease-out",
           scrolled
-            ? "mt-3 max-w-3xl rounded-full bg-white/90 px-5 py-2 shadow-lg shadow-navy/5 ring-1 ring-navy/[0.06] backdrop-blur-md"
+            ? "mt-3 max-w-3xl rounded-full bg-navy/95 px-5 py-2 shadow-lg shadow-black/20 ring-1 ring-white/10 backdrop-blur-md"
             : "mt-0 max-w-7xl rounded-none bg-transparent px-3 py-6"
         )}
       >
@@ -66,12 +66,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className={cn(
-                  "text-[11px] font-medium tracking-wide transition-colors",
-                  scrolled
-                    ? "text-navy/50 hover:text-navy"
-                    : "text-white/50 hover:text-white/85"
-                )}
+                className="text-[11px] font-medium tracking-wide text-white/50 transition-colors hover:text-white/85"
               >
                 {link.label}
               </a>
@@ -86,10 +81,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: "outline", size: "sm" }),
-              "h-auto rounded-full px-4 py-2 text-[10px] font-bold tracking-wider uppercase transition-colors",
-              scrolled
-                ? "border-navy/15 bg-transparent text-navy/60 hover:bg-navy/5 hover:text-navy"
-                : "border-white/25 bg-transparent text-white/70 hover:bg-white/10 hover:text-white"
+              "h-auto rounded-full border-white/25 bg-transparent px-4 py-2 text-[10px] font-bold tracking-wider text-white/70 uppercase transition-colors hover:bg-white/10 hover:text-white"
             )}
           >
             Login
