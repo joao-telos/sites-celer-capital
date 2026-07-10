@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { Processo } from "@/components/processo";
 import { ParaQuem } from "@/components/para-quem";
 import { Diferenciais } from "@/components/diferenciais";
+import { QuebraObjecao } from "@/components/quebra-objecao";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Processo />
         <ParaQuem />
         <Diferenciais />
+        <QuebraObjecao />
       </main>
     </>
   );
