@@ -4,6 +4,8 @@ import { Processo } from "@/components/processo";
 import { ParaQuem } from "@/components/para-quem";
 import { Diferenciais } from "@/components/diferenciais";
 import { QuebraObjecao } from "@/components/quebra-objecao";
+import { CtaFinal } from "@/components/cta-final";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
@@ -15,7 +17,9 @@ export default function Home() {
         <ParaQuem />
         <Diferenciais />
         <QuebraObjecao />
+        <CtaFinal />
       </main>
+      <Footer />
     </>
   );
 }
