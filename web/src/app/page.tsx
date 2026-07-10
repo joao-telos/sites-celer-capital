@@ -1,6 +1,7 @@
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Processo } from "@/components/processo";
+import { ParaQuem } from "@/components/para-quem";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <main className="flex flex-1 flex-col">
         <Hero />
         <Processo />
+        <ParaQuem />
       </main>
     </>
   );
