@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { href: "#processo", label: "Como funciona" },
   { href: "#para-quem", label: "Para quem" },
-  { href: "#diferenciais", label: "Diferenciais" },
+  { href: "#solucoes", label: "Soluções" },
 ];
 
 // TODO: confirmar com o cliente se esta é a URL definitiva de login da plataforma
@@ -90,7 +90,7 @@ export function Navbar() {
             href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
             className={cn(
               buttonVariants({ size: "sm" }),
-              "h-auto rounded-full bg-gold px-4 py-2 text-[10px] font-bold tracking-wider text-white uppercase hover:bg-gold-light"
+              "h-auto rounded-full bg-gold px-4 py-2 text-[10px] font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
             )}
           >
             Antecipar agora

@@ -53,15 +53,24 @@
 }
 
 @theme {
-  /* Celer Capital — paleta institucional fixa (docs/brand-guidelines.md) */
-  --color-navy: #011e2e;
-  --color-ink: #020b14; /* "black" institucional — nome próprio p/ não colidir com o black do Tailwind */
-  --color-gold: #996515;
-  --color-gold-light: #b07a20;
-  --color-teal: #096993;
-  --color-teal-light: #61a8c1;
-  --color-silver: #a0a5a5;
-  --color-cream: #f7f4ef;
+  /*
+    Celer Capital — paleta institucional real (atualizada 2026-07-12).
+    Substitui os tons "inventados" a partir do PDF de manual antigo — estes
+    4 valores vieram diretamente do cliente como a identidade de verdade.
+  */
+  --color-navy: #001a4b;
+  --color-ink: #0b0c0c; /* "black" institucional — nome próprio p/ não colidir com o black do Tailwind */
+  --color-gold: #e2af0c;
+  --color-gold-light: #ebc13a; /* hover dos botões dourados — mais claro que o gold base */
+  /*
+    gold-dark: MESMO matiz do gold, escurecido pra funcionar como TEXTO sobre
+    fundo claro (cream/branco). O gold base (#E2AF0C) é bright demais — texto
+    nele sobre --color-cream dá ~1.8:1 de contraste, bem abaixo do mínimo de
+    4.5:1 (AA). Nunca usar --color-gold como cor de texto sobre fundo claro;
+    --color-gold-dark é o substituto correto (~5.2:1 sobre --color-cream).
+  */
+  --color-gold-dark: #7c6007;
+  --color-cream: #eff1f4; /* cinza muito claro — nome do token ficou de antes, a cor real é mais fria que "creme" */
   --color-whatsapp: #1da851; /* exceção funcional única — só no CTA final do WhatsApp */
 
   --font-display: "Coolvetica", "Arial Narrow", sans-serif;
@@ -122,12 +131,13 @@
   --popover: #ffffff;
   --popover-foreground: var(--color-navy);
   --primary: var(--color-gold);
-  --primary-foreground: #ffffff;
+  /* navy, não branco — o gold novo (#E2AF0C) é claro demais pra texto branco em cima (~2:1) */
+  --primary-foreground: var(--color-navy);
   --secondary: color-mix(in oklch, var(--color-navy) 6%, white);
   --secondary-foreground: var(--color-navy);
   --muted: color-mix(in oklch, var(--color-navy) 6%, white);
   --muted-foreground: #6b6b6b;
-  --accent: var(--color-teal);
+  --accent: var(--color-navy);
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --border: color-mix(in oklch, var(--color-navy) 10%, transparent);

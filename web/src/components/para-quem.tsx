@@ -1,34 +1,38 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
 
-const SITUATIONS = [
+const SEGMENTS = [
   {
     number: "01",
-    tint: "bg-gold/[0.07]",
-    numberColor: "text-gold/15",
-    title: "Caixa apertado, recebíveis a prazo",
-    text: "Sua operação vendeu bem, mas o dinheiro só entra no mês que vem. O capital de giro não espera.",
+    tint: "bg-navy/[0.05]",
+    numberColor: "text-navy/10",
+    highlight: false,
+    hook: "Fechou o pedido, mas o aço já venceu.",
+    text: "Você vendeu a prazo pra outra empresa. O pagamento vem em 30 a 120 dias. Matéria-prima, folha e aluguel não esperam esse prazo.",
   },
   {
     number: "02",
-    tint: "bg-teal/[0.07]",
-    numberColor: "text-teal/15",
-    title: "Oportunidade que não pode esperar",
-    text: "Fornecedor com desconto à vista, estoque para repor, contrato novo para bancar. Velocidade é vantagem competitiva.",
+    tint: "bg-navy/[0.06]",
+    numberColor: "text-navy/10",
+    highlight: false,
+    hook: "Comprou estoque, vendeu a prazo, e agora?",
+    text: "Ciclo de caixa longo: compra hoje, vende amanhã, recebe daqui a 90 dias. Nas datas de pico, esse intervalo trava a operação bem na hora que ela mais precisa girar.",
   },
   {
     number: "03",
     tint: "bg-navy/[0.05]",
     numberColor: "text-navy/10",
-    title: "O banco não foi uma opção viável",
-    text: "Burocracia excessiva, prazo longo, exigências que travam. A Celer analisa o recebível, não o seu CNPJ na Serasa.",
+    highlight: false,
+    hook: "Contrato fechado não é dinheiro em caixa.",
+    text: "Prestou o serviço, assinou o contrato, mas o pagamento só cai daqui a 30 ou 60 dias.",
   },
   {
     number: "04",
-    tint: "bg-silver/[0.12]",
-    numberColor: "text-navy/10",
-    title: "Gestão de fluxo de caixa recorrente",
-    text: "Empresas que vendem muito a prazo usam antecipação como ferramenta estratégica de capital de giro — não como emergência.",
+    tint: "bg-gold/[0.12]",
+    numberColor: "text-gold/25",
+    highlight: true,
+    hook: "Já ouviu não do banco?",
+    text: "Score baixo, limite negado ou histórico manchado não são o fim da linha. A Celer analisa o recebível, não o seu CNPJ na Serasa.",
   },
 ];
 
@@ -37,23 +41,16 @@ export function ParaQuem() {
     <section id="para-quem">
       <div className="mx-auto max-w-4xl px-6 py-16 sm:px-10 lg:py-24">
         <Reveal>
-          <div className="mx-auto mb-12 max-w-xl text-center lg:mb-14">
-            <p className="mb-4 flex items-center justify-center gap-2.5 text-[9px] font-bold tracking-[0.3em] text-gold uppercase">
-              <span className="h-px w-5 bg-gold" aria-hidden="true" />
-              Para quem
-              <span className="h-px w-5 bg-gold" aria-hidden="true" />
-            </p>
-            <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
-              Situações em que a Celer resolve.
-            </h2>
-          </div>
+          <h2 className="font-heading mx-auto mb-12 max-w-xl text-center text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:mb-14 lg:text-4xl">
+            Feita pra quem vende a prazo e não pode esperar.
+          </h2>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {SITUATIONS.map((item, i) => (
+          {SEGMENTS.map((item, i) => (
             <Reveal key={item.number} delay={i * 0.08}>
               <Card
-                className={`relative h-full gap-0 rounded-3xl border-0 py-0 shadow-none ring-0 ${item.tint}`}
+                className={`relative h-full gap-0 rounded-3xl border-0 py-0 shadow-none ring-0 ${item.tint} ${item.highlight ? "border-t-4 border-gold" : ""}`}
               >
                 <CardContent className="px-8 py-9 text-left">
                   <span
@@ -63,7 +60,7 @@ export function ParaQuem() {
                     {item.number}
                   </span>
                   <h3 className="relative mb-2.5 max-w-[80%] text-sm font-bold text-navy">
-                    {item.title}
+                    {item.hook}
                   </h3>
                   <p className="relative max-w-[85%] text-xs leading-[1.7] font-light text-navy/70">
                     {item.text}

@@ -2,7 +2,6 @@
 
 import { ArrowRight } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -11,24 +10,14 @@ export function Hero() {
     <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-navy px-6 pt-32 pb-20 text-center sm:px-10">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-32 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(153,101,21,0.12)_0%,transparent_65%)]"
+        className="pointer-events-none absolute -top-32 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(226,175,12,0.12)_0%,transparent_65%)]"
       />
 
       <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center">
-        <Badge
-          variant="outline"
-          className="mb-7 gap-2 rounded-full border-gold/40 bg-transparent px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] text-gold uppercase"
-        >
-          <span className="size-1.5 rounded-full bg-gold" aria-hidden="true" />
-          Securitizadora
-        </Badge>
-
         <h1 className="font-heading text-[2.125rem] leading-[1.1] font-bold text-white sm:text-5xl lg:text-[3.5rem]">
           O capital que já é seu
           <br />
-          <span className="font-light">
-            não deveria <span className="text-gold">esperar.</span>
-          </span>
+          <span className="font-light text-gold">não deveria esperar.</span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-md text-sm leading-[1.8] font-light text-white/50 sm:text-base">
@@ -42,7 +31,7 @@ export function Hero() {
             href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
             className={cn(
               buttonVariants({ size: "lg" }),
-              "h-auto rounded-full bg-gold px-7 py-3.5 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-gold-light"
+              "h-auto rounded-full bg-gold px-7 py-3.5 text-[11px] font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
             )}
           >
             Antecipar meus recebíveis

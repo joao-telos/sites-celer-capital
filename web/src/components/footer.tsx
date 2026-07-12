@@ -10,7 +10,7 @@ export function Footer() {
           CNPJ XX.XXX.XXX/0001-XX
           {/* TODO: confirmar com o cliente se há registro regulatório específico a declarar (ex: CVM) antes de afirmar qualquer status regulatório publicamente */}
         </p>
-        <p className="font-heading text-[13px] text-gold italic">
+        <p className="font-heading text-[13px] text-gold-dark italic">
           &ldquo;Conectando Valor, Crescendo Juntos&rdquo;
         </p>
       </div>

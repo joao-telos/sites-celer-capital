@@ -12,15 +12,11 @@ export function CtaFinal() {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 left-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(153,101,21,0.09)_0%,transparent_65%)]"
+        className="pointer-events-none absolute top-1/2 left-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(226,175,12,0.09)_0%,transparent_65%)]"
       />
 
       <Reveal>
         <div className="relative z-10 mx-auto max-w-lg px-6">
-          <p className="mb-5 flex items-center justify-center gap-2.5 text-[9px] font-bold tracking-[0.3em] text-gold uppercase">
-            <span className="h-px w-5 bg-gold" aria-hidden="true" />
-            Próximo passo
-          </p>
           <h2 className="font-heading text-2xl leading-[1.15] font-bold text-white sm:text-3xl lg:text-[2.75rem]">
             Quanto capital está parado nos seus recebíveis agora?
           </h2>
