@@ -10,7 +10,7 @@ export function Atendimento() {
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base leading-[1.6] font-light text-navy/70 sm:text-lg">
             Do outro lado, tem alguém que entende a urgência do seu negócio e
-            resolve no seu tempo — rápido, direto, sem processo engessado.
+            resolve no seu tempo: rápido, direto, sem processo engessado.
           </p>
         </Reveal>
       </div>

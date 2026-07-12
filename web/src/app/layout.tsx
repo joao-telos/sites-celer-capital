@@ -12,7 +12,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Celer Capital — O capital que já é seu não deveria esperar",
+  title: "Celer Capital | O capital que já é seu não deveria esperar",
   description:
     "Celer Capital antecipa recebíveis de indústrias e distribuidoras em Curitiba, entregando capital imediato sem a burocracia bancária.",
 };

@@ -59,10 +59,10 @@ export function ParaQuem() {
                   >
                     {item.number}
                   </span>
-                  <h3 className="relative mb-2.5 max-w-[80%] text-sm font-bold text-navy">
+                  <h3 className="relative mb-2.5 max-w-[80%] text-base font-bold text-navy">
                     {item.hook}
                   </h3>
-                  <p className="relative max-w-[85%] text-xs leading-[1.7] font-light text-navy/70">
+                  <p className="relative max-w-[85%] text-sm leading-[1.6] font-light text-navy/70">
                     {item.text}
                   </p>
                 </CardContent>

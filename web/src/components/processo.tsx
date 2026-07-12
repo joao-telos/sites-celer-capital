@@ -3,11 +3,11 @@ import { Reveal } from "@/components/motion/reveal";
 const STEPS = [
   {
     title: "Seu cliente fecha o contrato com parcelamento",
-    text: "Você vende a prazo — nota fiscal, cheque pré, duplicata. O pagamento virá em 30, 60 ou 90 dias. O recebível existe, o caixa ainda não.",
+    text: "Você vende a prazo: nota fiscal, cheque pré, duplicata. O pagamento virá em 30, 60 ou 90 dias. O recebível existe, o caixa ainda não.",
   },
   {
     title: "Você cede os recebíveis à Celer",
-    text: "Nos envia os documentos pelo WhatsApp. Analisamos a qualidade dos recebíveis — não o seu histórico bancário.",
+    text: "Nos envia os documentos pelo WhatsApp. Analisamos a qualidade dos recebíveis, não o seu histórico bancário.",
   },
   {
     title: "Proposta em horas, não em dias",

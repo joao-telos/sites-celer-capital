@@ -20,9 +20,9 @@ export function CtaFinal() {
           <h2 className="font-heading text-2xl leading-[1.15] font-bold text-white sm:text-3xl lg:text-[2.75rem]">
             Quanto capital está parado nos seus recebíveis agora?
           </h2>
-          <p className="mt-5 text-sm leading-[1.8] font-light text-white/40">
-            Manda uma mensagem. Analisamos sem compromisso e respondemos com o
-            que é possível fazer — rápido.
+          <p className="mt-5 text-base leading-[1.6] font-light text-white/70 sm:text-lg">
+            Manda uma mensagem. Analisamos sem compromisso e respondemos
+            rápido com o que é possível fazer.
           </p>
           <a
             href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar

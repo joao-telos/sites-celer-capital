@@ -150,9 +150,9 @@ export function Solucoes() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-8 max-w-md text-sm leading-[1.7] font-light text-navy/70 sm:mt-10">
-            Você manda o documento, a Celer analisa e libera o valor —
-            simples assim.
+          <p className="mx-auto mt-8 max-w-lg text-base leading-[1.6] font-light text-navy/70 sm:mt-10 sm:text-lg">
+            Você manda o documento, a Celer analisa e libera o valor.
+            Simples assim.
           </p>
         </Reveal>
       </div>

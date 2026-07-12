@@ -20,9 +20,9 @@ export function Hero() {
           <span className="font-light text-gold">não deveria esperar.</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-md text-sm leading-[1.8] font-light text-white/50 sm:text-base">
+        <p className="mx-auto mt-6 max-w-lg text-base leading-[1.6] font-light text-white/50 sm:text-lg">
           Antecipe seus recebíveis e libere capital imediato para o seu
-          negócio — sem a burocracia bancária, sem perguntas
+          negócio, sem a burocracia bancária e sem perguntas
           desnecessárias.
         </p>
 
