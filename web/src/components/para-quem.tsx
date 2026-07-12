@@ -39,7 +39,7 @@ const SEGMENTS = [
 export function ParaQuem() {
   return (
     <section id="para-quem">
-      <div className="mx-auto max-w-4xl px-6 py-16 sm:px-10 lg:py-24">
+      <div className="mx-auto max-w-4xl px-6 py-12 sm:px-10 lg:py-16">
         <Reveal>
           <h2 className="font-heading mx-auto mb-12 max-w-xl text-center text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:mb-14 lg:text-4xl">
             Feita pra quem vende a prazo e não pode esperar.

@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useRef } from "react";
+import { forwardRef, useRef, type RefObject } from "react";
 import Image from "next/image";
 import { User } from "lucide-react";
 
@@ -8,20 +8,37 @@ import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
 import { Reveal } from "@/components/motion/reveal";
 
-const SolutionNode = forwardRef<
-  HTMLDivElement,
-  { label: string; className?: string }
->(({ label, className }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "z-10 w-[108px] rounded-2xl border border-navy/10 bg-navy/[0.04] px-3 py-2.5 text-center text-[10px] leading-tight font-bold text-navy shadow-sm sm:w-36 sm:px-4 sm:py-3 sm:text-xs",
-      className
-    )}
-  >
-    {label}
-  </div>
-));
+// Beams connect to these 1px anchors (pinned to the shape's edge) instead of
+// the shape's center — otherwise the line visually cuts across the label.
+function Anchor({
+  innerRef,
+  side,
+}: {
+  innerRef: RefObject<HTMLDivElement | null>;
+  side: "left" | "right";
+}) {
+  return (
+    <div
+      ref={innerRef}
+      aria-hidden="true"
+      className={cn(
+        "absolute top-1/2 size-px -translate-y-1/2",
+        side === "left" ? "left-0" : "right-0"
+      )}
+    />
+  );
+}
+
+const SolutionNode = forwardRef<HTMLDivElement, { label: string }>(
+  ({ label }, ref) => (
+    <div className="relative">
+      <div className="w-32 rounded-2xl border border-navy/10 bg-white px-4 py-3 text-center text-[11px] leading-tight font-bold text-navy shadow-md shadow-navy/5 sm:w-44 sm:px-5 sm:py-4 sm:text-sm lg:w-48 lg:text-base">
+        {label}
+      </div>
+      <Anchor innerRef={ref as RefObject<HTMLDivElement | null>} side="right" />
+    </div>
+  )
+);
 SolutionNode.displayName = "SolutionNode";
 
 export function Solucoes() {
@@ -30,23 +47,26 @@ export function Solucoes() {
   const notasRef = useRef<HTMLDivElement>(null);
   const chequesRef = useRef<HTMLDivElement>(null);
   const contratosRef = useRef<HTMLDivElement>(null);
-  const celerRef = useRef<HTMLDivElement>(null);
-  const clientRef = useRef<HTMLDivElement>(null);
+  const celerInRef = useRef<HTMLDivElement>(null);
+  const celerOutRef = useRef<HTMLDivElement>(null);
+  const clientInRef = useRef<HTMLDivElement>(null);
 
   return (
     <section id="solucoes">
-      <div className="mx-auto max-w-4xl px-6 py-16 sm:px-10 lg:py-20">
-        <h2 className="sr-only">
-          O que a Celer antecipa e como o capital chega até você
-        </h2>
-
+      <div className="mx-auto max-w-3xl px-6 py-12 text-center sm:px-10 lg:py-16">
         <Reveal>
+          <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
+            Qualquer um desses vira capital direto na sua conta.
+          </h2>
+        </Reveal>
+
+        <Reveal delay={0.1}>
           <div
             ref={containerRef}
-            className="relative mx-auto flex h-[400px] w-full max-w-lg items-center justify-center overflow-hidden sm:h-[440px]"
+            className="relative mx-auto mt-10 w-full max-w-2xl sm:mt-12"
           >
-            <div className="flex size-full flex-row items-stretch justify-between gap-3 sm:gap-8">
-              <div className="flex flex-col justify-center gap-3 sm:gap-4">
+            <div className="flex flex-row items-stretch justify-between gap-4 sm:gap-10 lg:gap-14">
+              <div className="flex flex-col justify-center gap-4 sm:gap-6">
                 <SolutionNode ref={duplicatasRef} label="Duplicatas" />
                 <SolutionNode ref={notasRef} label="Notas fiscais a prazo" />
                 <SolutionNode ref={chequesRef} label="Cheques pré-datados" />
@@ -57,33 +77,30 @@ export function Solucoes() {
               </div>
 
               <div className="flex flex-col justify-center">
-                <div
-                  ref={celerRef}
-                  className="z-10 flex size-14 shrink-0 items-center justify-center rounded-full border-2 border-gold bg-navy shadow-lg shadow-navy/20 sm:size-20"
-                >
-                  <div className="relative size-7 sm:size-10">
+                <div className="relative flex size-20 shrink-0 items-center justify-center rounded-full border-2 border-gold bg-navy shadow-lg shadow-navy/20 sm:size-28 lg:size-32">
+                  <div className="relative size-9 sm:size-14 lg:size-16">
                     <Image
                       src="/logo/celer-icon.png"
                       alt="Celer Capital"
                       fill
-                      sizes="40px"
+                      sizes="64px"
                       className="object-contain"
                     />
                   </div>
+                  <Anchor innerRef={celerInRef} side="left" />
+                  <Anchor innerRef={celerOutRef} side="right" />
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-2">
-                <div
-                  ref={clientRef}
-                  className="z-10 flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-navy/15 bg-white shadow-sm sm:size-16"
-                >
+              <div className="flex flex-col items-center justify-center gap-3">
+                <div className="relative flex size-16 shrink-0 items-center justify-center rounded-full border-2 border-navy/15 bg-white shadow-sm sm:size-20 lg:size-24">
                   <User
-                    className="size-5 text-navy sm:size-6"
+                    className="size-6 text-navy sm:size-8 lg:size-9"
                     aria-hidden="true"
                   />
+                  <Anchor innerRef={clientInRef} side="left" />
                 </div>
-                <span className="text-[10px] font-bold tracking-wide text-navy/60 uppercase sm:text-xs">
+                <span className="text-xs font-bold tracking-wide text-navy/60 uppercase sm:text-sm">
                   Você
                 </span>
               </div>
@@ -92,7 +109,7 @@ export function Solucoes() {
             <AnimatedBeam
               containerRef={containerRef}
               fromRef={duplicatasRef}
-              toRef={celerRef}
+              toRef={celerInRef}
               delay={0}
               gradientStartColor="var(--color-gold)"
               gradientStopColor="var(--color-gold-dark)"
@@ -100,7 +117,7 @@ export function Solucoes() {
             <AnimatedBeam
               containerRef={containerRef}
               fromRef={notasRef}
-              toRef={celerRef}
+              toRef={celerInRef}
               delay={0.25}
               gradientStartColor="var(--color-gold)"
               gradientStopColor="var(--color-gold-dark)"
@@ -108,7 +125,7 @@ export function Solucoes() {
             <AnimatedBeam
               containerRef={containerRef}
               fromRef={chequesRef}
-              toRef={celerRef}
+              toRef={celerInRef}
               delay={0.5}
               gradientStartColor="var(--color-gold)"
               gradientStopColor="var(--color-gold-dark)"
@@ -116,20 +133,27 @@ export function Solucoes() {
             <AnimatedBeam
               containerRef={containerRef}
               fromRef={contratosRef}
-              toRef={celerRef}
+              toRef={celerInRef}
               delay={0.75}
               gradientStartColor="var(--color-gold)"
               gradientStopColor="var(--color-gold-dark)"
             />
             <AnimatedBeam
               containerRef={containerRef}
-              fromRef={celerRef}
-              toRef={clientRef}
+              fromRef={celerOutRef}
+              toRef={clientInRef}
               delay={1}
               gradientStartColor="var(--color-navy)"
               gradientStopColor="var(--color-gold)"
             />
           </div>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <p className="mx-auto mt-8 max-w-md text-sm leading-[1.7] font-light text-navy/70 sm:mt-10">
+            Você manda o documento, a Celer analisa e libera o valor —
+            simples assim.
+          </p>
         </Reveal>
       </div>
     </section>

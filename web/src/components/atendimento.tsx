@@ -11,7 +11,7 @@ const POINTS = [
 export function Atendimento() {
   return (
     <section id="atendimento">
-      <div className="mx-auto max-w-2xl px-6 py-16 text-center sm:px-10 lg:py-24">
+      <div className="mx-auto max-w-2xl px-6 py-12 text-center sm:px-10 lg:py-16">
         <Reveal>
           <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
             Receba seu crédito quando você precisa dele
