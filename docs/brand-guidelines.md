@@ -20,12 +20,25 @@ Depois de ver a v1 implementada, o usuário pediu uma correção de rumo visual 
 4. **Cantos arredondados em tudo.** Botões viraram pill (`rounded-full`), cards `rounded-2xl`/`rounded-3xl`. O antigo padrão "institucional flat" (`rounded-none`) foi abandonado.
 5. **Blocos centralizados.** Títulos de seção e containers centralizados na página (Hero virou coluna única centralizada, sem o split assimétrico 55/45 da v1). Parágrafos longos dentro de cards continuam alinhados à esquerda — só os blocos/títulos centralizam, não todo texto corrido.
 
+## ⚠️ Pivô de paleta + conteúdo v3 (2026-07-12 — ler antes de implementar UI)
+
+Nova rodada de correções, desta vez sobre cor e conteúdo (não mais sobre layout/estrutura, que ficou definido no pivô v2 acima):
+
+1. **Paleta trocada pelas cores oficiais reais da identidade Celer.** As cores usadas nos pivôs v1/v2 (#011E2E navy, #996515 gold, #096993 teal, #F7F4EF cream) eram aproximações — o cliente confirmou a paleta institucional real: `#001A4B` (Navy) / `#E2AF0C` (Gold) / `#EFF1F4` (Cream) / `#0B0C0C` (Ink). O token Teal e o token Silver foram **removidos** — não fazem parte da paleta real e não têm mais uso no site. Ver seção 3 (já atualizada) para a tabela completa.
+2. **Novo gold é bem mais claro que o antigo** (#E2AF0C vs. #996515) — isso quebrou contraste em dois pontos e exigiu correção: texto branco sobre gold (botões) caiu pra ~2:1, corrigido trocando pra texto navy (~8.3:1); texto gold sobre cream (eyebrows/labels) caiu pra ~1.8:1, corrigido com um novo token só-para-texto, `gold-dark` (#7C6007, ~5.2:1 sobre cream — ver seção 3). Regra: `gold` puro é só para fundo (botões, backgrounds) ou texto sobre fundo escuro; `gold-dark` é para texto sobre fundo claro.
+3. **Eyebrows removidos de todas as seções.** O padrão "LABEL PEQUENA EM CAPS + linha dourada" que aparecia acima de cada H2 (Processo, Para Quem, CTA Final) foi removido inteiramente — os H2 agora lideram a seção diretamente, sem rótulo acima.
+4. **Seções "Diferenciais" e "Quebra de Objeção" removidas.** Comparavam a Celer com bancos/outras operações ("isso não é empréstimo", "banco vê score, Celer vê nota fiscal") — linguagem educacional/comparativa desnecessária pro público-alvo, que já chega ao site sabendo o que é securitização e já esperando essa diferença. Substituídas por duas seções novas, ambas derivadas do documento de Segmentação de Público do cliente:
+   - **Soluções** — catálogo direto dos instrumentos que a Celer antecipa (duplicatas, notas fiscais a prazo, cheques pré-datados, contratos e mensalidades). Sem H2/subtexto visível (só um `h2` `sr-only` pra manter landmark de acessibilidade) — é puramente uma grade de referência rápida.
+   - **Atendimento** — foca em atendimento direto e resposta rápida, sem nenhuma comparação com bancos/concorrentes. Reforça que o cliente recebe o crédito quando precisa, não depois de um processo lento.
+5. **"Para Quem" reescrita com frases-gancho por segmento.** Os 4 cards agora abrem com uma frase de identificação direta por segmento (indústria/metalurgia, distribuidora/atacado, serviços B2B, restrição bancária) em vez de descrição genérica de "situação". O card de restrição bancária tem destaque visual (borda superior dourada) — maior potencial de conversão segundo a Segmentação.
+6. **Pill "Securitizadora" removida da Hero**, e a segunda linha do headline ("não deveria esperar.") passou a usar `gold` (não mais itálico dourado — ver correção na seção 4/tagline abaixo, que também estava desatualizada apontando pra Cormorant Garamond).
+
 ---
 
 ## Quick Reference
-- **Primary Color:** #011E2E (Navy) — só Hero e CTA Final; o resto do site é #F7F4EF (Cream)
-- **Secondary Color:** #996515 (Gold)
-- **Accent Color:** #096993 (Teal)
+- **Primary Color:** #001A4B (Navy) — só Hero e CTA Final; o resto do site é #EFF1F4 (Cream)
+- **Secondary Color:** #E2AF0C (Gold) — uso em fundo/CTA; para texto sobre fundo claro usar `gold-dark` #7C6007
+- **Ink:** #0B0C0C — variação mais densa do bookend escuro (CTA Final)
 - **Primary Font (display):** Coolvetica (fonte real do cliente — integrada, ver seção 4)
 - **Secondary Font (corpo/UI):** Roboto
 - **Voice:** Direta, Sólida, Parceira
@@ -86,48 +99,46 @@ O manual oficial define o conceito como fusão de **agilidade moderna** com **so
 
 ## 3. Paleta de Cores
 
-Paleta institucional fixa (manual de marca oficial) — **não gerar tons/variações fora desta lista**, é regra explícita do manual ("não usar a logo em outra cor ou forma que não seja uma das exemplificadas").
+Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-07-12) — **não gerar tons/variações fora desta lista**, é regra explícita do manual ("não usar a logo em outra cor ou forma que não seja uma das exemplificadas").
 
 ### Primary Colors
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| Navy | #011E2E | rgb(1,30,46) | Um dos dois "bookends" escuros (Hero) — ver "Sistema de fundo único" abaixo |
-| Black (Ink) | #020B14 | rgb(2,11,20) | O outro bookend escuro (CTA Final) — mais denso que o navy |
+| Navy | #001A4B | rgb(0,26,75) | Um dos dois "bookends" escuros (Hero) — ver "Sistema de fundo único" abaixo |
+| Ink | #0B0C0C | rgb(11,12,12) | O outro bookend escuro (CTA Final) — mais denso que o navy |
 
 ### Secondary Colors
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| Gold | #996515 | rgb(153,101,21) | Cor de destaque — CTAs, dividers, eyebrows, tag labels. Uso deliberadamente escasso (5–10% da superfície): é o que carrega "premium" |
-| Teal | #096993 | rgb(9,105,147) | Accent terciário — variações em timeline, ícones secundários, evita monotonia do dourado repetido |
-| Teal Light | #61A8C1 | rgb(97,168,193) | Tom claro do teal — estados finais de timeline, textos secundários sobre navy |
+| Gold | #E2AF0C | rgb(226,175,12) | Cor de destaque — CTAs, backgrounds, dividers. Uso deliberadamente escasso (5–10% da superfície): é o que carrega "premium". **Não usar como cor de texto sobre fundo claro** (ver `gold-dark` abaixo e nota de acessibilidade) |
+| Gold Light | #EBC13A | rgb(235,193,58) | Tom claro do gold — hover de botões (`hover:bg-gold-light`) |
+| Gold Dark | #7C6007 | rgb(124,96,7) | **Variante só-para-texto**, mesma matiz do Gold mas escurecida para passar em contraste AA (~5.2:1) sobre o fundo Cream. Usar em qualquer lugar que antes usaria `text-gold` sobre fundo claro: eyebrows/labels (quando existirem), ícones de destaque em cards, tagline do footer |
 
 ### Neutral Palette
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| Silver | #A0A5A5 | rgb(160,165,165) | Texto muted sobre fundo escuro, bordas sutis |
 | White | #FFFFFF | rgb(255,255,255) | Texto sobre fundo escuro, fundo de seções claras |
-| Cream | #F7F4EF | rgb(247,244,239) | **Fundo único e dominante do site** (pivô v2) — todas as seções exceto Hero e CTA Final. Mais quente que branco puro, evita frieza clínica |
+| Cream | #EFF1F4 | rgb(239,241,244) | **Fundo único e dominante do site** (pivô v2) — todas as seções exceto Hero e CTA Final |
 
 ### Cor funcional (exceção documentada)
 | Name | Hex | Usage |
 |------|-----|-------|
 | WhatsApp Green | #1DA851 | **Única cor fora da paleta institucional aprovada para uso.** Reservada exclusivamente ao botão de CTA final "Falar pelo WhatsApp" — o reconhecimento de marca do WhatsApp supera a consistência de paleta nesse ponto único de conversão. Não usar em mais nenhum outro contexto. |
 
-### Regra de proporção (pivô v2)
+### Regra de proporção (pivô v2/v3)
 - Cream: ~80–85% da superfície do site inteiro (dominante — todas as seções exceto os dois bookends)
-- Navy + Black (Hero + CTA Final): os únicos dois momentos escuros da página inteira — não alternar seção a seção como na v1
-- Gold: ~5–8% (destaque — CTAs, linhas, eyebrows), consistente nos dois modos (claro e escuro)
-- Teal/Teal Light: variação pontual em cards/timeline sobre o fundo cream, nunca dominante
-- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda: `bg-gold/[0.07]`, `bg-teal/[0.07]`, `bg-navy/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs)
+- Navy + Ink (Hero + CTA Final): os únicos dois momentos escuros da página inteira — não alternar seção a seção como na v1
+- Gold: ~5–8% (destaque — CTAs, backgrounds), consistente nos dois modos (claro e escuro); `gold-dark` para texto, nunca `gold` puro como cor de texto sobre Cream
+- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda: `bg-gold/[0.12]`, `bg-navy/[0.04]`, `bg-navy/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs)
 - WhatsApp Green: 1 elemento por página (o CTA final)
 
 ### Acessibilidade
-- Texto branco sobre Navy (#011E2E): contraste 15.8:1 — AAA
-- Texto branco sobre Black (#020B14): contraste 19.6:1 — AAA
-- Gold (#996515) sobre Navy: contraste 3.4:1 — adequado para texto grande/eyebrows (≥18px), não usar para corpo de texto pequeno
-- Navy sobre Cream (#F7F4EF): contraste 14.9:1 — AAA
+- Texto branco sobre Navy (#001A4B): contraste ~15.6:1 — AAA
+- Texto navy sobre Gold (#E2AF0C) — usado em botões: contraste ~8.3:1 — AAA. **Não usar texto branco sobre gold** (só ~2:1, falha até AA)
+- Gold Dark (#7C6007) sobre Cream (#EFF1F4): contraste ~5.2:1 — AA para texto normal
+- Gold (#E2AF0C) sobre Cream: contraste ~1.8:1 — **falha, nunca usar `text-gold` diretamente sobre fundo claro**, sempre `text-gold-dark`
+- Navy sobre Cream (#EFF1F4): contraste ~15.3:1 — AAA
 - **Cuidado com opacidade de navy sobre cream para texto de corpo:** `text-navy` abaixo de ~65% de opacidade cai abaixo de 4.5:1 (AA) sobre o fundo cream — testado e corrigido várias vezes durante a implementação (`text-navy/50` ≈ 3.3:1, insuficiente; `text-navy/70` ≈ 6.2:1, seguro). Usar `/65` a `/70` como piso para texto de corpo secundário sobre cream, nunca menos.
-- Nunca usar Silver (#A0A5A5) para texto de corpo sobre branco/cream — contraste insuficiente. Silver é só para uso sobre fundo escuro ou como borda/preenchimento sutil.
 
 ---
 
@@ -200,7 +211,7 @@ Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os p
 - Tamanho mínimo digital: ~120px de largura para o lockup horizontal completo; 32px para o ícone isolado (navbar compilada, favicon)
 
 ### Tagline
-**"Conectando Valor, Crescendo Juntos"** — uso institucional (footer, apresentações, materiais de marca). Não é headline de conversão — é assinatura de marca, não argumento de venda. Manter em Cormorant Garamond itálico, cor Gold, sempre entre aspas quando usada como assinatura.
+**"Conectando Valor, Crescendo Juntos"** — uso institucional (footer, apresentações, materiais de marca). Não é headline de conversão — é assinatura de marca, não argumento de venda. Manter em itálico, cor `gold-dark` (não `gold` puro — está sobre o fundo claro do footer, ver acessibilidade na seção 3), sempre entre aspas quando usada como assinatura.
 
 ---
 
@@ -219,19 +230,19 @@ Biblioteca de padrões já validada no mockup v3 — base para os componentes do
 O site inteiro usa **Cream como fundo único**, exceto dois momentos deliberadamente escuros (navy/ink): o **Hero** (abertura) e o **CTA Final** (fechamento) — como parênteses ao redor do conteúdo claro. Isso substitui o padrão v1 de alternar Navy→Black→Cream seção a seção. Novas seções: usar Cream, nunca inventar uma terceira cor de fundo de seção inteira.
 
 ### Cards com tons suaves (soft tints) — substitui "cards brancos com borda colorida"
-Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco: `bg-gold/[0.07]`, `bg-teal/[0.07]`, `bg-navy/[0.05]`, `bg-silver/[0.12]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ser inteiramente escuro (navy sólido) como accent pontual dentro de uma seção clara — ver seção "Quebra de Objeção" — mas isso é exceção pontual, não o padrão de todos os cards.
+Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco: `bg-gold/[0.12]`, `bg-navy/[0.04]`, `bg-navy/[0.05]`, `bg-navy/[0.06]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` (ex: o card de restrição bancária em "Para Quem", maior potencial de conversão) — mas isso é exceção pontual, não o padrão de todos os cards.
 
 ### Timeline numerada
-Linha vertical conectando dots numerados, progressão de cor gold → teal → silver — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site. Cores dos dots adaptadas para o novo fundo claro (`border-gold bg-gold/10`, etc. em vez dos tons desenhados para fundo escuro da v1).
+Linha vertical conectando dots numerados, progressão de cor gold → navy → navy claro — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site. Cores dos dots: `border-gold bg-gold/10 text-gold-dark` (início) até `border-navy/15 bg-navy/5 text-navy/35` (final, mais apagado).
 
 ### Grid de cards (2×2 ou 2×N)
-Cards com tom suave de fundo (não branco+borda), número fantasma grande no canto em opacidade baixa. Padrão para qualquer conteúdo de "situações/casos de uso" (ex: seção "Para Quem").
+Cards com tom suave de fundo (não branco+borda), número fantasma grande no canto em opacidade baixa. Padrão usado em "Para Quem" (frases-gancho por segmento) e "Soluções" (catálogo de instrumentos antecipáveis).
 
-### Tabela comparativa
-Layout de 3 colunas (rótulo / Celer / concorrente), dentro de um card `rounded-3xl bg-white` sobre o fundo cream (não mais fundo navy de seção inteira). Valores do concorrente com `text-decoration: line-through` — mas o texto do concorrente precisa de opacidade suficiente pra continuar legível (≥65% de navy sobre branco/cream), o efeito "isso é pior" vem do risco, não de deixar o texto ilegível.
+### Sem eyebrows, sem linguagem comparativa
+Nenhuma seção usa mais o padrão "LABEL EM CAPS + linha dourada" acima do H2 (removido no pivô v3) — o H2 lidera a seção diretamente. Nenhuma seção compara a Celer com bancos ou concorrentes ponto a ponto (a antiga "Tabela comparativa" foi removida junto com "Quebra de Objeção") — o público-alvo já entende a categoria; o foco é em atendimento e nos casos de uso reais do cliente, não em desmontar objeções que ele não tem.
 
 ### Blocos centralizados
-Títulos de seção e containers centralizados na página (`mx-auto text-center` no bloco de intro de cada seção). Parágrafos longos dentro de cards continuam alinhados à esquerda dentro do próprio card — só o bloco como um todo centraliza, não cada linha de texto corrido.
+Títulos de seção e containers centralizados na página (`mx-auto text-center` no bloco de intro de cada seção). Parágrafos longos dentro de cards continuam alinhados à esquerda dentro do próprio card — só o bloco como um todo centraliza, não cada linha de texto corrido. Exceção deliberada: a seção "Soluções" não tem H2/subtexto visível (só um `h2` `sr-only`), então não há bloco de intro pra centralizar — só a grade de cards.
 
 ---
 
@@ -239,10 +250,12 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 
 ### Visual
 - [ ] Logo só na versão fornecida (branca), só sobre fundo escuro (Hero/CTA Final) — nunca recolorida via CSS
-- [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp)
+- [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp): `navy` `#001A4B`, `gold` `#E2AF0C`, `cream` `#EFF1F4`, `ink` `#0B0C0C`
+- [ ] `text-gold` nunca usado como cor de texto sobre fundo claro — usar `text-gold-dark` (texto sobre fundo escuro pode usar `text-gold` normalmente)
 - [ ] Fonte de display só em ≥20px, nunca para corpo de texto
 - [ ] Fundo cream único em todas as seções, exceto os dois bookends escuros (Hero, CTA Final)
 - [ ] Cantos arredondados em botões (pill) e cards (`rounded-2xl`+) — nunca `rounded-none`
+- [ ] Nenhuma seção com eyebrow (label caps + linha dourada acima do H2) — removido no pivô v3
 - [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda
 - [ ] Texto navy sobre cream em pelo menos 65% de opacidade (corpo de texto) — abaixo disso cai fora do AA
 - [ ] Dourado usado com escassez (5–8% da superfície) — se está em toda parte, perdeu o efeito de destaque
@@ -262,7 +275,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 ---
 
 ## Extractable Fields
-- `colors.primary` = Navy #011E2E (bookends only) · `colors.background` = Cream #F7F4EF (site-wide default) · `colors.secondary` = Gold #996515 · `colors.accent` = Teal #096993
+- `colors.primary` = Navy #001A4B (bookends only) · `colors.background` = Cream #EFF1F4 (site-wide default) · `colors.secondary` = Gold #E2AF0C (backgrounds) · `colors.secondaryText` = Gold Dark #7C6007 (text on light bg) · `colors.ink` = #0B0C0C
 - `typography.heading` = Coolvetica (integrada — Light/Regular/Bold + itálico, `font-bold` não `font-semibold`) · `typography.body` = Roboto
 - `voice.traits` = Ágil sem apressada, Direta sem fria, Sólida sem distante, Parceira não fornecedora, Justa não paternalista
 - `voice.prohibited` = instituição financeira, assessoria de investimentos, parceiro de investimentos, referência ao latim
