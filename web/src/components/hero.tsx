@@ -28,7 +28,9 @@ export function Hero() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
+            href="https://wa.me/5541995699494?text=Ol%C3%A1%2C%20tudo%20bem%3F%0AVim%20do%20site%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Celer%20Capital!"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ size: "lg" }),
               "h-auto rounded-full bg-gold px-7 py-3.5 text-[11px] font-bold tracking-wider text-navy uppercase hover:bg-gold-light"

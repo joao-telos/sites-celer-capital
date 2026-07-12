@@ -87,7 +87,9 @@ export function Navbar() {
             Login
           </a>
           <a
-            href="#whatsapp-pendente" // TODO: confirmar número de WhatsApp com o cliente antes de publicar
+            href="https://wa.me/5541995699494?text=Ol%C3%A1%2C%20tudo%20bem%3F%0AVim%20do%20site%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Celer%20Capital!"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ size: "sm" }),
               "h-auto rounded-full bg-gold px-4 py-2 text-[10px] font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
