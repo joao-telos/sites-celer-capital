@@ -6,8 +6,7 @@ export function Footer() {
           © {new Date().getFullYear()} Celer Capital · Todos os direitos
           reservados
           <br />
-          {/* TODO: confirmar CNPJ real com o cliente antes de publicar */}
-          CNPJ XX.XXX.XXX/0001-XX
+          CNPJ 28.857.128/0001-95
           {/* TODO: confirmar com o cliente se há registro regulatório específico a declarar (ex: CVM) antes de afirmar qualquer status regulatório publicamente */}
         </p>
         <p className="font-heading text-[13px] text-gold-dark italic">
