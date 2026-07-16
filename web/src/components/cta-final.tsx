@@ -12,7 +12,7 @@ export function CtaFinal() {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 left-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(226,175,12,0.09)_0%,transparent_65%)]"
+        className="pointer-events-none absolute top-1/2 left-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(198,134,34,0.09)_0%,transparent_65%)]"
       />
 
       <Reveal>

@@ -10,7 +10,7 @@ export function Hero() {
     <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-navy px-6 pt-32 pb-20 text-center sm:px-10">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-32 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(226,175,12,0.12)_0%,transparent_65%)]"
+        className="pointer-events-none absolute -top-32 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(198,134,34,0.12)_0%,transparent_65%)]"
       />
 
       <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center">
