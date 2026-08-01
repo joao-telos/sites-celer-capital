@@ -33,11 +33,32 @@ Nova rodada de correções, desta vez sobre cor e conteúdo (não mais sobre lay
 5. **"Para Quem" reescrita com frases-gancho por segmento.** Os 4 cards agora abrem com uma frase de identificação direta por segmento (indústria/metalurgia, distribuidora/atacado, serviços B2B, restrição bancária) em vez de descrição genérica de "situação". O card de restrição bancária tem destaque visual (borda superior dourada) — maior potencial de conversão segundo a Segmentação.
 6. **Pill "Securitizadora" removida da Hero**, e a segunda linha do headline ("não deveria esperar.") passou a usar `gold` (não mais itálico dourado — ver correção na seção 4/tagline abaixo, que também estava desatualizada apontando pra Cormorant Garamond).
 
+## ⚠️ Rodada de gradientes + institucional (2026-07-31 — ler antes de implementar UI)
+
+Pedido do cliente depois de ver o site pronto. Não mexe na estrutura definida
+nos pivôs anteriores, só na superfície e em duas seções novas:
+
+1. **Nada de cor chapada.** Ver "Sistema de gradientes" na seção 6. O token
+   `#003599` (Navy Bright) entrou por pedido do cliente e não é uma variação
+   gerada a partir da paleta.
+2. **Seção "Sobre" adicionada, com duas exceções deliberadas a este manual:**
+   - É a **única seção com título alinhado à esquerda** — o manual pede blocos
+     de seção centralizados (pivô v2, item 5). O layout de duas colunas com
+     Missão e Visão à direita foi pedido explicitamente pelo cliente.
+   - É a **única seção que explica o mecanismo da antecipação** ("não precisa
+     esperar 30, 60 ou 90 dias"). O pivô v3 tinha removido esse tipo de texto
+     por considerar que o visitante já chega sabendo. O texto veio pronto do
+     cliente.
+3. **Seção "Valores" adicionada**, com um acordeão de 6 painéis em gradiente
+   escuro. Painéis são cards, não fundo de seção: a regra dos dois únicos
+   momentos escuros da página continua valendo, porque a seção em si fica no
+   wash claro.
+
 ---
 
 ## Quick Reference
 - **Primary Color:** #001A4B (Navy) — só Hero e CTA Final; o resto do site é #EFF1F4 (Cream)
-- **Secondary Color:** #E2AF0C (Gold) — uso em fundo/CTA; para texto sobre fundo claro usar `gold-dark` #7C6007
+- **Secondary Color:** #C68622 (Gold) — uso em fundo/CTA; para texto sobre fundo claro usar `gold-dark` #6D4A13
 - **Ink:** #0B0C0C — variação mais densa do bookend escuro (CTA Final)
 - **Primary Font (display):** Coolvetica (fonte real do cliente — integrada, ver seção 4)
 - **Secondary Font (corpo/UI):** Roboto
@@ -105,14 +126,15 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
 | Navy | #001A4B | rgb(0,26,75) | Um dos dois "bookends" escuros (Hero) — ver "Sistema de fundo único" abaixo |
+| Navy Bright | #003599 | rgb(0,53,153) | Ponta clara do gradiente da Hero e dos painéis de Valores. Entrou por pedido do cliente em 2026-07-31, fora da paleta original — não é uma variação gerada |
 | Ink | #0B0C0C | rgb(11,12,12) | O outro bookend escuro (CTA Final) — mais denso que o navy |
 
 ### Secondary Colors
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| Gold | #E2AF0C | rgb(226,175,12) | Cor de destaque — CTAs, backgrounds, dividers. Uso deliberadamente escasso (5–10% da superfície): é o que carrega "premium". **Não usar como cor de texto sobre fundo claro** (ver `gold-dark` abaixo e nota de acessibilidade) |
-| Gold Light | #EBC13A | rgb(235,193,58) | Tom claro do gold — hover de botões (`hover:bg-gold-light`) |
-| Gold Dark | #7C6007 | rgb(124,96,7) | **Variante só-para-texto**, mesma matiz do Gold mas escurecida para passar em contraste AA (~5.2:1) sobre o fundo Cream. Usar em qualquer lugar que antes usaria `text-gold` sobre fundo claro: eyebrows/labels (quando existirem), ícones de destaque em cards, tagline do footer |
+| Gold | #C68622 | rgb(198,134,34) | Cor de destaque — CTAs, backgrounds, dividers. Uso deliberadamente escasso (5–10% da superfície): é o que carrega "premium". **Não usar como cor de texto sobre fundo claro** (ver `gold-dark` abaixo e nota de acessibilidade) |
+| Gold Light | #E1A951 | rgb(225,169,81) | Tom claro do gold — hover de botões (`hover:bg-gold-light`) |
+| Gold Dark | #6D4A13 | rgb(109,74,19) | **Variante só-para-texto**, mesma matiz do Gold mas escurecida para passar em contraste AA (7,0:1, e AAA para texto grande) sobre o fundo Cream. Usar em qualquer lugar que antes usaria `text-gold` sobre fundo claro: eyebrows/labels (quando existirem), ícones de destaque em cards, tagline do footer |
 
 ### Neutral Palette
 | Name | Hex | RGB | Usage |
@@ -129,16 +151,17 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 - Cream: ~80–85% da superfície do site inteiro (dominante — todas as seções exceto os dois bookends)
 - Navy + Ink (Hero + CTA Final): os únicos dois momentos escuros da página inteira — não alternar seção a seção como na v1
 - Gold: ~5–8% (destaque — CTAs, backgrounds), consistente nos dois modos (claro e escuro); `gold-dark` para texto, nunca `gold` puro como cor de texto sobre Cream
-- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda: `bg-gold/[0.12]`, `bg-navy/[0.04]`, `bg-navy/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs)
+- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda — desde 2026-07-31 como gradientes diagonais, não mais tom plano (ver seção 6, "Sistema de gradientes"): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs)
 - WhatsApp Green: 1 elemento por página (o CTA final)
 
 ### Acessibilidade
-- Texto branco sobre Navy (#001A4B): contraste ~15.6:1 — AAA
-- Texto navy sobre Gold (#E2AF0C) — usado em botões: contraste ~8.3:1 — AAA. **Não usar texto branco sobre gold** (só ~2:1, falha até AA)
-- Gold Dark (#7C6007) sobre Cream (#EFF1F4): contraste ~5.2:1 — AA para texto normal
-- Gold (#E2AF0C) sobre Cream: contraste ~1.8:1 — **falha, nunca usar `text-gold` diretamente sobre fundo claro**, sempre `text-gold-dark`
-- Navy sobre Cream (#EFF1F4): contraste ~15.3:1 — AAA
+- Texto branco sobre Navy (#001A4B): contraste 16,8:1 — AAA
+- Texto navy sobre Gold (#C68622) — usado em botões: contraste 5,5:1 — AA. **Atenção:** com o dourado antigo (#E2AF0C) esse par passava em AAA (~8,3:1); com o dourado real, cai para AA. **Não usar texto branco sobre gold** (3,1:1, reprova)
+- Gold Dark (#6D4A13) sobre Cream (#EFF1F4): contraste 7,0:1 — AA para texto normal (e AAA para texto grande)
+- Gold (#C68622) sobre Cream: contraste 2,7:1 — **falha, nunca usar `text-gold` diretamente sobre fundo claro**, sempre `text-gold-dark`
+- Navy sobre Cream (#EFF1F4): contraste 14,9:1 — AAA
 - **Cuidado com opacidade de navy sobre cream para texto de corpo:** `text-navy` abaixo de ~65% de opacidade cai abaixo de 4.5:1 (AA) sobre o fundo cream — testado e corrigido várias vezes durante a implementação (`text-navy/50` ≈ 3.3:1, insuficiente; `text-navy/70` ≈ 6.2:1, seguro). Usar `/65` a `/70` como piso para texto de corpo secundário sobre cream, nunca menos.
+- **Piso de opacidade para texto branco sobre o gradiente escuro:** `/70`. O gradiente da Hero termina em #003599, bem mais claro que o navy — `text-white/50` dá 5,0:1 sobre #001A4B mas cai para 3,7:1 sobre #003599, reprovando AA. Medido e corrigido em 2026-07-31.
 
 ---
 
@@ -229,8 +252,40 @@ Biblioteca de padrões já validada no mockup v3 — base para os componentes do
 ### Sistema de fundo único + bookends escuros (substitui a "alternância" da v1)
 O site inteiro usa **Cream como fundo único**, exceto dois momentos deliberadamente escuros (navy/ink): o **Hero** (abertura) e o **CTA Final** (fechamento) — como parênteses ao redor do conteúdo claro. Isso substitui o padrão v1 de alternar Navy→Black→Cream seção a seção. Novas seções: usar Cream, nunca inventar uma terceira cor de fundo de seção inteira.
 
+### Sistema de gradientes (2026-07-31)
+
+O cliente pediu para tirar o aspecto chapado do site. O sistema de fundo único
+acima continua valendo na estrutura (cream dominante, dois bookends escuros) —
+o que muda é que nenhuma dessas superfícies é mais uma cor sólida.
+
+**Bookends escuros.** Os dois fazem o mesmo movimento horizontal, o do CTA Final
+uma oitava mais escuro, para as duas pontas da página rimarem sem ficarem iguais:
+
+| Seção | Gradiente |
+|---|---|
+| Hero | `linear-gradient(90deg, #001A4B 0%, #003599 100%)` |
+| CTA Final | `linear-gradient(90deg, #0B0C0C 0%, #001A4B 100%)` |
+
+Implementados pelo componente `GradientBackground` (`components/ui/`), que os
+exporta como `HERO_GRADIENT` e `CTA_GRADIENT`. Nunca repetir o hex solto no
+componente da seção.
+
+**Seções claras.** Wash sutil entre branco e Cream, aplicado pelas utilities
+`surface-wash-down` e `surface-wash-up` (definidas em `globals.css`). A direção
+alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
+início da próxima, então a emenda fica invisível e o scroll lê como uma
+superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
+Para Quem (up), Sobre (down), Valores (up), Soluções (down), Atendimento (up).
+**Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
+duas `down` seguidas cria uma faixa visível na emenda.
+
+**Cards.** Os tints planos viraram gradientes diagonais (`bg-linear-to-br`),
+mantendo os mesmos valores como ponta mais forte: `from-navy/[0.07]
+to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Em Tailwind v4 a utility
+é `bg-linear-to-*`; `bg-gradient-to-*` está depreciado.
+
 ### Cards com tons suaves (soft tints) — substitui "cards brancos com borda colorida"
-Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco: `bg-gold/[0.12]`, `bg-navy/[0.04]`, `bg-navy/[0.05]`, `bg-navy/[0.06]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` (ex: o card de restrição bancária em "Para Quem", maior potencial de conversão) — mas isso é exceção pontual, não o padrão de todos os cards.
+Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco — desde 2026-07-31, como gradientes diagonais (`bg-linear-to-br`, ver "Sistema de gradientes" acima): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` (ex: o card de restrição bancária em "Para Quem", maior potencial de conversão) — mas isso é exceção pontual, não o padrão de todos os cards.
 
 ### Timeline numerada
 Linha vertical conectando dots numerados, progressão de cor gold → navy → navy claro — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site. Cores dos dots: `border-gold bg-gold/10 text-gold-dark` (início) até `border-navy/15 bg-navy/5 text-navy/35` (final, mais apagado).
@@ -242,7 +297,7 @@ Cards com tom suave de fundo (não branco+borda), número fantasma grande no can
 Nenhuma seção usa mais o padrão "LABEL EM CAPS + linha dourada" acima do H2 (removido no pivô v3) — o H2 lidera a seção diretamente. Nenhuma seção compara a Celer com bancos ou concorrentes ponto a ponto (a antiga "Tabela comparativa" foi removida junto com "Quebra de Objeção") — o público-alvo já entende a categoria; o foco é em atendimento e nos casos de uso reais do cliente, não em desmontar objeções que ele não tem.
 
 ### Blocos centralizados
-Títulos de seção e containers centralizados na página (`mx-auto text-center` no bloco de intro de cada seção). Parágrafos longos dentro de cards continuam alinhados à esquerda dentro do próprio card — só o bloco como um todo centraliza, não cada linha de texto corrido. Exceção deliberada: a seção "Soluções" não tem H2/subtexto visível (só um `h2` `sr-only`), então não há bloco de intro pra centralizar — só a grade de cards.
+Títulos de seção e containers centralizados na página (`mx-auto text-center` no bloco de intro de cada seção). Parágrafos longos dentro de cards continuam alinhados à esquerda dentro do próprio card — só o bloco como um todo centraliza, não cada linha de texto corrido. Exceção deliberada: a seção "Soluções" não tem H2/subtexto visível (só um `h2` `sr-only`), então não há bloco de intro pra centralizar — só a grade de cards. Segunda exceção (2026-07-31): a seção "Sobre" tem título alinhado à esquerda, em duas colunas — pedido explícito do cliente, ver bloco de pivô no topo do documento.
 
 ---
 
@@ -250,14 +305,15 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 
 ### Visual
 - [ ] Logo só na versão fornecida (branca), só sobre fundo escuro (Hero/CTA Final) — nunca recolorida via CSS
-- [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp): `navy` `#001A4B`, `gold` `#E2AF0C`, `cream` `#EFF1F4`, `ink` `#0B0C0C`
+- [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp): `navy` `#001A4B`, `navy-bright` `#003599`, `gold` `#C68622`, `cream` `#EFF1F4`, `ink` `#0B0C0C`
 - [ ] `text-gold` nunca usado como cor de texto sobre fundo claro — usar `text-gold-dark` (texto sobre fundo escuro pode usar `text-gold` normalmente)
 - [ ] Fonte de display só em ≥20px, nunca para corpo de texto
-- [ ] Fundo cream único em todas as seções, exceto os dois bookends escuros (Hero, CTA Final)
+- [ ] Fundo claro em todas as seções, exceto os dois bookends escuros (Hero, CTA Final) — com o wash de gradiente da seção 6, e a direção alternando em relação às seções vizinhas
 - [ ] Cantos arredondados em botões (pill) e cards (`rounded-2xl`+) — nunca `rounded-none`
 - [ ] Nenhuma seção com eyebrow (label caps + linha dourada acima do H2) — removido no pivô v3
-- [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda
+- [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda. Exceção única: a seção "Sobre", em duas colunas com título à esquerda (pedido do cliente, 2026-07-31)
 - [ ] Texto navy sobre cream em pelo menos 65% de opacidade (corpo de texto) — abaixo disso cai fora do AA
+- [ ] Texto branco sobre o gradiente escuro em pelo menos 70% de opacidade — abaixo disso reprova AA na ponta clara (#003599)
 - [ ] Dourado usado com escassez (5–8% da superfície) — se está em toda parte, perdeu o efeito de destaque
 
 ### Copy
@@ -275,11 +331,11 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 ---
 
 ## Extractable Fields
-- `colors.primary` = Navy #001A4B (bookends only) · `colors.background` = Cream #EFF1F4 (site-wide default) · `colors.secondary` = Gold #E2AF0C (backgrounds) · `colors.secondaryText` = Gold Dark #7C6007 (text on light bg) · `colors.ink` = #0B0C0C
+- `colors.primary` = Navy #001A4B (bookends only) · `colors.primaryBright` = Navy Bright #003599 (gradient endpoint, Hero + Valores) · `colors.background` = Cream #EFF1F4 (site-wide default) · `colors.secondary` = Gold #C68622 (backgrounds) · `colors.secondaryText` = Gold Dark #6D4A13 (text on light bg) · `colors.ink` = #0B0C0C
 - `typography.heading` = Coolvetica (integrada — Light/Regular/Bold + itálico, `font-bold` não `font-semibold`) · `typography.body` = Roboto
 - `voice.traits` = Ágil sem apressada, Direta sem fria, Sólida sem distante, Parceira não fornecedora, Justa não paternalista
 - `voice.prohibited` = instituição financeira, assessoria de investimentos, parceiro de investimentos, referência ao latim
 - `logo.variants` = só branco/claro disponível, uso restrito a fundo escuro (Hero, CTA Final)
 - `logo.minSize` = ~120px (lockup horizontal) / 32px (ícone)
 - `layout.radius` = pill (botões) / rounded-2xl–3xl (cards) — nunca rounded-none
-- `layout.background` = single-color (cream), bookends escuros só em Hero e CTA Final
+- `layout.background` = cream dominante com wash de gradiente sutil (branco↔cream, alternando por seção), bookends escuros em gradiente só em Hero e CTA Final
