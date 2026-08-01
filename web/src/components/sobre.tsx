@@ -27,7 +27,7 @@ const PILARES = [
 */
 export function Sobre() {
   return (
-    <section id="sobre" className="surface-wash-down">
+    <section id="sobre" className="surface-wash-up">
       <div className="mx-auto max-w-5xl px-6 py-12 sm:px-10 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
           <Reveal>
