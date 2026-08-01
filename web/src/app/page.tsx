@@ -2,6 +2,7 @@ import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Processo } from "@/components/processo";
 import { ParaQuem } from "@/components/para-quem";
+import { Sobre } from "@/components/sobre";
 import { Solucoes } from "@/components/solucoes";
 import { Atendimento } from "@/components/atendimento";
 import { CtaFinal } from "@/components/cta-final";
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero />
         <Processo />
         <ParaQuem />
+        <Sobre />
         <Solucoes />
         <Atendimento />
         <CtaFinal />
