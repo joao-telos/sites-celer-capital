@@ -621,6 +621,8 @@ Conteúdo completo de `web/src/components/atendimento.tsx`:
 ```tsx
 "use client";
 
+import { Fragment } from "react";
+
 import { useInViewOnce } from "@/hooks/use-in-view-once";
 import { cn } from "@/lib/utils";
 
@@ -667,20 +669,26 @@ export function Atendimento() {
             return (
               <span key={linha.cor} className={cn("block", linha.cor)}>
                 {linha.palavras.map((palavra, indicePalavra) => (
-                  <span
-                    key={palavra}
-                    style={{
-                      transitionDelay: `${(palavrasAntes + indicePalavra) * 0.12}s`,
-                    }}
-                    className={cn(
-                      "mr-[0.25em] inline-block transition-all duration-500 ease-out last:mr-0",
-                      inView
-                        ? "translate-y-0 opacity-100 blur-none"
-                        : "translate-y-2 opacity-0 blur-sm"
-                    )}
-                  >
-                    {palavra}
-                  </span>
+                  <Fragment key={palavra}>
+                    {/* Espaço real entre as palavras, não margem. Spans
+                        inline-block colados produzem textContent sem
+                        separação ("ConectandoValor"), e é isso que o leitor
+                        de tela anuncia e que o usuário copia. */}
+                    {indicePalavra > 0 ? " " : null}
+                    <span
+                      style={{
+                        transitionDelay: `${(palavrasAntes + indicePalavra) * 0.12}s`,
+                      }}
+                      className={cn(
+                        "inline-block transition-all duration-500 ease-out",
+                        inView
+                          ? "translate-y-0 opacity-100 blur-none"
+                          : "translate-y-2 opacity-0 blur-sm"
+                      )}
+                    >
+                      {palavra}
+                    </span>
+                  </Fragment>
                 ))}
               </span>
             );
