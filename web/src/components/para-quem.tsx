@@ -42,7 +42,7 @@ export function ParaQuem() {
           {SEGMENTS.map((item, i) => (
             <Reveal key={item.number} delay={i * 0.08}>
               <Card
-                className={`relative h-full gap-0 rounded-3xl border-0 py-0 shadow-none ring-0 ${item.tint} ${item.highlight ? "border-t-4 border-gold" : ""}`}
+                className={`relative h-full gap-0 rounded-3xl border-0 bg-transparent py-0 shadow-none ring-0 ${item.tint} ${item.highlight ? "border-t-4 border-gold" : ""}`}
               >
                 <CardContent className="px-7 py-9 text-left">
                   <span

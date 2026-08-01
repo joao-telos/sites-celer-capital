@@ -80,7 +80,7 @@ export function InteractiveAccordion({
             <button
               key={panel.id}
               type="button"
-              aria-expanded={isActive}
+              onClick={() => setActiveIndex(i)}
               onMouseEnter={() => setActiveIndex(i)}
               onFocus={() => setActiveIndex(i)}
               style={{ background: gradienteDoPainel(i), flexBasis: 0 }}

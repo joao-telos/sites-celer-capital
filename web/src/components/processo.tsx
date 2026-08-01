@@ -29,7 +29,7 @@ export function Processo() {
     <section id="processo" className="surface-wash-down relative overflow-hidden">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-24 size-[400px] rounded-full bg-[radial-gradient(circle,rgba(0,26,75,0.06)_0%,transparent_65%)]"
+        className="pointer-events-none absolute -right-24 -top-24 z-0 size-[400px] rounded-full bg-[radial-gradient(circle,rgba(0,26,75,0.06)_0%,transparent_65%)]"
       />
 
       <div className="relative z-10 mx-auto max-w-2xl px-6 py-12 sm:px-10 lg:py-16">
