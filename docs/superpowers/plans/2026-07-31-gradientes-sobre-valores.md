@@ -688,9 +688,13 @@ Com `flexBasis: 0`, `grow-[3]` no ativo e `grow` nos cinco fechados, a soma é 8
 
 - [ ] **Step 2: Criar a seção**
 
-Criar `web/src/components/valores.tsx`. A copy dos seis valores veio pronta do cliente:
+Criar `web/src/components/valores.tsx`. A copy dos seis valores veio pronta do cliente.
+
+**Correção do plano (2026-07-31, durante a execução):** este arquivo **precisa** de `"use client"`, ao contrário do que a versão original deste plano dizia. O array `VALORES` carrega referências de componente (os ícones do `lucide-react`, que não trazem a diretiva própria) e as passa como prop para o Client Component `InteractiveAccordion`. React Server Components rejeita isso em tempo de execução: `Functions cannot be passed directly to Client Components`. Reproduzido no log do dev server antes da correção.
 
 ```tsx
+"use client";
+
 import {
   Award,
   Handshake,
