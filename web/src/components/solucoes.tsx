@@ -32,7 +32,7 @@ function Anchor({
 const SolutionNode = forwardRef<HTMLDivElement, { label: string }>(
   ({ label }, ref) => (
     <div className="relative">
-      <div className="w-32 rounded-2xl border border-navy/10 bg-white px-4 py-3 text-center text-[11px] leading-tight font-bold text-navy shadow-md shadow-navy/5 sm:w-44 sm:px-5 sm:py-4 sm:text-sm lg:w-48 lg:text-base">
+      <div className="w-32 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center text-[11px] leading-tight font-bold text-navy shadow-md shadow-navy/5 sm:w-44 sm:px-5 sm:py-4 sm:text-sm lg:w-48 lg:text-base">
         {label}
       </div>
       <Anchor innerRef={ref as RefObject<HTMLDivElement | null>} side="right" />
@@ -52,7 +52,7 @@ export function Solucoes() {
   const clientInRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="solucoes">
+    <section id="solucoes" className="surface-wash-down">
       <div className="mx-auto max-w-3xl px-6 py-12 text-center sm:px-10 lg:py-16">
         <Reveal>
           <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">

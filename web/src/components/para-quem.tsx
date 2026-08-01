@@ -4,7 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 const SEGMENTS = [
   {
     number: "01",
-    tint: "bg-navy/[0.05]",
+    tint: "bg-linear-to-br from-navy/[0.07] to-navy/[0.015]",
     numberColor: "text-navy/10",
     highlight: false,
     hook: "Fechou o contrato. O pagamento só vem depois.",
@@ -12,7 +12,7 @@ const SEGMENTS = [
   },
   {
     number: "02",
-    tint: "bg-navy/[0.06]",
+    tint: "bg-linear-to-br from-navy/[0.08] to-navy/[0.02]",
     numberColor: "text-navy/10",
     highlight: false,
     hook: "Apareceram clientes novos. O caixa aguenta mais um?",
@@ -20,7 +20,7 @@ const SEGMENTS = [
   },
   {
     number: "03",
-    tint: "bg-gold/[0.12]",
+    tint: "bg-linear-to-br from-gold/[0.16] to-gold/[0.05]",
     numberColor: "text-gold/25",
     highlight: true,
     hook: "Já ouviu não do banco?",
@@ -30,7 +30,7 @@ const SEGMENTS = [
 
 export function ParaQuem() {
   return (
-    <section id="para-quem">
+    <section id="para-quem" className="surface-wash-up">
       <div className="mx-auto max-w-5xl px-6 py-12 sm:px-10 lg:py-16">
         <Reveal>
           <h2 className="font-heading mx-auto mb-10 max-w-xl text-center text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:mb-12 lg:text-4xl">

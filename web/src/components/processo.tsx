@@ -26,7 +26,7 @@ const STEPS = [
 
 export function Processo() {
   return (
-    <section id="processo" className="relative overflow-hidden">
+    <section id="processo" className="surface-wash-down relative overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 -top-24 size-[400px] rounded-full bg-[radial-gradient(circle,rgba(0,26,75,0.06)_0%,transparent_65%)]"
