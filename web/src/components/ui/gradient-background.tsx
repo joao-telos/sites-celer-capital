@@ -11,6 +11,19 @@ export const HERO_GRADIENT =
 export const CTA_GRADIENT =
   "linear-gradient(90deg, var(--color-ink) 0%, var(--color-navy) 100%)";
 
+/*
+  Gradientes de "caixa" (2026-08-01): mesma ideia dos bookends acima, mas
+  para a caixa arredondada de uma seção sobre o wash claro, não para o fundo
+  de uma seção inteira — por isso 135°, não 90° (ver docs/brand-guidelines.md,
+  "Gradiente de caixa"). Vivem aqui pelo mesmo motivo dos bookends: nenhuma
+  seção deve carregar o literal do gradiente.
+*/
+export const SOBRE_BOX_GRADIENT =
+  "linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-bright) 100%)";
+
+export const NUMEROS_BOX_GRADIENT =
+  "linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 100%)";
+
 interface GradientBackgroundProps {
   /** Valor CSS completo de `background` — normalmente um linear-gradient(). */
   gradient: string;

@@ -1,5 +1,6 @@
 import { CountingNumber } from "@/components/ui/counting-number";
 import { Reveal } from "@/components/motion/reveal";
+import { NUMEROS_BOX_GRADIENT } from "@/components/ui/gradient-background";
 
 /*
   Dados institucionais fornecidos pelo cliente em 2026-08-01. Verbatim:
@@ -53,10 +54,7 @@ export function Numeros() {
         <Reveal>
           <div
             className="rounded-[2rem] px-8 py-12 sm:px-12 lg:px-16 lg:py-16"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 100%)",
-            }}
+            style={{ background: NUMEROS_BOX_GRADIENT }}
           >
             <dl className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
               {NUMEROS.map((item) => (

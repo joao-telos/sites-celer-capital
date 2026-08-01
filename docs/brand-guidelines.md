@@ -54,6 +54,31 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
    momentos escuros da página continua valendo, porque a seção em si fica no
    wash claro.
 
+## ⚠️ Rodada 2026-08-01 — reestruturação visual, Números e tagline (ler antes de implementar UI)
+
+Rodada que mexe na ordem da página e em duas seções específicas — não no
+sistema de gradientes, que já ficou fechado na rodada anterior:
+
+1. **Seção "Para Quem" removida e página reordenada.** Ordem atual: Hero,
+   Processo, Sobre, Números, Valores, Soluções, Atendimento, CTA Final. Isso
+   torna histórico o item 5 do pivô v3 (2026-07-12, acima), que descreve o
+   conteúdo de "Para Quem" — a seção não existe mais no site.
+2. **Seção "Números" adicionada**, entre Sobre e Valores: uma caixa em
+   gradiente dourado (ver seção 6, "Gradiente de caixa") com 4 estatísticas
+   institucionais (anos de mercado, anos de empresa, valor antecipado,
+   empresas parceiras) contadas via `CountingNumber` ao entrar na viewport.
+   É a maior superfície dourada do site — ver a exceção registrada na regra
+   de proporção da seção 3.
+3. **Sobre reformulada como caixa navy** (Missão/Visão em caixas cream
+   sólidas dentro dela) — já refletido na entrada do token Navy Bright
+   (seção 3) e em "Gradiente de caixa" (seção 6).
+4. **Atendimento virou a tagline animada da marca** ("Conectando Valor,
+   Crescendo Juntos", revelada palavra a palavra no scroll — ver seção 5,
+   Tagline). Isso torna histórico o segundo item da lista no pivô v3 (item 4
+   acima), que descreve o antigo conteúdo textual de "Atendimento" (foco em
+   atendimento direto e resposta rápida) — esse texto não existe mais na
+   seção.
+
 ---
 
 ## Quick Reference
@@ -151,8 +176,8 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 ### Regra de proporção (pivô v2/v3)
 - Cream: ~80–85% da superfície do site inteiro (dominante — todas as seções exceto os dois bookends)
 - Navy + Ink (Hero + CTA Final): os únicos dois momentos escuros da página inteira — não alternar seção a seção como na v1
-- Gold: ~5–8% (destaque — CTAs, backgrounds), consistente nos dois modos (claro e escuro); `gold-dark` para texto, nunca `gold` puro como cor de texto sobre Cream
-- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda — desde 2026-07-31 como gradientes diagonais, não mais tom plano (ver seção 6, "Sistema de gradientes"): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs)
+- Gold: ~5–8% fora da seção Números (destaque — CTAs, backgrounds), consistente nos dois modos (claro e escuro); `gold-dark` para texto, nunca `gold` puro como cor de texto sobre Cream. **Exceção deliberada (2026-08-01):** a seção Números é uma caixa inteira em gradiente dourado, bem acima desse teto — pedido do cliente para dar peso visual aos números institucionais, não um desvio acidental da regra. É a única exceção; fora dela, a escassez continua valendo.
+- Cards sobre o fundo cream usam **tons suaves** (soft tints) em vez de branco+borda — desde 2026-07-31 como gradientes diagonais, não mais tom plano (ver seção 6, "Sistema de gradientes"): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]` — nunca a cor sólida cheia num card inteiro (isso é reservado para os CTAs). Padrão descrito, mas sem exemplo em uso atual no site (2026-08-01) — ver seção 6, "Cards"
 - WhatsApp Green: 1 elemento por página (o CTA final)
 
 ### Acessibilidade
@@ -281,6 +306,12 @@ componente da seção.
 | Sobre | `linear-gradient(135deg, #001A4B 0%, #003599 100%)` | branco (piso `/70`) |
 | Números | `linear-gradient(135deg, #C68622 0%, #F2AA3A 100%)` | navy cheio, sem opacidade |
 
+Implementados no mesmo módulo `GradientBackground` (`components/ui/`), que os
+exporta como `SOBRE_BOX_GRADIENT` e `NUMEROS_BOX_GRADIENT`. Mesma regra dos
+bookends: nunca repetir o hex solto no componente da seção — `sobre.tsx` e
+`numeros.tsx` importam a constante em vez de escrever o `linear-gradient(...)`
+inline.
+
 Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é fundo de largura total, onde o movimento horizontal funciona; caixa arredondada lê melhor na diagonal. As caixas de Missão e Visão dentro da caixa Sobre são cream sólido, não tint translúcido — sobre fundo navy, um tint navy desapareceria.
 
 **Seções claras.** Wash sutil entre branco e Cream, aplicado pelas utilities
@@ -295,10 +326,14 @@ duas `down` seguidas cria uma faixa visível na emenda.
 **Cards.** Os tints planos viraram gradientes diagonais (`bg-linear-to-br`),
 mantendo os mesmos valores como ponta mais forte: `from-navy/[0.07]
 to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Em Tailwind v4 a utility
-é `bg-linear-to-*`; `bg-gradient-to-*` está depreciado.
+é `bg-linear-to-*`; `bg-gradient-to-*` está depreciado. Padrão descrito, mas
+sem exemplo em uso atual no site (2026-08-01): os dois consumidores eram
+`para-quem.tsx` (seção removida nesta rodada) e as caixas Missão/Visão em
+`sobre.tsx` (viraram cream sólido nesta rodada) — `bg-linear-to-br` não
+aparece mais em `web/src`.
 
 ### Cards com tons suaves (soft tints) — substitui "cards brancos com borda colorida"
-Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco — desde 2026-07-31, como gradientes diagonais (`bg-linear-to-br`, ver "Sistema de gradientes" acima): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` — padrão descrito, mas sem exemplo em uso atual no site (era exclusivo do card de restrição bancária da antiga seção "Para Quem", removida em 2026-08-01).
+Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco — desde 2026-07-31, como gradientes diagonais (`bg-linear-to-br`, ver "Sistema de gradientes" acima): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]` (padrão descrito, mas sem exemplo em uso atual no site — ver seção 6, "Cards"). Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` — padrão descrito, mas sem exemplo em uso atual no site (era exclusivo do card de restrição bancária da antiga seção "Para Quem", removida em 2026-08-01).
 
 ### Timeline numerada
 Linha vertical conectando dots numerados, progressão de cor gold → navy → navy claro — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site. Cores dos dots: `border-gold bg-gold/10 text-gold-dark` (início) até `border-navy/15 bg-navy/5 text-navy/35` (final, mais apagado).
@@ -328,7 +363,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Texto navy sobre cream em pelo menos 65% de opacidade (corpo de texto) — abaixo disso cai fora do AA
 - [ ] Texto branco sobre o gradiente escuro em pelo menos 70% de opacidade — abaixo disso reprova AA na ponta clara (#003599)
 - [ ] Texto sobre superfície dourada em navy cheio, sem opacidade — branco e navy translúcido reprovam AA nos dois extremos do gradiente
-- [ ] Dourado usado com escassez (5–8% da superfície) — se está em toda parte, perdeu o efeito de destaque
+- [ ] Dourado usado com escassez (5–8% da superfície) fora da seção Números — se está em toda parte, perdeu o efeito de destaque. Exceção deliberada: a caixa da seção Números, ver seção 3
 
 ### Copy
 - [ ] Nenhum número, prazo ou processo sem confirmação do cliente (usar placeholder explícito, nunca inventar)

@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
+import { SOBRE_BOX_GRADIENT } from "@/components/ui/gradient-background";
 
 /*
   Missão e Visão agora são caixas cream sólidas dentro da caixa navy. Os
@@ -37,10 +38,7 @@ export function Sobre() {
         <Reveal>
           <div
             className="rounded-[2rem] px-8 py-12 sm:px-12 lg:px-14 lg:py-14"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-bright) 100%)",
-            }}
+            style={{ background: SOBRE_BOX_GRADIENT }}
           >
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
               <div className="text-left">
