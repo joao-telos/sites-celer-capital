@@ -126,7 +126,7 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
 | Navy | #001A4B | rgb(0,26,75) | Um dos dois "bookends" escuros (Hero) — ver "Sistema de fundo único" abaixo |
-| Navy Bright | #003599 | rgb(0,53,153) | Ponta clara do gradiente da Hero e dos painéis de Valores. Entrou por pedido do cliente em 2026-07-31, fora da paleta original — não é uma variação gerada |
+| Navy Bright | #003599 | rgb(0,53,153) | Ponta clara do gradiente da Hero, dos painéis de Valores e da caixa da seção Sobre (2026-08-01). Entrou por pedido do cliente em 2026-07-31, fora da paleta original — não é uma variação gerada |
 | Ink | #0B0C0C | rgb(11,12,12) | O outro bookend escuro (CTA Final) — mais denso que o navy |
 
 ### Secondary Colors
@@ -134,7 +134,8 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 |------|-----|-----|-------|
 | Gold | #C68622 | rgb(198,134,34) | Cor de destaque — CTAs, backgrounds, dividers. Uso deliberadamente escasso (5–10% da superfície): é o que carrega "premium". **Não usar como cor de texto sobre fundo claro** (ver `gold-dark` abaixo e nota de acessibilidade) |
 | Gold Light | #E1A951 | rgb(225,169,81) | Tom claro do gold — hover de botões (`hover:bg-gold-light`) |
-| Gold Dark | #6D4A13 | rgb(109,74,19) | **Variante só-para-texto**, mesma matiz do Gold mas escurecida para passar em contraste AA (7,0:1, e AAA para texto grande) sobre o fundo Cream. Usar em qualquer lugar que antes usaria `text-gold` sobre fundo claro: eyebrows/labels (quando existirem), ícones de destaque em cards, tagline do footer |
+| Gold Dark | #6D4A13 | rgb(109,74,19) | **Variante só-para-texto**, mesma matiz do Gold mas escurecida para passar em contraste AA (7,0:1, e AAA para texto grande) sobre o fundo Cream. Usar em qualquer lugar que antes usaria `text-gold` sobre fundo claro: eyebrows/labels (quando existirem), ícones de destaque em cards, tagline |
+| Gold Bright | #F2AA3A | rgb(242,170,58) | Ponta clara do gradiente da seção Números. Entrou por pedido do cliente em 2026-08-01, fora da paleta original — não é uma variação gerada |
 
 ### Neutral Palette
 | Name | Hex | RGB | Usage |
@@ -162,6 +163,7 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 - Navy sobre Cream (#EFF1F4): contraste 14,9:1 — AAA
 - **Cuidado com opacidade de navy sobre cream para texto de corpo:** `text-navy` abaixo de ~65% de opacidade cai abaixo de 4.5:1 (AA) sobre o fundo cream — testado e corrigido várias vezes durante a implementação (`text-navy/50` ≈ 3.3:1, insuficiente; `text-navy/70` ≈ 6.2:1, seguro). Usar `/65` a `/70` como piso para texto de corpo secundário sobre cream, nunca menos.
 - **Piso de opacidade para texto branco sobre o gradiente escuro:** `/70`. O gradiente da Hero termina em #003599, bem mais claro que o navy — `text-white/50` dá 5,0:1 sobre #001A4B mas cai para 3,7:1 sobre #003599, reprovando AA. Medido e corrigido em 2026-07-31.
+- **Texto sobre superfície dourada é sempre navy, sem opacidade.** Branco reprova nos dois extremos do gradiente da seção Números (3,1:1 sobre #C68622, 2,0:1 sobre #F2AA3A), e navy com opacidade também escorrega: `text-navy/80` cai para 4,31:1 na ponta escura, abaixo do AA. Navy cheio dá 5,5:1 na ponta escura e 8,5:1 na clara. Isso generaliza a regra que já valia para os botões dourados.
 
 ---
 
@@ -234,7 +236,9 @@ Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os p
 - Tamanho mínimo digital: ~120px de largura para o lockup horizontal completo; 32px para o ícone isolado (navbar compilada, favicon)
 
 ### Tagline
-**"Conectando Valor, Crescendo Juntos"** — uso institucional (footer, apresentações, materiais de marca). Não é headline de conversão — é assinatura de marca, não argumento de venda. Manter em itálico, cor `gold-dark` (não `gold` puro — está sobre o fundo claro do footer, ver acessibilidade na seção 3), sempre entre aspas quando usada como assinatura.
+**"Conectando Valor, Crescendo Juntos"** — desde 2026-08-01 é uma **seção própria** da página (entre Soluções e o CTA Final), em caixa alta e tipografia grande, com as palavras revelando uma a uma no scroll. Saiu do rodapé na mesma mudança: nos dois lugares, apareceria duas vezes separadas apenas pelo CTA Final.
+
+Continua sendo assinatura de marca, não argumento de conversão — não usar como headline de venda. Em materiais fora do site (apresentações, peças institucionais), o uso antigo continua válido: itálico, entre aspas, em `gold-dark` sobre fundo claro.
 
 ---
 
@@ -270,12 +274,21 @@ Implementados pelo componente `GradientBackground` (`components/ui/`), que os
 exporta como `HERO_GRADIENT` e `CTA_GRADIENT`. Nunca repetir o hex solto no
 componente da seção.
 
+**Gradiente de caixa (2026-08-01).** Além dos dois bookends de seção inteira, duas seções usam uma caixa grande arredondada preenchida com gradiente, sobre o wash claro:
+
+| Seção | Gradiente | Texto |
+|---|---|---|
+| Sobre | `linear-gradient(135deg, #001A4B 0%, #003599 100%)` | branco (piso `/70`) |
+| Números | `linear-gradient(135deg, #C68622 0%, #F2AA3A 100%)` | navy cheio, sem opacidade |
+
+Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é fundo de largura total, onde o movimento horizontal funciona; caixa arredondada lê melhor na diagonal. As caixas de Missão e Visão dentro da caixa Sobre são cream sólido, não tint translúcido — sobre fundo navy, um tint navy desapareceria.
+
 **Seções claras.** Wash sutil entre branco e Cream, aplicado pelas utilities
 `surface-wash-down` e `surface-wash-up` (definidas em `globals.css`). A direção
 alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
 início da próxima, então a emenda fica invisível e o scroll lê como uma
 superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
-Para Quem (up), Sobre (down), Valores (up), Soluções (down), Atendimento (up).
+Sobre (up), Números (down), Valores (up), Soluções (down), Atendimento (up).
 **Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
 duas `down` seguidas cria uma faixa visível na emenda.
 
@@ -285,13 +298,13 @@ to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Em Tailwind v4 a utility
 é `bg-linear-to-*`; `bg-gradient-to-*` está depreciado.
 
 ### Cards com tons suaves (soft tints) — substitui "cards brancos com borda colorida"
-Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco — desde 2026-07-31, como gradientes diagonais (`bg-linear-to-br`, ver "Sistema de gradientes" acima): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` (ex: o card de restrição bancária em "Para Quem", maior potencial de conversão) — mas isso é exceção pontual, não o padrão de todos os cards.
+Variação de conteúdo dentro do fundo cream vem de **cards com tons suaves da paleta**, não de bordas coloridas sobre branco — desde 2026-07-31, como gradientes diagonais (`bg-linear-to-br`, ver "Sistema de gradientes" acima): `from-navy/[0.07] to-navy/[0.015]` e `from-gold/[0.16] to-gold/[0.05]`. Cantos sempre arredondados (`rounded-2xl` a `rounded-3xl`, nunca `rounded-none`). Um card pode ganhar destaque pontual com `border-t-4 border-gold` — padrão descrito, mas sem exemplo em uso atual no site (era exclusivo do card de restrição bancária da antiga seção "Para Quem", removida em 2026-08-01).
 
 ### Timeline numerada
 Linha vertical conectando dots numerados, progressão de cor gold → navy → navy claro — comunica visualmente "início urgente, chegada tranquila". Reaproveitar para qualquer sequência de processo/etapas no site. Cores dos dots: `border-gold bg-gold/10 text-gold-dark` (início) até `border-navy/15 bg-navy/5 text-navy/35` (final, mais apagado).
 
 ### Grid de cards (2×2 ou 2×N)
-Cards com tom suave de fundo (não branco+borda), número fantasma grande no canto em opacidade baixa. Padrão usado em "Para Quem" (frases-gancho por segmento) e "Soluções" (catálogo de instrumentos antecipáveis).
+Cards com tom suave de fundo (não branco+borda), número fantasma grande no canto em opacidade baixa. Padrão usado em "Soluções" (catálogo de instrumentos antecipáveis).
 
 ### Sem eyebrows, sem linguagem comparativa
 Nenhuma seção usa mais o padrão "LABEL EM CAPS + linha dourada" acima do H2 (removido no pivô v3) — o H2 lidera a seção diretamente. Nenhuma seção compara a Celer com bancos ou concorrentes ponto a ponto (a antiga "Tabela comparativa" foi removida junto com "Quebra de Objeção") — o público-alvo já entende a categoria; o foco é em atendimento e nos casos de uso reais do cliente, não em desmontar objeções que ele não tem.
@@ -305,7 +318,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 
 ### Visual
 - [ ] Logo só na versão fornecida (branca), só sobre fundo escuro (Hero/CTA Final) — nunca recolorida via CSS
-- [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp): `navy` `#001A4B`, `navy-bright` `#003599`, `gold` `#C68622`, `cream` `#EFF1F4`, `ink` `#0B0C0C`
+- [ ] Nenhuma cor fora da paleta institucional (exceto o verde do botão WhatsApp): `navy` `#001A4B`, `navy-bright` `#003599`, `gold` `#C68622`, `gold-bright` `#F2AA3A`, `cream` `#EFF1F4`, `ink` `#0B0C0C`
 - [ ] `text-gold` nunca usado como cor de texto sobre fundo claro — usar `text-gold-dark` (texto sobre fundo escuro pode usar `text-gold` normalmente)
 - [ ] Fonte de display só em ≥20px, nunca para corpo de texto
 - [ ] Fundo claro em todas as seções, exceto os dois bookends escuros (Hero, CTA Final) — com o wash de gradiente da seção 6, e a direção alternando em relação às seções vizinhas
@@ -314,6 +327,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda. Exceção única: a seção "Sobre", em duas colunas com título à esquerda (pedido do cliente, 2026-07-31)
 - [ ] Texto navy sobre cream em pelo menos 65% de opacidade (corpo de texto) — abaixo disso cai fora do AA
 - [ ] Texto branco sobre o gradiente escuro em pelo menos 70% de opacidade — abaixo disso reprova AA na ponta clara (#003599)
+- [ ] Texto sobre superfície dourada em navy cheio, sem opacidade — branco e navy translúcido reprovam AA nos dois extremos do gradiente
 - [ ] Dourado usado com escassez (5–8% da superfície) — se está em toda parte, perdeu o efeito de destaque
 
 ### Copy
@@ -331,7 +345,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 ---
 
 ## Extractable Fields
-- `colors.primary` = Navy #001A4B (bookends only) · `colors.primaryBright` = Navy Bright #003599 (gradient endpoint, Hero + Valores) · `colors.background` = Cream #EFF1F4 (site-wide default) · `colors.secondary` = Gold #C68622 (backgrounds) · `colors.secondaryText` = Gold Dark #6D4A13 (text on light bg) · `colors.ink` = #0B0C0C
+- `colors.primary` = Navy #001A4B (bookends only) · `colors.primaryBright` = Navy Bright #003599 (gradient endpoint, Hero + Valores + Sobre box) · `colors.background` = Cream #EFF1F4 (site-wide default) · `colors.secondary` = Gold #C68622 (backgrounds) · `colors.secondaryBright` = Gold Bright #F2AA3A (gradient endpoint, Números box) · `colors.secondaryText` = Gold Dark #6D4A13 (text on light bg) · `colors.ink` = #0B0C0C
 - `typography.heading` = Coolvetica (integrada — Light/Regular/Bold + itálico, `font-bold` não `font-semibold`) · `typography.body` = Roboto
 - `voice.traits` = Ágil sem apressada, Direta sem fria, Sólida sem distante, Parceira não fornecedora, Justa não paternalista
 - `voice.prohibited` = instituição financeira, assessoria de investimentos, parceiro de investimentos, referência ao latim
