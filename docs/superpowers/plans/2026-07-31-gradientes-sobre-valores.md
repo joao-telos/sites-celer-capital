@@ -267,7 +267,17 @@ Trocar a abertura da section (remover `bg-ink`) e inserir a camada antes do glow
       />
 ```
 
-O `text-white/70` do parágrafo e o `text-white/20` do disclaimer ficam como estão: o gradiente do CTA vai de ink até navy, ambos mais escuros que `#003599`, então o contraste só melhora em relação ao ink chapado de hoje.
+O `text-white/70` do parágrafo fica como está: o gradiente do CTA vai de ink até navy, ambos mais escuros que `#003599`, então o contraste dele só melhora em relação ao ink chapado de hoje.
+
+O disclaimer, porém, **precisa subir**. Hoje ele está em `text-white/20`, que sobre o ink dá **1,78:1** em texto de 9px — falha AA com folga larga, e é um defeito que já existe no site, anterior a esta rodada. Como o arquivo já está sendo tocado e a Global Constraint deste plano fixa `/70` como piso para branco sobre fundo escuro, corrigir aqui evita que a regra nasça com exceção:
+
+```tsx
+          <p className="mt-5 text-[9px] tracking-wider text-white/70 uppercase">
+            Sem compromisso · Sem consulta de crédito · Resposta rápida
+          </p>
+```
+
+Em `/70` o contraste vai para ~9,7:1. Decisão do usuário na varredura de pré-execução (2026-07-31).
 
 - [ ] **Step 2: Aplicar o wash nas quatro seções claras existentes**
 
