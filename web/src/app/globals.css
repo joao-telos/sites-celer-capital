@@ -59,6 +59,13 @@
     4 valores vieram diretamente do cliente como a identidade de verdade.
   */
   --color-navy: #001a4b;
+  /*
+    navy-bright: pedido do cliente (2026-07-31) para o gradiente da Hero.
+    NÃO estava na paleta institucional original — entrou por decisão do
+    cliente, não por variação inventada. Ver
+    docs/superpowers/specs/2026-07-31-gradientes-sobre-valores-design.md
+  */
+  --color-navy-bright: #003599;
   --color-ink: #0b0c0c; /* "black" institucional — nome próprio p/ não colidir com o black do Tailwind */
   --color-gold: #c68622;
   --color-gold-light: #e1a951; /* hover dos botões dourados — mais claro que o gold base */
@@ -205,6 +212,28 @@
   html {
     @apply font-sans;
   }
+}
+
+/*
+  Wash sutil das seções claras. A direção alterna de seção para seção
+  (down, up, down, ...) para que a cor do fim de uma seção seja a mesma do
+  início da próxima — a emenda fica invisível e o scroll lê como uma
+  superfície contínua em vez de faixas.
+*/
+@utility surface-wash-down {
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--color-cream) 100%
+  );
+}
+
+@utility surface-wash-up {
+  background-image: linear-gradient(
+    180deg,
+    var(--color-cream) 0%,
+    #ffffff 100%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

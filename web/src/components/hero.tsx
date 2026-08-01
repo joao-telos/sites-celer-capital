@@ -2,15 +2,21 @@
 
 import { ArrowRight } from "lucide-react";
 
+import {
+  GradientBackground,
+  HERO_GRADIENT,
+} from "@/components/ui/gradient-background";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-navy px-6 pt-32 pb-20 text-center sm:px-10">
+    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 pt-32 pb-20 text-center sm:px-10">
+      <GradientBackground gradient={HERO_GRADIENT} />
+
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-32 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(198,134,34,0.12)_0%,transparent_65%)]"
+        className="pointer-events-none absolute -top-32 left-1/2 z-0 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(198,134,34,0.12)_0%,transparent_65%)]"
       />
 
       <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center">
@@ -20,7 +26,7 @@ export function Hero() {
           <span className="font-light text-gold">não deveria esperar.</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-lg text-base leading-[1.6] font-light text-white/50 sm:text-lg">
+        <p className="mx-auto mt-6 max-w-lg text-base leading-[1.6] font-light text-white/70 sm:text-lg">
           Antecipe seus recebíveis e libere capital imediato para o seu
           negócio, sem a burocracia bancária e sem perguntas
           desnecessárias.
@@ -43,7 +49,7 @@ export function Hero() {
             href="#processo"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "h-auto rounded-full border-white/20 bg-transparent px-6 py-3.5 text-[10px] font-bold tracking-wider text-white/60 uppercase hover:bg-white/5 hover:text-white"
+              "h-auto rounded-full border-white/20 bg-transparent px-6 py-3.5 text-[10px] font-bold tracking-wider text-white/70 uppercase hover:bg-white/5 hover:text-white"
             )}
           >
             Ver como funciona
