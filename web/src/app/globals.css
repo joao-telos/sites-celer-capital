@@ -70,6 +70,13 @@
   --color-gold: #c68622;
   --color-gold-light: #e1a951; /* hover dos botões dourados — mais claro que o gold base */
   /*
+    gold-bright: pedido do cliente (2026-08-01) para o gradiente da seção
+    Números. Como o navy-bright, NÃO estava na paleta institucional —
+    entrou por decisão do cliente, não por variação inventada. Ver
+    docs/superpowers/specs/2026-08-01-reestruturacao-visual-numeros-tagline-design.md
+  */
+  --color-gold-bright: #f2aa3a;
+  /*
     gold-dark: MESMO matiz do gold, escurecido pra funcionar como TEXTO sobre
     fundo claro (cream/branco). O gold base (#C68622) sozinho sobre
     --color-cream dá ~2.7:1 de contraste, abaixo do mínimo de 4.5:1 (AA).

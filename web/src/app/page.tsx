@@ -1,5 +1,6 @@
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
+import { Numeros } from "@/components/numeros";
 import { Processo } from "@/components/processo";
 import { Sobre } from "@/components/sobre";
 import { Valores } from "@/components/valores";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <Processo />
         <Sobre />
+        <Numeros />
         <Valores />
         <Solucoes />
         <Atendimento />
