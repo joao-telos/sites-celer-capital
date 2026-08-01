@@ -217,6 +217,21 @@ Valores não recebe link, por decisão do usuário: os links só aparecem de `md
 
 **Limitação conhecida do ambiente:** neste harness o painel do navegador não compõe frames, então `IntersectionObserver` e eventos nativos de scroll não disparam — as animações de `Reveal` e o estado pill da navbar não podem ser verificados visualmente aqui (confirmado na sessão de 2026-07-31). A lógica é verificável por inspeção do DOM; o efeito visual precisa de conferência num navegador normal.
 
+## Pendência técnica conhecida (aberta, decisão de mergear assim)
+
+**O console em desenvolvimento repete ~20 vezes** `Only plain objects can be passed to Client Components from Server Components`, apontando o `forwardRef` dos ícones do `lucide-react` dentro de `AccordionPanel` (`web/src/components/valores.tsx` → `web/src/components/ui/interactive-accordion.tsx`).
+
+O que foi verificado em 2026-07-31, para quem for mexer nisso não precisar refazer:
+
+- Reproduz com dev server recém-iniciado e `.next` apagado. Não é cache velho.
+- **Produção não é afetada:** `npm run build` passa sem warning e prerenderiza a seção com os 6 valores.
+- O payload RSC **não contém** os dados dos painéis (`curl -H "RSC: 1"` não acha "Celeridade"), ou seja, os dados não estão de fato cruzando a fronteira server→client. O payload referencia `valores.tsx [app-client]`, então a fronteira está desenhada onde deveria.
+- O HTML de SSR contém os valores, a seção renderiza, e o acordeão funciona no desktop e na grade mobile.
+
+O `"use client"` em `valores.tsx` (ver a correção de plano no commit `beb729d`) resolveu o erro *bloqueante* original, mas não este aviso. **O mecanismo exato não foi determinado** — não assuma que sabe a causa sem investigar.
+
+Conserto provável, se for incomodar: parar de passar a referência do componente como prop. `AccordionPanel.icon` passaria a ser uma chave string, resolvida contra um registro de ícones dentro do próprio client component. Isso muda a API pública de `InteractiveAccordion`, que é o motivo de não ter entrado junto.
+
 ## Pendências para o cliente
 
 - Fotos reais para os painéis de Valores, se quiser trocar os gradientes por imagem
