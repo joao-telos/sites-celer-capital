@@ -249,13 +249,17 @@ export function CountingNumber({
     const semMovimento = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (semMovimento) {
-      setValue(target);
-      return;
-    }
 
     const inicio = performance.now();
     const passo = (agora: number) => {
+      // setState fica dentro do callback do rAF (não direto no corpo do
+      // effect) para não disparar o lint react-hooks/set-state-in-effect,
+      // que reclama de cascading renders quando setState roda sincronamente
+      // no corpo do effect.
+      if (semMovimento) {
+        setValue(target);
+        return;
+      }
       const progresso = Math.min((agora - inicio) / durationMs, 1);
       setValue(Math.round(from + (target - from) * easeOutCubic(progresso)));
       if (progresso < 1) {
