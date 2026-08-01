@@ -182,6 +182,14 @@ O `TODO` sobre registro regulatório permanece: é pendência aberta e não tem 
 - Cores computadas vêm em `oklab()` no Tailwind v4. Cálculo de contraste exige converter para sRGB antes de compor o alpha.
 - Ao mudar a viewport, recarregar antes de medir.
 
+## Achados menores desta rodada, deixados em aberto
+
+Levantados pela revisão final, julgados polimento e não corrigidos. Registrados para não serem redescobertos do zero:
+
+- **`rounded-[2rem]` nas duas caixas novas** (`sobre.tsx`, `numeros.tsx`) é valor arbitrário fora da escala de raio do projeto. Com `--radius: 1.25rem`, `rounded-2xl` dá 2.25rem e `rounded-3xl` dá 2.75rem, e o manual pede essa faixa. Resolver com um token novo ou ajustando a escala.
+- **`CountingNumber` não reinicia `value` quando as props mudam.** O efeito depende de `[inView, from, target, durationMs]`, mas uma mudança de prop no meio do voo faz o número saltar para trás e recontar. Inalcançável hoje (todas as props são literais de módulo), mas é armadilha para o próximo consumidor. O `frameRef.current` também nunca é zerado depois do último frame.
+- **`atendimento.tsx` e o `id="atendimento"`** descrevem uma seção cujo conteúdo inteiro virou a tagline da marca. Nenhuma âncora aponta para ela, então renomear é de graça.
+
 ## Pendências herdadas, ainda abertas
 
 - Aviso de serialização RSC no console em dev, do acordeão de Valores — documentado em `2026-07-31-gradientes-sobre-valores-design.md`, produção não afetada
