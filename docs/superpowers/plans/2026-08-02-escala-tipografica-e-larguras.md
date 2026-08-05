@@ -17,7 +17,7 @@
 - **Leia antes de escrever código:** `web/AGENTS.md` manda consultar `node_modules/next/dist/docs/`.
 - **Mesma família tipográfica.** Coolvetica (`font-heading`) no display, Roboto no corpo. Nenhuma troca de fonte.
 - **Fora de escopo, mesmo aparecendo nas referências do cliente:** Hero full-bleed com foto sangrando, rodapé escuro com marca-d'água, cards densos com lista de bullets. Não implemente nada disso.
-- **Nenhuma copy visível muda**, com uma exceção nomeada: a primeira linha do H1 da Hero passa a ser renderizada em caixa alta via CSS (`uppercase`). O texto em si não é reescrito.
+- **Nenhuma copy institucional do cliente é reescrita.** Uma exceção nomeada de apresentação: a primeira linha do H1 da Hero passa a ser renderizada em caixa alta via CSS (`uppercase`), sem alterar o texto. O texto novo que os placeholders de fotografia introduzem ("Foto pendente" e a descrição do que falta) **não** é copy institucional: é sinalização de pendência, deliberadamente visível, e foi aprovada como tal.
 - **Paleta fechada:** navy `#001A4B`, navy-bright `#003599`, gold `#C68622`, gold-bright `#F2AA3A`, gold-light `#E1A951`, gold-dark `#6D4A13`, cream `#EFF1F4`, ink `#0B0C0C`, white `#FFFFFF`, whatsapp `#1DA851`.
 - **Tailwind v4:** `bg-linear-to-*`, não `bg-gradient-to-*` (depreciado).
 - **Fonte de display nunca abaixo de 20px** e nunca `font-semibold`/600.
