@@ -299,10 +299,21 @@ Linha 58, o H2:
 
 - [ ] **Step 3: Soluções — nós do diagrama**
 
-Linha 35, o `SolutionNode`. Os nós crescem junto com a fonte, senão o texto maior estoura a caixa:
+**Correção do plano (2026-08-05, durante a execução):** a versão original deste passo dava ao nó três degraus de tamanho (`text-caption sm:text-body lg:text-card`), o que contraria a Global Constraint deste próprio plano contra modificador de tamanho por cima de token fluido. Os saltos medidos eram de +33% em 640px e +27% em 1024px. Decisão do usuário: o nó ganha um token fluido próprio.
+
+Primeiro, adicionar o nono token em `web/src/app/globals.css`, junto dos outros, logo depois de `--text-card`:
+
+```css
+  --text-node: clamp(0.75rem, 0.45rem + 1.25vw, 1.375rem); /* 12 → 22 */
+  --text-node--line-height: 1.2;
+```
+
+Segundo — **e isto não é opcional** — registrar `node` no `extendTailwindMerge` de `web/src/lib/utils.ts`, no array do grupo `font-size`, junto dos oito nomes que já estão lá. Sem isso o `tailwind-merge` classifica `text-node` como cor de texto e descarta o tamanho em silêncio sempre que a `className` também trouxer uma cor. Foi exatamente esse o bug que custou três rodadas de correção na Task 1.
+
+Terceiro, a linha 35, o `SolutionNode`. A caixa continua crescendo por breakpoint, o texto não:
 
 ```tsx
-      <div className="text-caption w-36 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center font-bold text-navy shadow-md shadow-navy/5 sm:w-52 sm:px-5 sm:py-4 sm:text-body lg:w-60 lg:text-card">
+      <div className="text-node w-36 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center font-bold text-navy shadow-md shadow-navy/5 sm:w-52 sm:px-5 sm:py-4 lg:w-60">
 ```
 
 Linha 66, o container do diagrama, que precisa acompanhar os nós mais largos:
