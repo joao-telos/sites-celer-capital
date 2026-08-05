@@ -60,10 +60,10 @@ export function InteractiveAccordion({
               style={{ background: gradienteDoPainel(i) }}
             >
               <Icon className="size-6 text-gold" aria-hidden="true" />
-              <h3 className="font-heading mt-4 text-xl font-bold text-white">
+              <h3 className="font-heading text-h3 mt-4 font-bold text-white">
                 {panel.title}
               </h3>
-              <p className="mt-2 text-sm leading-[1.6] font-light text-white/75">
+              <p className="text-body mt-2 font-light text-white/75">
                 {panel.description}
               </p>
             </li>
@@ -85,7 +85,7 @@ export function InteractiveAccordion({
               onFocus={() => setActiveIndex(i)}
               style={{ background: gradienteDoPainel(i), flexBasis: 0 }}
               className={cn(
-                "relative h-[420px] cursor-pointer overflow-hidden rounded-3xl text-left transition-[flex-grow] duration-500 ease-out focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none",
+                "relative h-[480px] cursor-pointer overflow-hidden rounded-3xl text-left transition-[flex-grow] duration-500 ease-out focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none",
                 isActive ? "grow-[3]" : "grow"
               )}
             >
@@ -107,10 +107,10 @@ export function InteractiveAccordion({
                     : "pointer-events-none opacity-0"
                 )}
               >
-                <span className="font-heading block text-2xl font-bold text-white">
+                <span className="font-heading block text-[1.75rem] font-bold text-white lg:text-[2rem]">
                   {panel.title}
                 </span>
-                <span className="mt-2 block text-sm leading-[1.6] font-light text-white/75">
+                <span className="text-body mt-2 block font-light text-white/75">
                   {panel.description}
                 </span>
               </span>
@@ -120,7 +120,7 @@ export function InteractiveAccordion({
               <span
                 aria-hidden="true"
                 className={cn(
-                  "font-heading absolute bottom-24 left-1/2 -translate-x-1/2 rotate-90 text-xl font-bold whitespace-nowrap text-white/80 transition-opacity duration-300",
+                  "font-heading text-h3 absolute bottom-24 left-1/2 -translate-x-1/2 rotate-90 font-bold whitespace-nowrap text-white/80 transition-opacity duration-300",
                   isActive
                     ? "pointer-events-none opacity-0"
                     : "opacity-100 delay-150"
