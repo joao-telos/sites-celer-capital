@@ -553,8 +553,31 @@ interface PhotoSlotProps {
   aspect: string;
   /** O que a foto precisa mostrar. Aparece no placeholder. */
   descricao: string;
+  /** Fundo onde o slot vive. "dark" para dentro da caixa navy da Sobre. */
+  tone?: "light" | "dark";
   className?: string;
 }
+
+/*
+  O slot vive em dois contextos: sobre o wash claro (Processo) e dentro da
+  caixa navy (Sobre). Um prop de tom mantém as duas paletas aqui dentro,
+  em vez de obrigar o chamador a recolorir os filhos por seletor de
+  descendente — o que exigiria conhecer a estrutura interna do componente.
+*/
+const TONS = {
+  light: {
+    caixa: "border-navy/20 bg-navy/[0.03]",
+    icone: "text-navy/40",
+    rotulo: "text-navy/70",
+    descricao: "text-navy/70",
+  },
+  dark: {
+    caixa: "border-white/25 bg-white/[0.06]",
+    icone: "text-white/40",
+    rotulo: "text-white/75",
+    descricao: "text-white/75",
+  },
+} as const;
 
 /**
  * Espaço reservado para fotografia que o cliente ainda não forneceu.
@@ -566,20 +589,33 @@ interface PhotoSlotProps {
  *
  * Um buraco declarado é mais honesto que um buraco disfarçado.
  */
-export function PhotoSlot({ aspect, descricao, className }: PhotoSlotProps) {
+export function PhotoSlot({
+  aspect,
+  descricao,
+  tone = "light",
+  className,
+}: PhotoSlotProps) {
+  const t = TONS[tone];
+
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-navy/20 bg-navy/[0.03] p-6 text-center",
+        "flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-6 text-center",
+        t.caixa,
         aspect,
         className
       )}
     >
-      <ImageIcon className="size-8 text-navy/30" aria-hidden="true" />
-      <p className="text-caption font-bold tracking-wide text-navy/60 uppercase">
+      <ImageIcon className={cn("size-8", t.icone)} aria-hidden="true" />
+      <p
+        className={cn(
+          "text-caption font-bold tracking-wide uppercase",
+          t.rotulo
+        )}
+      >
         Foto pendente
       </p>
-      <p className="text-body max-w-[34ch] font-light text-navy/65">
+      <p className={cn("text-body max-w-[34ch] font-light", t.descricao)}>
         {descricao}
       </p>
     </div>
@@ -805,19 +841,13 @@ O slot entra na coluna da esquerda, abaixo do bloco de texto, para as duas colun
 
                 <PhotoSlot
                   aspect="aspect-[16/10]"
+                  tone="dark"
                   descricao="Equipe da Celer ou atendimento acontecendo. Precisa funcionar sobre fundo escuro."
-                  className="border-white/25 bg-white/[0.06]"
                 />
               </div>
 ```
 
-O `className` sobrescreve a borda e o fundo do `PhotoSlot`, que por padrão são feitos para fundo claro — aqui ele vive dentro da caixa navy.
-
-**O texto interno do `PhotoSlot` continua em navy** e ficaria ilegível sobre a caixa escura. Passe também as cores de texto pelo `className`, usando o seletor de filho do Tailwind:
-
-```tsx
-                  className="border-white/25 bg-white/[0.06] [&_p]:text-white/75 [&_svg]:text-white/40"
-```
+O `tone="dark"` é o que troca borda, fundo, cor do ícone e cor dos dois textos de uma vez. Uma versão anterior deste plano mandava recolorir os filhos pelo `className` com seletor de descendente (`[&_p]:text-white/75`); isso funcionava, mas obrigava o chamador a conhecer a estrutura interna do componente. O prop de tom mantém as duas paletas dentro do `PhotoSlot`.
 
 - [ ] **Step 3: Verificar tipos e lint**
 
