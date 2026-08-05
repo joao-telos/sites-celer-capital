@@ -264,60 +264,62 @@
   início da próxima — a emenda fica invisível e o scroll lê como uma
   superfície contínua em vez de faixas.
 */
-@utility surface-wash-down {
-  background-image: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    var(--color-cream) 100%
-  );
-}
+@layer utilities {
+  .surface-wash-down {
+    background-image: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      var(--color-cream) 100%
+    );
+  }
 
-@utility surface-wash-up {
-  background-image: linear-gradient(
-    180deg,
-    var(--color-cream) 0%,
-    #ffffff 100%
-  );
-}
+  .surface-wash-up {
+    background-image: linear-gradient(
+      180deg,
+      var(--color-cream) 0%,
+      #ffffff 100%
+    );
+  }
 
-@utility text-micro {
-  font-size: var(--text-micro);
-  line-height: var(--text-micro--line-height);
-}
+  .text-micro {
+    font-size: var(--text-micro);
+    line-height: var(--text-micro--line-height);
+  }
 
-@utility text-caption {
-  font-size: var(--text-caption);
-  line-height: var(--text-caption--line-height);
-}
+  .text-caption {
+    font-size: var(--text-caption);
+    line-height: var(--text-caption--line-height);
+  }
 
-@utility text-body {
-  font-size: var(--text-body);
-  line-height: var(--text-body--line-height);
-}
+  .text-body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
 
-@utility text-lead {
-  font-size: var(--text-lead);
-  line-height: var(--text-lead--line-height);
-}
+  .text-lead {
+    font-size: var(--text-lead);
+    line-height: var(--text-lead--line-height);
+  }
 
-@utility text-card {
-  font-size: var(--text-card);
-  line-height: var(--text-card--line-height);
-}
+  .text-card {
+    font-size: var(--text-card);
+    line-height: var(--text-card--line-height);
+  }
 
-@utility text-h2 {
-  font-size: var(--text-h2);
-  line-height: var(--text-h2--line-height);
-}
+  .text-h2 {
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+  }
 
-@utility text-stat {
-  font-size: var(--text-stat);
-  line-height: var(--text-stat--line-height);
-}
+  .text-stat {
+    font-size: var(--text-stat);
+    line-height: var(--text-stat--line-height);
+  }
 
-@utility text-display {
-  font-size: var(--text-display);
-  line-height: var(--text-display--line-height);
+  .text-display {
+    font-size: var(--text-display);
+    line-height: var(--text-display--line-height);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
