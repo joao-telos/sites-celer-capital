@@ -66,6 +66,10 @@ Cada valor é um `clamp()` de três partes: mínimo, expressão `rem + vw`, máx
 
 O manual proíbe usar Coolvetica abaixo de 20px. `--text-card` chega a 20px no mobile, exatamente no piso — mas esse token é consumido por H3 de card, que usa Roboto, não a fonte de display. Nenhum consumidor de Coolvetica cai abaixo de 20px nesta escala.
 
+> **Correção (2026-08-05, revisão final).** O raciocínio acima está errado no ponto que mais importa. Três dos quatro consumidores desse token usam `font-heading`, ou seja, Coolvetica: `sobre.tsx`, e duas vezes o `interactive-accordion.tsx`. Só o `processo.tsx` usa Roboto.
+>
+> A conclusão continua valendo por acidente, não por argumento: o mínimo do `clamp()` é exatamente `1.25rem`, isto é, exatamente 20px, então a Coolvetica encosta no piso com margem zero. **Quem baixar esse mínimo no futuro coloca a Coolvetica abaixo do piso em três lugares de uma vez.** O token também foi renomeado para `--text-h3` durante a execução, porque `card` colidia com `--color-card` do shadcn. Ver `docs/brand-guidelines.md` para o estado atual.
+
 ## 2. Larguras de container
 
 Duas faixas, com critério explícito:
