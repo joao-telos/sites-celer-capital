@@ -17,7 +17,7 @@ const twMerge = extendTailwindMerge({
             "caption",
             "body",
             "lead",
-            "card",
+            "h3",
             "node",
             "h2",
             "stat",
