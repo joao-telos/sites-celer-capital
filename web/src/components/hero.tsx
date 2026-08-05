@@ -19,14 +19,15 @@ export function Hero() {
         className="pointer-events-none absolute -top-32 left-1/2 z-0 size-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(198,134,34,0.12)_0%,transparent_65%)]"
       />
 
-      <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center">
-        <h1 className="font-heading text-[2.125rem] leading-[1.1] font-bold text-white sm:text-5xl lg:text-[3.5rem]">
-          O capital que já é seu
-          <br />
-          <span className="font-light text-gold">não deveria esperar.</span>
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center">
+        <h1 className="font-heading text-display font-bold text-white">
+          <span className="block uppercase">O capital que já é seu</span>
+          <span className="block font-light text-gold">
+            não deveria esperar.
+          </span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-lg text-base leading-[1.6] font-light text-white/70 sm:text-lg">
+        <p className="text-body mx-auto mt-6 max-w-[68ch] font-light text-white/70">
           Antecipe seus recebíveis e libere capital imediato para o seu
           negócio, sem a burocracia bancária e sem perguntas
           desnecessárias.
@@ -39,7 +40,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "h-auto rounded-full bg-gold px-7 py-3.5 text-[11px] font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
+              "text-caption h-auto rounded-full bg-gold px-7 py-3.5 font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
             )}
           >
             Antecipar meus recebíveis
@@ -49,7 +50,7 @@ export function Hero() {
             href="#processo"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "h-auto rounded-full border-white/20 bg-transparent px-6 py-3.5 text-[10px] font-bold tracking-wider text-white/70 uppercase hover:bg-white/5 hover:text-white"
+              "text-caption h-auto rounded-full border-white/20 bg-transparent px-6 py-3.5 font-bold tracking-wider text-white/70 uppercase hover:bg-white/5 hover:text-white"
             )}
           >
             Ver como funciona
