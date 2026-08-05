@@ -79,6 +79,14 @@ sistema de gradientes, que já ficou fechado na rodada anterior:
    atendimento direto e resposta rápida) — esse texto não existe mais na
    seção.
 
+## ⚠️ Rodada de escala (2026-08-02 — ler antes de implementar UI)
+
+O cliente reclamou que os elementos estavam pequenos, deixando espaço vazio, e enviou seis referências (One7 Partner, Mais Crédito e Grupo, em celular e desktop).
+
+O diagnóstico, medido no site em execução, foi que a escala não estava pequena: estava **bimodal**. Ver a seção 4 para a escala nova e a seção 6 para o sistema de larguras.
+
+**Ficou explicitamente fora desta rodada**, mesmo aparecendo nas três referências de desktop: Hero full-bleed com foto sangrando na borda, rodapé escuro com marca-d'água, e cards densos com lista de bullets. Se a distância visual para as referências ainda incomodar, é aí que ela mora — não em tamanho de fonte.
+
 ---
 
 ## Quick Reference
@@ -217,18 +225,31 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 
 Roboto continua carregado via `next/font/google` (auto-hospedado pelo Next.js, sem `<link>` manual). Os dois cortes acima da dobra (Regular + Bold) têm `<link rel="preload">` no `<head>` (`web/src/app/layout.tsx`), já que aparecem no Hero em toda visita.
 
-### Escala tipográfica
+### Escala tipográfica (2026-08-02)
 
-| Elemento | Fonte | Peso | Tamanho (Desktop/Mobile) | Line Height | Tracking |
-|---|---|---|---|---|---|
-| Hero H1 | Coolvetica | **700** (não 600 — sem corte real) | 56px / 34px | 1.05 | -0.5px |
-| H2 (seção) | Coolvetica | **700** | 28–36px / 26px | 1.2 | 0 |
-| H3 (card/item) | Roboto | 700 | 15–16px / 15px | 1.3 | 0.2px |
-| Eyebrow / tag | Roboto | 700 | 9–10px | 1 | 3px, uppercase |
-| Body | Roboto | 300–400 | 14–16px / 14px | 1.7–1.8 | 0 |
-| Small / caption | Roboto | 400 | 10–12px | 1.5 | 0.5px |
-| Stat / valor em destaque | Coolvetica | 300 | 40–56px | 1 | 0 |
-| Botão / CTA | Roboto | 700 | 10–11px | 1 | 1–1.5px, uppercase |
+A escala vive em tokens no `@theme` do `globals.css`, não em valores espalhados pelos componentes. Cada token é fluido: um `clamp()` que interpola entre o tamanho de mobile e o de desktop.
+
+| Token | Papel | Mobile → Desktop | Fonte |
+|---|---|---|---|
+| `text-micro` | disclaimer, legenda mínima | 10 → 11 | Roboto |
+| `text-caption` | botões, labels em caixa alta | 12 → 13 | Roboto |
+| `text-body` | corpo de texto | 16 → 17 | Roboto |
+| `text-lead` | parágrafo de destaque | 19 → 21 | Roboto |
+| `text-node` | nó do diagrama de Soluções | 12 → 22 | Roboto |
+| `text-h3` | H3 de card | 20 → 22 | Roboto |
+| `text-h2` | título de seção | 32 → 44 | Coolvetica |
+| `text-stat` | numeral da seção Números | 48 → 68 | Coolvetica |
+| `text-display` | H1 da Hero e tagline | 44 → 88 | Coolvetica |
+
+**Não use `sm:` ou `lg:` de tamanho junto com esses tokens.** O `clamp()` já cobre a faixa inteira; um breakpoint por cima reintroduz o salto que a escala fluida existe para eliminar.
+
+**A âncora em `rem` do `clamp()` não é opcional.** Um `clamp()` que interpola em `vw` puro ignora o zoom do navegador: o texto para de crescer quando o usuário aumenta a fonte. A forma `rem + vw` preserva o zoom.
+
+**Por que esta escala substituiu a anterior:** a antiga era bimodal. Tinha dois ou três elementos grandes e todo o resto comprimido entre 11 e 16px, sem nada entre 20 e 36. O H3 de card tinha 16px e o corpo 14px, e dois pixels de diferença não estabelecem hierarquia, então os cards liam como bloco cinza uniforme.
+
+**Armadilha de namespace nº 1 — colisão com token de cor.** O token do H3 se chamava originalmente `text-card`. `--color-card` já existe (shadcn define), e o Tailwind resolve a utility `text-*` a partir dos namespaces `--color-*` **e** `--text-*` — escolheu a cor, descartando o tamanho por completo (o H3 renderizava em 16px em vez de 22px). Renomeado para `text-h3`; os valores do `clamp()` não mudaram. **Regra:** nenhum token de tamanho pode ter nome igual a um token de cor.
+
+**Armadilha de namespace nº 2 — `tailwind-merge`.** Como os nove tokens vivem em `text-*`, o mesmo namespace que o `tailwind-merge` usa para cor de texto, ele classificava `text-body` (por exemplo) como cor e descartava o tamanho sempre que a mesma `className` também trazia uma cor (ex.: `text-white/70`) e passava pela função `cn()`. Resolvido com um `extendTailwindMerge` em `web/src/lib/utils.ts`, que registra os nove nomes como grupo `font-size`. **Todo token novo precisa entrar nesse registro também**, senão o bug volta.
 
 ### Uso do itálico
 Itálico dourado no display (dentro do H1) marca a palavra de maior carga emocional da headline — convenção já estabelecida ("não deveria *esperar*"). Usar com moderação: no máximo 1 palavra/expressão em itálico por headline. Usa o corte itálico real (`coolvetica-bold-italic.woff2`), nunca um itálico sintético/inclinado via CSS.
@@ -270,6 +291,29 @@ Continua sendo assinatura de marca, não argumento de conversão — não usar c
 ## 6. Componentes de UI
 
 Biblioteca de padrões já validada no mockup v3 — base para os componentes do site final. Cada seção nova do site (além das 6 do mockup) deve reaproveitar estes padrões antes de inventar um novo.
+
+### Larguras de container (2026-08-02)
+
+Duas faixas, com critério:
+
+| Faixa | Largura | Onde |
+|---|---|---|
+| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento |
+| Texto corrido | 768px (`max-w-3xl`) | CTA Final |
+
+Antes desta rodada eram cinco larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
+
+**Trava de legibilidade, obrigatória junto:** todo bloco de texto corrido dentro da faixa de conteúdo fica limitado a `max-w-[68ch]`. Container largo sem essa trava produz linhas de mais de 100 caracteres, e a página trocaria "pequeno demais" por "difícil de ler".
+
+**Cuidado com limites internos.** Alargar o container não adianta se o conteúdo tem o próprio teto por dentro. A seção Processo tinha um `max-w-[440px]` no texto de cada passo que precisou sair junto, senão a seção ficaria larga e vazia.
+
+### Slots de fotografia
+
+Duas seções têm espaço reservado para foto que o cliente ainda não forneceu: Processo (ao lado da linha do tempo) e Sobre (dentro da caixa navy). Ambos usam o componente `PhotoSlot` (`components/ui/photo-slot.tsx`), que renderiza um placeholder visível, com borda tracejada e a descrição do que a foto precisa mostrar. O componente tem uma prop `tone` (`light` | `dark`) que troca a paleta interna conforme o fundo onde o slot vive.
+
+O placeholder é deliberadamente visível. Um buraco declarado é mais honesto que um bloco cinza mudo, e a decisão de 2026-07-31 de não usar banco de imagens continua valendo: o manual aponta o visual próprio como o diferencial real da marca frente aos concorrentes, e stock genérico trabalha contra isso.
+
+Os painéis da seção Valores também foram desenhados para receber foto no lugar do gradiente, se o cliente fornecer.
 
 ### Botões — todos pill (`rounded-full`), pivô v2
 | Variante | Uso | Estilo |
@@ -358,6 +402,8 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Fonte de display só em ≥20px, nunca para corpo de texto
 - [ ] Fundo claro em todas as seções, exceto os dois bookends escuros (Hero, CTA Final) — com o wash de gradiente da seção 6, e a direção alternando em relação às seções vizinhas
 - [ ] Cantos arredondados em botões (pill) e cards (`rounded-2xl`+) — nunca `rounded-none`
+- [ ] Tamanhos de texto vindos dos tokens da escala (`text-body`, `text-h3`, `text-h2`...), nunca valores soltos, e sem `sm:`/`lg:` de tamanho por cima
+- [ ] Texto corrido em container largo limitado a `max-w-[68ch]`
 - [ ] Nenhuma seção com eyebrow (label caps + linha dourada acima do H2) — removido no pivô v3
 - [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda. Exceção única: a seção "Sobre", em duas colunas com título à esquerda (pedido do cliente, 2026-07-31)
 - [ ] Texto navy sobre cream em pelo menos 65% de opacidade (corpo de texto) — abaixo disso cai fora do AA
