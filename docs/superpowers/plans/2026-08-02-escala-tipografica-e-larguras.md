@@ -961,8 +961,13 @@ Este é o ponto de risco desta tarefa: o título rotacionado a 90° tem a altura
   const btns = [...document.querySelectorAll("#valores button")];
   const painel = btns[0].getBoundingClientRect();
   const rotacionados = btns.slice(1).map((b) => {
+    // Seleciona pela classe, NÃO por getComputedStyle(x).transform. O
+    // Tailwind v4 emite `rotate` como propriedade CSS própria e não a
+    // compõe em `transform`, que fica sempre "none" — o find não acharia
+    // nada, e um .every() sobre lista vazia retorna true. Seria um verde
+    // falso: a asserção passaria sem medir coisa alguma.
     const s = [...b.querySelectorAll("span")].find(
-      (x) => getComputedStyle(x).transform !== "none" && x.textContent.trim()
+      (x) => x.className.includes("rotate-90") && x.textContent.trim()
     );
     return s ? { texto: s.textContent.trim(), larguraDoTexto: Math.round(s.scrollWidth) } : null;
   });
@@ -976,6 +981,8 @@ Este é o ponto de risco desta tarefa: o título rotacionado a 90° tem a altura
 ```
 
 Esperado: `alturaPainel: 480`, `cabemNaAltura: true`, `overflow: false`. O texto rotacionado ocupa altura igual à sua largura de texto, e os 96px descontados são o espaço do ícone no topo e da margem inferior.
+
+**Confira que `rotacionados` traz os cinco títulos com número, e não cinco `null`.** Uma lista de `null` faz o `.every()` retornar `true` sem medir nada — a asserção passaria vazia. Se vier `null`, o seletor não está achando os spans e o resultado não vale.
 
 Se `cabemNaAltura` vier `false`, o painel cresce mais — suba `h-[480px]` em passos de 40px até passar, e registre o valor final no relatório.
 
