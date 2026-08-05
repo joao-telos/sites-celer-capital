@@ -61,9 +61,9 @@ const VALORES: AccordionPanel[] = [
 export function Valores() {
   return (
     <section id="valores" className="surface-wash-up">
-      <div className="mx-auto max-w-5xl px-6 py-12 sm:px-10 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-16">
         <Reveal>
-          <h2 className="font-heading mb-10 text-center text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:mb-12 lg:text-4xl">
+          <h2 className="font-heading text-h2 mb-10 text-center font-bold text-navy lg:mb-12">
             Nossos valores
           </h2>
         </Reveal>

@@ -34,10 +34,10 @@ export function Atendimento() {
 
   return (
     <section id="atendimento" className="surface-wash-up">
-      <div className="mx-auto max-w-5xl px-6 py-20 text-center sm:px-10 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 py-20 text-center sm:px-10 lg:py-28">
         <h2
           ref={ref}
-          className="font-heading text-4xl leading-[1.05] font-bold uppercase sm:text-6xl lg:text-7xl"
+          className="font-heading text-display font-bold uppercase"
         >
           {LINHAS.map((linha, indiceLinha) => {
             const palavrasAntes = LINHAS.slice(0, indiceLinha).reduce(

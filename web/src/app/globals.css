@@ -54,6 +54,43 @@
 
 @theme {
   /*
+    Escala tipográfica fluida (2026-08-02). Substitui a escala bimodal
+    anterior, que tinha dois ou três elementos grandes e todo o resto
+    comprimido entre 11 e 16px, sem nada entre 20 e 36.
+
+    Cada valor é um clamp(min, rem + vw, max). A âncora em `rem` NÃO é
+    opcional: um clamp que interpola em vw puro ignora o zoom do
+    navegador, e o texto para de crescer quando o usuário aumenta a
+    fonte. A parte em rem é o que preserva o zoom.
+
+    Comentário ao lado de cada linha: tamanho em 375px → tamanho no
+    desktop, depois que o clamp satura.
+  */
+  --text-micro: clamp(0.625rem, 0.6rem + 0.1vw, 0.6875rem); /* 10 → 11 */
+  --text-micro--line-height: 1.5;
+
+  --text-caption: clamp(0.75rem, 0.72rem + 0.13vw, 0.8125rem); /* 12 → 13 */
+  --text-caption--line-height: 1;
+
+  --text-body: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem); /* 16 → 17 */
+  --text-body--line-height: 1.6;
+
+  --text-lead: clamp(1.1875rem, 1.13rem + 0.23vw, 1.3125rem); /* 19 → 21 */
+  --text-lead--line-height: 1.4;
+
+  --text-card: clamp(1.25rem, 1.19rem + 0.25vw, 1.375rem); /* 20 → 22 */
+  --text-card--line-height: 1.25;
+
+  --text-h2: clamp(2rem, 1.5rem + 2.2vw, 2.75rem); /* 32 → 44 */
+  --text-h2--line-height: 1.15;
+
+  --text-stat: clamp(3rem, 1.8rem + 5vw, 4.25rem); /* 48 → 68 */
+  --text-stat--line-height: 1;
+
+  --text-display: clamp(2.75rem, 1.2rem + 6.5vw, 5.5rem); /* 44 → 88 */
+  --text-display--line-height: 1.05;
+
+  /*
     Celer Capital — paleta institucional real (atualizada 2026-07-12).
     Substitui os tons "inventados" a partir do PDF de manual antigo — estes
     4 valores vieram diretamente do cliente como a identidade de verdade.
@@ -241,6 +278,46 @@
     var(--color-cream) 0%,
     #ffffff 100%
   );
+}
+
+@utility text-micro {
+  font-size: var(--text-micro);
+  line-height: var(--text-micro--line-height);
+}
+
+@utility text-caption {
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+}
+
+@utility text-body {
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
+
+@utility text-lead {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+}
+
+@utility text-card {
+  font-size: var(--text-card);
+  line-height: var(--text-card--line-height);
+}
+
+@utility text-h2 {
+  font-size: var(--text-h2);
+  line-height: var(--text-h2--line-height);
+}
+
+@utility text-stat {
+  font-size: var(--text-stat);
+  line-height: var(--text-stat--line-height);
+}
+
+@utility text-display {
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
 }
 
 @media (prefers-reduced-motion: reduce) {
