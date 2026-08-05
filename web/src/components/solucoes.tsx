@@ -32,7 +32,7 @@ function Anchor({
 const SolutionNode = forwardRef<HTMLDivElement, { label: string }>(
   ({ label }, ref) => (
     <div className="relative">
-      <div className="w-32 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center text-[11px] leading-tight font-bold text-navy shadow-md shadow-navy/5 sm:w-44 sm:px-5 sm:py-4 sm:text-sm lg:w-48 lg:text-base">
+      <div className="text-caption w-36 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center font-bold text-navy shadow-md shadow-navy/5 sm:w-52 sm:px-5 sm:py-4 sm:text-body lg:w-60 lg:text-card">
         {label}
       </div>
       <Anchor innerRef={ref as RefObject<HTMLDivElement | null>} side="right" />
@@ -53,9 +53,9 @@ export function Solucoes() {
 
   return (
     <section id="solucoes" className="surface-wash-down">
-      <div className="mx-auto max-w-3xl px-6 py-12 text-center sm:px-10 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 py-12 text-center sm:px-10 lg:py-16">
         <Reveal>
-          <h2 className="font-heading text-[1.75rem] leading-[1.2] font-bold text-navy sm:text-3xl lg:text-4xl">
+          <h2 className="font-heading text-h2 font-bold text-navy">
             Qualquer um desses vira capital direto na sua conta.
           </h2>
         </Reveal>
@@ -63,7 +63,7 @@ export function Solucoes() {
         <Reveal delay={0.1}>
           <div
             ref={containerRef}
-            className="relative mx-auto mt-10 w-full max-w-2xl sm:mt-12"
+            className="relative mx-auto mt-10 w-full max-w-4xl sm:mt-12"
           >
             <div className="flex flex-row items-stretch justify-between gap-4 sm:gap-10 lg:gap-14">
               <div className="flex flex-col justify-center gap-4 sm:gap-6">
@@ -100,7 +100,7 @@ export function Solucoes() {
                   />
                   <Anchor innerRef={clientInRef} side="left" />
                 </div>
-                <span className="text-xs font-bold tracking-wide text-navy/60 uppercase sm:text-sm">
+                <span className="text-caption font-bold tracking-wide text-navy/60 uppercase">
                   Você
                 </span>
               </div>
@@ -150,7 +150,7 @@ export function Solucoes() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-8 max-w-lg text-base leading-[1.6] font-light text-navy/70 sm:mt-10 sm:text-lg">
+          <p className="text-lead mx-auto mt-8 max-w-[68ch] font-light text-navy/70 sm:mt-10">
             Você manda o documento, a Celer analisa e libera o valor.
             Simples assim.
           </p>

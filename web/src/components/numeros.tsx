@@ -46,7 +46,7 @@ const NUMEROS = [
 export function Numeros() {
   return (
     <section id="numeros" className="surface-wash-down">
-      <div className="mx-auto max-w-5xl px-6 py-12 sm:px-10 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-16">
         {/* Sem título visível: a referência do cliente não tem um, e a seção
             funciona como faixa de dados. O sr-only mantém o landmark. */}
         <h2 className="sr-only">Celer Capital em números</h2>
@@ -59,12 +59,12 @@ export function Numeros() {
             <dl className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
               {NUMEROS.map((item) => (
                 <div key={item.label} className="text-center">
-                  <dt className="font-heading text-4xl leading-none font-bold text-navy sm:text-5xl">
+                  <dt className="font-heading text-stat font-bold text-navy">
                     {item.prefixo}
                     <CountingNumber target={item.target} />
                     {item.sufixo}
                   </dt>
-                  <dd className="mt-3 text-sm leading-[1.5] font-light text-navy">
+                  <dd className="text-body mt-3 font-light text-navy">
                     {item.label}
                   </dd>
                 </div>
