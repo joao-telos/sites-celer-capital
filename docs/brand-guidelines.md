@@ -236,10 +236,12 @@ A escala vive em tokens no `@theme` do `globals.css`, não em valores espalhados
 | `text-body` | corpo de texto | 16 → 17 | Roboto |
 | `text-lead` | parágrafo de destaque | 19 → 21 | Roboto |
 | `text-node` | nó do diagrama de Soluções | 12 → 22 | Roboto |
-| `text-h3` | H3 de card | 20 → 22 | Roboto |
+| `text-h3` | H3 de card | 20 → 22 | Roboto e Coolvetica |
 | `text-h2` | título de seção | 32 → 44 | Coolvetica |
 | `text-stat` | numeral da seção Números | 48 → 68 | Coolvetica |
 | `text-display` | H1 da Hero e tagline | 44 → 88 | Coolvetica |
+
+`text-h3` tem quatro usos e só um é Roboto (`processo.tsx`); os outros três (`sobre.tsx`, e as duas ocorrências em `interactive-accordion.tsx`) são `font-heading` (Coolvetica). O mínimo do `clamp()` desse token é exatamente `1.25rem` = 20px, em cima do piso rígido da fonte de display — não reduza esse mínimo.
 
 **Não use `sm:` ou `lg:` de tamanho junto com esses tokens.** O `clamp()` já cobre a faixa inteira; um breakpoint por cima reintroduz o salto que a escala fluida existe para eliminar.
 
@@ -301,7 +303,9 @@ Duas faixas, com critério:
 | Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento |
 | Texto corrido | 768px (`max-w-3xl`) | CTA Final |
 
-Antes desta rodada eram cinco larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
+Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
+
+**Exceção documentada:** o Footer (`web/src/components/footer.tsx`) usa `max-w-4xl` (896px), uma terceira largura fora das duas faixas acima. Não é um defeito, só não cabia em nenhuma das duas faixas e ficou fora deste levantamento até agora.
 
 **Trava de legibilidade, obrigatória junto:** todo bloco de texto corrido dentro da faixa de conteúdo fica limitado a `max-w-[68ch]`. Container largo sem essa trava produz linhas de mais de 100 caracteres, e a página trocaria "pequeno demais" por "difícil de ler".
 
@@ -403,6 +407,10 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Fundo claro em todas as seções, exceto os dois bookends escuros (Hero, CTA Final) — com o wash de gradiente da seção 6, e a direção alternando em relação às seções vizinhas
 - [ ] Cantos arredondados em botões (pill) e cards (`rounded-2xl`+) — nunca `rounded-none`
 - [ ] Tamanhos de texto vindos dos tokens da escala (`text-body`, `text-h3`, `text-h2`...), nunca valores soltos, e sem `sm:`/`lg:` de tamanho por cima
+
+  Exceções deliberadas a esta regra, ambas avaliadas e mantidas:
+  - `interactive-accordion.tsx` (`text-[1.75rem] lg:text-[2rem]` no título do painel aberto) — o painel já varia a própria largura via `flex-grow`; um token fluido criaria um segundo eixo de variação competindo com o primeiro.
+  - `processo.tsx` (`text-2xl` no número do passo, dentro de um círculo `size-12`) — o tamanho do texto aqui segue o círculo, não a escala tipográfica.
 - [ ] Texto corrido em container largo limitado a `max-w-[68ch]`
 - [ ] Nenhuma seção com eyebrow (label caps + linha dourada acima do H2) — removido no pivô v3
 - [ ] Blocos/títulos de seção centralizados; parágrafos longos dentro de cards continuam à esquerda. Exceção única: a seção "Sobre", em duas colunas com título à esquerda (pedido do cliente, 2026-07-31)

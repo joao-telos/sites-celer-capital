@@ -75,7 +75,7 @@ export function Sobre() {
                     <h3 className="font-heading text-h3 font-bold text-navy">
                       {pilar.title}
                     </h3>
-                    <p className="text-body mt-3 font-light text-navy/70">
+                    <p className="text-body mt-3 max-w-[68ch] font-light text-navy/70">
                       {pilar.text}
                     </p>
                   </div>

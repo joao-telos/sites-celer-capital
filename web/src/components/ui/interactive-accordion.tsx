@@ -84,6 +84,10 @@ export function InteractiveAccordion({
               onMouseEnter={() => setActiveIndex(i)}
               onFocus={() => setActiveIndex(i)}
               style={{ background: gradienteDoPainel(i), flexBasis: 0 }}
+              // h-[480px]: painel fechado mostra o título rotacionado 90°, então a
+              // largura renderizada do título vira a altura que ele precisa. Folga
+              // atual: maior título com 126px de largura contra um limite de 384px.
+              // Uma futura edição de copy não deveria precisar rederivar essa conta.
               className={cn(
                 "relative h-[480px] cursor-pointer overflow-hidden rounded-3xl text-left transition-[flex-grow] duration-500 ease-out focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none",
                 isActive ? "grow-[3]" : "grow"

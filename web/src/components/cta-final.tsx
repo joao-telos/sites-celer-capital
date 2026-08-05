@@ -26,7 +26,7 @@ export function CtaFinal() {
           <h2 className="font-heading text-h2 font-bold text-white">
             Quanto capital está parado nos seus recebíveis agora?
           </h2>
-          <p className="text-body mt-5 font-light text-white/70">
+          <p className="text-body mt-5 max-w-[68ch] font-light text-white/70">
             Manda uma mensagem. Analisamos sem compromisso e respondemos
             rápido com o que é possível fazer.
           </p>

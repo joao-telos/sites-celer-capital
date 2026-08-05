@@ -66,7 +66,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[13px] font-medium tracking-wide text-white/50 transition-colors hover:text-white/85"
+                className="text-caption font-medium tracking-wide text-white/70 transition-colors hover:text-white"
               >
                 {link.label}
               </a>
@@ -81,7 +81,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: "outline", size: "sm" }),
-              "h-auto rounded-full border-white/25 bg-transparent px-4 py-2 text-[10px] font-bold tracking-wider text-white/70 uppercase transition-colors hover:bg-white/10 hover:text-white"
+              "h-auto rounded-full border-white/25 bg-transparent px-4 py-2 text-caption font-bold tracking-wider text-white/70 uppercase transition-colors hover:bg-white/10 hover:text-white"
             )}
           >
             Login
@@ -92,7 +92,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ size: "sm" }),
-              "h-auto rounded-full bg-gold px-4 py-2 text-[10px] font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
+              "h-auto rounded-full bg-gold px-4 py-2 text-caption font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
             )}
           >
             Antecipar agora
