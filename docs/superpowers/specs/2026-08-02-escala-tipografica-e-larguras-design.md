@@ -146,6 +146,14 @@ Levantados no diagnóstico, precisam de verificação explícita:
 
 **Limitações conhecidas do ambiente**, já verificadas nesta base e nenhuma delas defeito do site: o painel do navegador não compõe frames, então `IntersectionObserver` não dispara (blocos em `Reveal` ficam em `opacity: 0`, a tagline não revela, os contadores não iniciam), transições CSS não avançam, e screenshots falham. Cores computadas saem em `oklab()`, então cálculo de contraste exige converter para sRGB antes de compor o alpha. Ao mudar a viewport, recarregar antes de medir.
 
+## Achados menores desta rodada, deixados em aberto
+
+Levantados pela revisão final, julgados polimento e não corrigidos. Registrados para não serem redescobertos do zero:
+
+- **As duas colunas da seção Sobre ficam ~27% desbalanceadas em altura** (esquerda 575px, direita 452px em 1265px). A causa registrada inicialmente estava errada: medido em 1265px, o `PhotoSlot` honra o `aspect-[16/10]` exatamente (513×320). O desequilíbrio vem da altura do bloco de texto. O `lg:items-center` centraliza a coluna mais curta, então lê como deliberado.
+- **O prop `aspect` do `PhotoSlot` é indicativo, não contrato.** Em 375px o slot da Sobre renderiza 263×222 (razão 1,18) contra `aspect-[16/10]` declarado, porque ícone, rótulo e descrição excedem a altura da proporção. Quando uma foto real substituir o placeholder, a caixa vai assumir a razão declarada e o layout mobile muda em relação ao que está na tela hoje. O `aspect` também é funcionalmente redundante com o `className`: ambos caem no mesmo `cn()`.
+- **A faixa de tablet (~885px) nunca foi medida nas verificações de tarefa**, só 375px e ~1160px. Foi onde a revisão final achou os estouros de comprimento de linha, já corrigidos. Vale incluir essa largura nas próximas rodadas.
+
 ## Pendências herdadas, ainda abertas
 
 - Fotografia real para os dois slots novos, e para os painéis de Valores
