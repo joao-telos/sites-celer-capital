@@ -27,6 +27,27 @@
 
 ---
 
+## Correções do plano feitas durante a execução
+
+**2026-08-05 — `--text-card` renomeado para `--text-h3`.** O nome colidia com `--color-card`, que o shadcn já define. O Tailwind resolve a utility `text-card` a partir dos dois namespaces, escolhe a cor, e **descarta o tamanho por completo** — o H3 renderizava em 16px em vez de 22px. Dos nove tokens, `card` era o único com contrapartida em `--color-*`. O nome `h3` é consistente com `h2`, não tem contrapartida de cor, e descreve o papel real. Os valores do `clamp()` não mudaram.
+
+**2026-08-05 — a fórmula de contagem de caracteres das asserções estava errada.** Ela dividia a largura da linha por `fontSize * 0.5`, assumindo meio em por caractere. A unidade `ch` da Roboto é ~0.554em, então `max-w-[68ch]` mede 641px e a fórmula reportava 75 para um bloco que tem exatamente 68 caracteres pela definição do CSS. **A classe estava certa e o verificador errado.** Onde uma asserção contar caracteres por linha, meça a largura real do `ch` em vez de estimar:
+
+```js
+const medeCh = (el) => {
+  const s = document.createElement("span");
+  s.style.cssText = "position:absolute;visibility:hidden;white-space:pre";
+  s.textContent = "0";
+  el.appendChild(s);
+  const w = s.getBoundingClientRect().width;
+  s.remove();
+  return w;
+};
+// charsPorLinha = larguraDaLinha / medeCh(paragrafo)
+```
+
+---
+
 ## Estrutura de arquivos
 
 **Criar:**
@@ -63,7 +84,7 @@
 
 **Interfaces:**
 - Consumes: nada de tarefas anteriores.
-- Produces: os tokens `text-micro`, `text-caption`, `text-body`, `text-lead`, `text-card`, `text-h2`, `text-stat`, `text-display`, disponíveis como utilities do Tailwind para todas as tarefas seguintes.
+- Produces: os tokens `text-micro`, `text-caption`, `text-body`, `text-lead`, `text-h3`, `text-h2`, `text-stat`, `text-display`, disponíveis como utilities do Tailwind para todas as tarefas seguintes.
 
 - [ ] **Step 1: Adicionar os tokens da escala**
 
@@ -95,8 +116,8 @@ Em `web/src/app/globals.css`, dentro do bloco `@theme`, logo antes da linha `--f
   --text-lead: clamp(1.1875rem, 1.13rem + 0.23vw, 1.3125rem); /* 19 → 21 */
   --text-lead--line-height: 1.4;
 
-  --text-card: clamp(1.25rem, 1.19rem + 0.25vw, 1.375rem); /* 20 → 22 */
-  --text-card--line-height: 1.25;
+  --text-h3: clamp(1.25rem, 1.19rem + 0.25vw, 1.375rem); /* 20 → 22 */
+  --text-h3--line-height: 1.25;
 
   --text-h2: clamp(2rem, 1.5rem + 2.2vw, 2.75rem); /* 32 → 44 */
   --text-h2--line-height: 1.15;
@@ -299,9 +320,9 @@ Linha 58, o H2:
 
 - [ ] **Step 3: Soluções — nós do diagrama**
 
-**Correção do plano (2026-08-05, durante a execução):** a versão original deste passo dava ao nó três degraus de tamanho (`text-caption sm:text-body lg:text-card`), o que contraria a Global Constraint deste próprio plano contra modificador de tamanho por cima de token fluido. Os saltos medidos eram de +33% em 640px e +27% em 1024px. Decisão do usuário: o nó ganha um token fluido próprio.
+**Correção do plano (2026-08-05, durante a execução):** a versão original deste passo dava ao nó três degraus de tamanho (`text-caption sm:text-body lg:text-h3`), o que contraria a Global Constraint deste próprio plano contra modificador de tamanho por cima de token fluido. Os saltos medidos eram de +33% em 640px e +27% em 1024px. Decisão do usuário: o nó ganha um token fluido próprio.
 
-Primeiro, adicionar o nono token em `web/src/app/globals.css`, junto dos outros, logo depois de `--text-card`:
+Primeiro, adicionar o nono token em `web/src/app/globals.css`, junto dos outros, logo depois de `--text-h3`:
 
 ```css
   --text-node: clamp(0.75rem, 0.45rem + 1.25vw, 1.375rem); /* 12 → 22 */
@@ -609,7 +630,7 @@ Linha 47, a linha vertical da timeline reposiciona junto com o círculo:
 Linha 56, o título do passo:
 
 ```tsx
-                  <h3 className="text-card mb-1.5 font-bold text-navy">
+                  <h3 className="text-h3 mb-1.5 font-bold text-navy">
 ```
 
 Linha 59, o texto do passo. **O `max-w-[440px]` sai** — era ele que travava o conteúdo por dentro e faria a seção ficar larga e vazia:
@@ -757,7 +778,7 @@ Linha 52, o parágrafo, com a trava de 68 caracteres:
 Linha 66, o título das caixas de Missão e Visão:
 
 ```tsx
-                    <h3 className="font-heading text-card font-bold text-navy">
+                    <h3 className="font-heading text-h3 font-bold text-navy">
 ```
 
 Linha 69, o corpo das caixas:
@@ -858,7 +879,7 @@ fundo claro e o texto em navy ficaria ilegivel."
 Linha 63, o título dos cards:
 
 ```tsx
-              <h3 className="font-heading text-card mt-4 font-bold text-white">
+              <h3 className="font-heading text-h3 mt-4 font-bold text-white">
 ```
 
 Linha 66, a descrição:
@@ -890,7 +911,7 @@ Linha 113, a descrição do painel aberto:
 Linha 123, o título rotacionado do painel fechado:
 
 ```tsx
-                  "font-heading text-card absolute bottom-24 left-1/2 -translate-x-1/2 rotate-90 font-bold whitespace-nowrap text-white/80 transition-opacity duration-300",
+                  "font-heading text-h3 absolute bottom-24 left-1/2 -translate-x-1/2 rotate-90 font-bold whitespace-nowrap text-white/80 transition-opacity duration-300",
 ```
 
 - [ ] **Step 3: Verificar tipos e lint**
@@ -986,7 +1007,7 @@ A escala vive em tokens no `@theme` do `globals.css`, não em valores espalhados
 | `text-caption` | botões, labels em caixa alta | 12 → 13 | Roboto |
 | `text-body` | corpo de texto | 16 → 17 | Roboto |
 | `text-lead` | parágrafo de destaque | 19 → 21 | Roboto |
-| `text-card` | H3 de card | 20 → 22 | Roboto |
+| `text-h3` | H3 de card | 20 → 22 | Roboto |
 | `text-h2` | título de seção | 32 → 44 | Coolvetica |
 | `text-stat` | numeral da seção Números | 48 → 68 | Coolvetica |
 | `text-display` | H1 da Hero e tagline | 44 → 88 | Coolvetica |
@@ -1052,7 +1073,7 @@ O diagnóstico, medido no site em execução, foi que a escala não estava peque
 O checklist tem itens que a escala nova torna obsoletos ou que precisam de companhia. Ajustar o item da fonte de display e acrescentar dois:
 
 ```markdown
-- [ ] Tamanhos de texto vindos dos tokens da escala (`text-body`, `text-card`, `text-h2`...), nunca valores soltos, e sem `sm:`/`lg:` de tamanho por cima
+- [ ] Tamanhos de texto vindos dos tokens da escala (`text-body`, `text-h3`, `text-h2`...), nunca valores soltos, e sem `sm:`/`lg:` de tamanho por cima
 - [ ] Texto corrido em container largo limitado a `max-w-[68ch]`
 ```
 
