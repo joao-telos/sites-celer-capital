@@ -18,6 +18,7 @@ const twMerge = extendTailwindMerge({
             "body",
             "lead",
             "card",
+            "node",
             "h2",
             "stat",
             "display",

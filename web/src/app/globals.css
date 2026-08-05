@@ -81,6 +81,9 @@
   --text-card: clamp(1.25rem, 1.19rem + 0.25vw, 1.375rem); /* 20 → 22 */
   --text-card--line-height: 1.25;
 
+  --text-node: clamp(0.75rem, 0.45rem + 1.25vw, 1.375rem); /* 12 → 22 */
+  --text-node--line-height: 1.2;
+
   --text-h2: clamp(2rem, 1.5rem + 2.2vw, 2.75rem); /* 32 → 44 */
   --text-h2--line-height: 1.15;
 

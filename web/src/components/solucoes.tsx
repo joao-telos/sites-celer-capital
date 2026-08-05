@@ -32,7 +32,7 @@ function Anchor({
 const SolutionNode = forwardRef<HTMLDivElement, { label: string }>(
   ({ label }, ref) => (
     <div className="relative">
-      <div className="text-caption w-36 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center font-bold text-navy shadow-md shadow-navy/5 sm:w-52 sm:px-5 sm:py-4 sm:text-body lg:w-60 lg:text-card">
+      <div className="text-node w-36 rounded-2xl border border-navy/10 bg-linear-to-b from-white to-cream px-4 py-3 text-center font-bold text-navy shadow-md shadow-navy/5 sm:w-52 sm:px-5 sm:py-4 lg:w-60">
         {label}
       </div>
       <Anchor innerRef={ref as RefObject<HTMLDivElement | null>} side="right" />
