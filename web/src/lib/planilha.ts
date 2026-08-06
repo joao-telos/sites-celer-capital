@@ -2,20 +2,21 @@ import { JWT } from "google-auth-library";
 
 import type { DadosFormulario } from "@/lib/validacao";
 
+/** Lê uma variável de ambiente obrigatória, nomeando exatamente a que falta. */
+function exigeEnv(nome: string): string {
+  const valor = process.env[nome];
+  if (!valor) throw new Error(`${nome} não configurada.`);
+  return valor;
+}
+
 /*
   Grava uma linha por envio via API REST do Sheets. Usa só a biblioteca
   de autenticação, não o pacote `googleapis` completo: seriam dezenas de
   megabytes para consumir um endpoint.
 */
 function credenciais(): JWT {
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const chave = process.env.GOOGLE_PRIVATE_KEY;
-
-  if (!email || !chave) {
-    throw new Error(
-      "GOOGLE_SERVICE_ACCOUNT_EMAIL ou GOOGLE_PRIVATE_KEY não configurada."
-    );
-  }
+  const email = exigeEnv("GOOGLE_SERVICE_ACCOUNT_EMAIL");
+  const chave = exigeEnv("GOOGLE_PRIVATE_KEY");
 
   return new JWT({
     email,
@@ -26,8 +27,7 @@ function credenciais(): JWT {
 }
 
 export async function gravarNaPlanilha(dados: DadosFormulario): Promise<void> {
-  const planilhaId = process.env.PLANILHA_ID;
-  if (!planilhaId) throw new Error("PLANILHA_ID não configurada.");
+  const planilhaId = exigeEnv("PLANILHA_ID");
 
   const auth = credenciais();
   // getAccessToken() da google-auth-library devolve { token, res }, não
