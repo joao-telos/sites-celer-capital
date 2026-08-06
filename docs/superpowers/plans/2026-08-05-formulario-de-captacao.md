@@ -689,7 +689,7 @@ Criar `web/src/components/formulario.tsx`. É Client Component: usa `useActionSt
 ```tsx
 "use client";
 
-import { useActionState, useId, useRef } from "react";
+import { useActionState, useId, useState } from "react";
 
 import {
   enviarFormulario,
@@ -716,8 +716,14 @@ export function Formulario() {
     ESTADO_INICIAL
   );
   const idBase = useId();
-  // Marca quando o formulário apareceu, para a armadilha de tempo do servidor.
-  const renderizadoEm = useRef(Date.now());
+  /*
+    Marca quando o formulário apareceu, para a armadilha de tempo do
+    servidor. Inicializador lazy do useState, não useRef(Date.now()): o
+    argumento do useRef é avaliado a cada render, o que as regras
+    react-hooks/purity deste projeto rejeitam. Só o primeiro valor é
+    guardado nos dois casos, mas o lazy não chama Date.now() à toa.
+  */
+  const [renderizadoEm] = useState(() => Date.now());
 
   const erros = estado.status === "erro" ? estado.erros : {};
 
@@ -738,7 +744,7 @@ export function Formulario() {
               <input
                 type="hidden"
                 name="renderizadoEm"
-                value={renderizadoEm.current}
+                value={renderizadoEm}
               />
               {/* Honeypot. Escondido de humanos, visível para bot. */}
               <input
