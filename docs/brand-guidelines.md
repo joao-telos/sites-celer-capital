@@ -133,8 +133,14 @@ O manual oficial define o conceito como fusão de **agilidade moderna** com **so
 | Hero / headline | Confiante, direto, uma frase que carrega posse | "O capital que já é seu não deveria esperar." |
 | Explicação de processo | Didático, sequencial, sem jargão | "Você vende a prazo. A Celer analisa os recebíveis — não o seu histórico bancário." |
 | Quebra de objeção (não é empréstimo) | Direto, comparativo | "Isso não é dívida. É receber hoje o que já é seu por direito." |
-| CTA / WhatsApp | Convite de baixo atrito, sem formulário | "Manda uma mensagem. Sem compromisso, resposta rápida." |
+| CTA / WhatsApp | Convite de baixo atrito — um dos dois caminhos de conversão (ver nota abaixo) | "Manda uma mensagem. Sem compromisso, resposta rápida." |
 | Dado não confirmado | Nunca inventar — usar placeholder explícito | `[prazo de aprovação — confirmar com cliente]` |
+
+**Dois caminhos de conversão (2026-08-05).** O site passou a ter um formulário de captação qualificada, na seção `#formulario`, logo acima do CTA Final. Ele coleta nome, CNPJ, empresa, WhatsApp, e-mail e faixa de faturamento anual, todos obrigatórios.
+
+Isso muda a regra de "convite de baixo atrito, sem formulário" que valia até aqui. O raciocínio original, ancorado na persona (Rodrigo, 46, dono de metalúrgica, que desconfia de processo lento), era que atrito baixo converte melhor nesse público — e seis campos obrigatórios são atrito alto.
+
+A mudança é deliberada e do cliente: a faixa de faturamento qualifica o lead antes do primeiro contato. **O caminho de baixo atrito não foi removido:** o CTA Final em WhatsApp continua logo abaixo, para quem não quiser preencher. Quem for medir conversão deve comparar os dois, não só o formulário.
 
 ### Prohibited Terms (Termos proibidos)
 - "instituição financeira" (linguagem genérica do PDF — não reflete o modelo de securitizadora, ver correção de escopo acima)
@@ -425,6 +431,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Nenhuma referência ao latim ("Celer = veloz") — testado e descartado
 - [ ] Linguagem testável pelo "teste do Rodrigo" (seção 2): concreto, sem financês, diferenciado, sustentável na prática
 - [ ] "Nome sujo"/restrição bancária tratado com respeito — nunca como acusação ao cliente
+- [ ] Formulário com aviso de uso dos dados visível abaixo do botão. **Pendência conhecida:** o site não tem página de política de privacidade. O aviso curto foi decisão consciente do cliente em 2026-08-05, ciente de que compliance provavelmente pedirá política completa, base legal declarada e política de retenção
 
 ### Estrutural
 - [ ] CTA final sempre aponta para WhatsApp (`api.whatsapp.com/send?phone=...&text=...`), nunca formulário
