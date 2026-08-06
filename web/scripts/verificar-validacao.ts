@@ -66,6 +66,37 @@ checa(
   true
 );
 
+// Tetos de comprimento: sem eles, um campo de ~1 MB passa direto para a
+// planilha e o Sheets rejeita a linha inteira com 400.
+checa(
+  "Nome longo demais é rejeitado",
+  validar({ ...completo, nome: "A".repeat(151) }).nome !== undefined,
+  true
+);
+checa(
+  "Empresa longa demais é rejeitada",
+  validar({ ...completo, empresa: "A".repeat(151) }).empresa !== undefined,
+  true
+);
+checa(
+  "E-mail longo demais é rejeitado",
+  validar({ ...completo, email: `${"a".repeat(150)}@metalurgica.com.br` }).email !== undefined,
+  true
+);
+// Padding com caracteres que `limpaCnpj`/`limpaTelefone` descartam: o valor
+// limpo continua válido, então é o teto de comprimento do valor bruto (não
+// a validação de formato) que precisa barrar isto.
+checa(
+  "CNPJ válido mas bruto longo demais é rejeitado",
+  validar({ ...completo, cnpj: `11222333000181${"-".repeat(20)}` }).cnpj !== undefined,
+  true
+);
+checa(
+  "WhatsApp válido mas bruto longo demais é rejeitado",
+  validar({ ...completo, whatsapp: `41995699494${"-".repeat(20)}` }).whatsapp !== undefined,
+  true
+);
+
 const falhas = casos.filter(([, ok]) => !ok);
 for (const [nome, ok] of casos) {
   console.log(`${ok ? "ok  " : "FALHOU"}  ${nome}`);

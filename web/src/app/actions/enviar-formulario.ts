@@ -6,37 +6,27 @@ import { validar, type DadosFormulario, type ErrosFormulario } from "@/lib/valid
 
 export type EstadoEnvio =
   | { status: "inicial" }
-  | { status: "erro"; erros: ErrosFormulario; mensagem?: string }
+  | {
+      status: "erro";
+      erros: ErrosFormulario;
+      valores: DadosFormulario;
+      mensagem?: string;
+    }
   | { status: "sucesso" };
-
-/** Envio em menos disto é bot: humano não preenche seis campos tão rápido. */
-const SEGUNDOS_MINIMOS = 3;
 
 export async function enviarFormulario(
   _estadoAnterior: EstadoEnvio,
   formData: FormData
 ): Promise<EstadoEnvio> {
   /*
-    Honeypot: campo escondido de humanos. Se veio preenchido, é bot.
-    Responde sucesso de propósito — bot que descobre que falhou ajusta e
-    volta.
+    Só o honeypot. Uma armadilha de tempo baseada em Date.now() do
+    navegador foi removida em 2026-08-06: ela comparava o relógio do
+    cliente com o do servidor, então qualquer aparelho adiantado tinha o
+    envio descartado em silêncio, com mensagem de sucesso. Perder lead
+    legítimo é pior que deixar passar bot.
   */
   if (String(formData.get("apelido") ?? "").length > 0) {
-    return { status: "sucesso" };
-  }
-
-  /*
-    Number(null) é 0, não NaN — pegadilha clássica de coerção do JS. Se o
-    campo vier ausente ou vazio, um Number() direto daria 0, o decorrido
-    viraria a hora Unix atual em segundos, e a submissão passaria como se
-    fosse humano lento. Isso liberaria justamente o bot mais comum: o que
-    raspa os nomes dos campos e posta sem executar JS nenhum.
-  */
-  const bruto = formData.get("renderizadoEm");
-  const renderizadoEm =
-    typeof bruto === "string" && bruto.trim() !== "" ? Number(bruto) : NaN;
-  const decorrido = (Date.now() - renderizadoEm) / 1000;
-  if (!Number.isFinite(renderizadoEm) || decorrido < SEGUNDOS_MINIMOS) {
+    console.warn("Envio descartado pelo honeypot.");
     return { status: "sucesso" };
   }
 
@@ -63,7 +53,7 @@ export async function enviarFormulario(
   // direto neste endpoint.
   const erros = validar(dados);
   if (Object.keys(erros).length > 0) {
-    return { status: "erro", erros };
+    return { status: "erro", erros, valores: dados };
   }
 
   /*
@@ -77,6 +67,7 @@ export async function enviarFormulario(
     return {
       status: "erro",
       erros: {},
+      valores: dados,
       mensagem:
         "Não conseguimos registrar seus dados agora. Fale com a gente pelo WhatsApp, que respondemos na hora.",
     };

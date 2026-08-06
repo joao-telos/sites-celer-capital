@@ -60,7 +60,8 @@ Rodada que mexe na ordem da página e em duas seções específicas — não no
 sistema de gradientes, que já ficou fechado na rodada anterior:
 
 1. **Seção "Para Quem" removida e página reordenada.** Ordem atual: Hero,
-   Processo, Sobre, Números, Valores, Soluções, Atendimento, CTA Final. Isso
+   Processo, Sobre, Números, Valores, Soluções, Atendimento, Formulário, CTA
+   Final. Isso
    torna histórico o item 5 do pivô v3 (2026-07-12, acima), que descreve o
    conteúdo de "Para Quem" — a seção não existe mais no site.
 2. **Seção "Números" adicionada**, entre Sobre e Valores: uma caixa em
@@ -185,7 +186,7 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 ### Cor funcional (exceção documentada)
 | Name | Hex | Usage |
 |------|-----|-------|
-| WhatsApp Green | #1DA851 | **Única cor fora da paleta institucional aprovada para uso.** Reservada exclusivamente ao botão de CTA final "Falar pelo WhatsApp" — o reconhecimento de marca do WhatsApp supera a consistência de paleta nesse ponto único de conversão. Não usar em mais nenhum outro contexto. |
+| WhatsApp Green | #1DA851 | **Única cor fora da paleta institucional aprovada para uso.** Reservada exclusivamente ao botão de CTA final "Falar pelo WhatsApp" — o reconhecimento de marca do WhatsApp supera a consistência de paleta nesse ponto de conversão. Não usar em mais nenhum outro contexto. |
 
 ### Regra de proporção (pivô v2/v3)
 - Cream: ~80–85% da superfície do site inteiro (dominante — todas as seções exceto os dois bookends)
@@ -373,7 +374,8 @@ Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é f
 alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
 início da próxima, então a emenda fica invisível e o scroll lê como uma
 superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
-Sobre (up), Números (down), Valores (up), Soluções (down), Atendimento (up).
+Sobre (up), Números (down), Valores (up), Soluções (down), Atendimento (up),
+Formulário (down).
 **Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
 duas `down` seguidas cria uma faixa visível na emenda.
 

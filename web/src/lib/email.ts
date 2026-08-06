@@ -55,7 +55,7 @@ export async function enviarEmail(dados: DadosFormulario): Promise<void> {
       .split(",")
       .map((e) => e.trim())
       .filter(Boolean),
-    subject: `Novo contato pelo site: ${dados.empresa}`,
+    subject: `Novo contato pelo site: ${dados.empresa.replace(/[\r\n]+/g, " ").slice(0, 120)}`,
     html: `<h2>Novo contato pelo site</h2>\n${linhas}`,
   });
 

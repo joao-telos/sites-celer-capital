@@ -95,18 +95,28 @@ export function validar(dados: DadosFormulario): ErrosFormulario {
 
   if (dados.nome.trim().length < 2) {
     erros.nome = "Informe seu nome completo.";
+  } else if (dados.nome.trim().length > 150) {
+    erros.nome = "Máximo de 150 caracteres.";
   }
   if (!cnpjValido(dados.cnpj)) {
     erros.cnpj = "CNPJ inválido.";
+  } else if (dados.cnpj.trim().length > 30) {
+    erros.cnpj = "Valor longo demais.";
   }
   if (dados.empresa.trim().length < 2) {
     erros.empresa = "Informe o nome da empresa.";
+  } else if (dados.empresa.trim().length > 150) {
+    erros.empresa = "Máximo de 150 caracteres.";
   }
   if (!whatsappValido(dados.whatsapp)) {
     erros.whatsapp = "Informe um WhatsApp com DDD.";
+  } else if (dados.whatsapp.trim().length > 30) {
+    erros.whatsapp = "Valor longo demais.";
   }
   if (!emailValido(dados.email)) {
     erros.email = "Informe um e-mail válido.";
+  } else if (dados.email.trim().length > 150) {
+    erros.email = "Máximo de 150 caracteres.";
   }
   if (!(FAIXAS_FATURAMENTO as readonly string[]).includes(dados.faturamento)) {
     erros.faturamento = "Selecione uma faixa de faturamento.";

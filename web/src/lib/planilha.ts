@@ -1,6 +1,6 @@
 import { JWT } from "google-auth-library";
 
-import type { DadosFormulario } from "@/lib/validacao";
+import { limpaCnpj, limpaTelefone, type DadosFormulario } from "@/lib/validacao";
 
 /** Lê uma variável de ambiente obrigatória, nomeando exatamente a que falta. */
 function exigeEnv(nome: string): string {
@@ -39,9 +39,9 @@ export async function gravarNaPlanilha(dados: DadosFormulario): Promise<void> {
   const linha = [
     new Date().toISOString(),
     dados.nome,
-    dados.cnpj,
+    limpaCnpj(dados.cnpj),
     dados.empresa,
-    dados.whatsapp,
+    limpaTelefone(dados.whatsapp),
     dados.email,
     dados.faturamento,
   ];
