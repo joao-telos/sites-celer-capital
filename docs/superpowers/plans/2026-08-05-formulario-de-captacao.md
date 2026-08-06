@@ -873,28 +873,54 @@ Depois em 375px, recarregando antes de medir: `overflow: false`.
 
 - [ ] **Step 5: Verificar que o servidor rejeita o que o cliente aceitaria**
 
-O `required` do navegador é conveniência, não segurança. Confirme que a action rejeita sozinha, postando direto e ignorando a UI:
+O `required` do navegador é conveniência de UX, não segurança: ele só impede o envio pela UI. O que precisa ser provado é que **a action rejeita sozinha**, mesmo quando a validação do navegador é contornada.
+
+Desligue a validação nativa e preencha com valores inválidos, tudo por script:
 
 ```js
-(async () => {
-  const fd = new FormData();
-  fd.set("nome", "Teste");
-  fd.set("cnpj", "11111111111111");        // DV inválido
-  fd.set("empresa", "Teste");
-  fd.set("whatsapp", "123");                // curto
-  fd.set("email", "sem-arroba");
-  fd.set("faturamento", "Uns 5 milhões");   // fora da lista
-  fd.set("renderizadoEm", String(Date.now() - 10000));
-  const r = await fetch(location.href, {
-    method: "POST",
-    headers: { "Next-Action": "PLACEHOLDER" },
-    body: fd,
-  });
-  return `status ${r.status}`;
+(() => {
+  const form = document.querySelector("#formulario form");
+  form.noValidate = true;
+
+  const invalidos = {
+    nome: "x",                      // curto demais
+    cnpj: "11222333000199",         // dígito verificador errado
+    empresa: "x",                   // curto demais
+    whatsapp: "123",                // curto demais
+    email: "sem-arroba",            // sem @
+    faturamento: "Uns 5 milhões",   // fora da lista das sete faixas
+  };
+
+  for (const [nome, valor] of Object.entries(invalidos)) {
+    const campo = form.elements.namedItem(nome);
+    // O select rejeita valor fora das options, então injeta uma.
+    if (campo.tagName === "SELECT") {
+      const op = document.createElement("option");
+      op.value = valor;
+      campo.appendChild(op);
+    }
+    campo.value = valor;
+  }
+
+  form.requestSubmit();
+  return "enviado, aguarde a resposta do servidor";
 })();
 ```
 
-O id da Server Action muda a cada build, então o `Next-Action` acima não é utilizável direto. **A forma prática de verificar é pela UI, desabilitando a validação do navegador:** rode `document.querySelector('#formulario form').noValidate = true`, preencha com os valores inválidos acima, envie, e confirme que **cada campo** volta com mensagem de erro vinda do servidor. Registre no relatório os seis erros que apareceram.
+Espere a resposta e leia os erros que voltaram:
+
+```js
+JSON.stringify(
+  [...document.querySelectorAll("#formulario [id$='-erro']")].map((e) => ({
+    campo: e.id,
+    mensagem: e.textContent,
+  })),
+  null,
+  1
+);
+```
+
+Esperado: **seis mensagens de erro**, uma por campo. Se vier menos de seis, algum campo está passando pela validação do servidor e isso é falha da tarefa. Registre no relatório as seis mensagens literais.
 
 - [ ] **Step 6: Commit**
 
