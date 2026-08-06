@@ -60,7 +60,8 @@ Rodada que mexe na ordem da página e em duas seções específicas — não no
 sistema de gradientes, que já ficou fechado na rodada anterior:
 
 1. **Seção "Para Quem" removida e página reordenada.** Ordem atual: Hero,
-   Processo, Sobre, Números, Valores, Soluções, Atendimento, CTA Final. Isso
+   Processo, Sobre, Números, Valores, Soluções, Atendimento, Formulário, CTA
+   Final. Isso
    torna histórico o item 5 do pivô v3 (2026-07-12, acima), que descreve o
    conteúdo de "Para Quem" — a seção não existe mais no site.
 2. **Seção "Números" adicionada**, entre Sobre e Valores: uma caixa em
@@ -133,8 +134,14 @@ O manual oficial define o conceito como fusão de **agilidade moderna** com **so
 | Hero / headline | Confiante, direto, uma frase que carrega posse | "O capital que já é seu não deveria esperar." |
 | Explicação de processo | Didático, sequencial, sem jargão | "Você vende a prazo. A Celer analisa os recebíveis — não o seu histórico bancário." |
 | Quebra de objeção (não é empréstimo) | Direto, comparativo | "Isso não é dívida. É receber hoje o que já é seu por direito." |
-| CTA / WhatsApp | Convite de baixo atrito, sem formulário | "Manda uma mensagem. Sem compromisso, resposta rápida." |
+| CTA / WhatsApp | Convite de baixo atrito — um dos dois caminhos de conversão (ver nota abaixo) | "Manda uma mensagem. Sem compromisso, resposta rápida." |
 | Dado não confirmado | Nunca inventar — usar placeholder explícito | `[prazo de aprovação — confirmar com cliente]` |
+
+**Dois caminhos de conversão (2026-08-05).** O site passou a ter um formulário de captação qualificada, na seção `#formulario`, logo acima do CTA Final. Ele coleta nome, CNPJ, empresa, WhatsApp, e-mail e faixa de faturamento anual, todos obrigatórios.
+
+Isso muda a regra de "convite de baixo atrito, sem formulário" que valia até aqui. O raciocínio original, ancorado na persona (Rodrigo, 46, dono de metalúrgica, que desconfia de processo lento), era que atrito baixo converte melhor nesse público — e seis campos obrigatórios são atrito alto.
+
+A mudança é deliberada e do cliente: a faixa de faturamento qualifica o lead antes do primeiro contato. **O caminho de baixo atrito não foi removido:** o CTA Final em WhatsApp continua logo abaixo, para quem não quiser preencher. Quem for medir conversão deve comparar os dois, não só o formulário.
 
 ### Prohibited Terms (Termos proibidos)
 - "instituição financeira" (linguagem genérica do PDF — não reflete o modelo de securitizadora, ver correção de escopo acima)
@@ -179,7 +186,7 @@ Paleta institucional real da Celer (confirmada com o cliente no pivô v3, 2026-0
 ### Cor funcional (exceção documentada)
 | Name | Hex | Usage |
 |------|-----|-------|
-| WhatsApp Green | #1DA851 | **Única cor fora da paleta institucional aprovada para uso.** Reservada exclusivamente ao botão de CTA final "Falar pelo WhatsApp" — o reconhecimento de marca do WhatsApp supera a consistência de paleta nesse ponto único de conversão. Não usar em mais nenhum outro contexto. |
+| WhatsApp Green | #1DA851 | **Única cor fora da paleta institucional aprovada para uso.** Reservada exclusivamente ao botão de CTA final "Falar pelo WhatsApp" — o reconhecimento de marca do WhatsApp supera a consistência de paleta nesse ponto de conversão. Não usar em mais nenhum outro contexto. |
 
 ### Regra de proporção (pivô v2/v3)
 - Cream: ~80–85% da superfície do site inteiro (dominante — todas as seções exceto os dois bookends)
@@ -300,7 +307,7 @@ Duas faixas, com critério:
 
 | Faixa | Largura | Onde |
 |---|---|---|
-| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento |
+| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento, Formulário |
 | Texto corrido | 768px (`max-w-3xl`) | CTA Final |
 
 Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
@@ -367,7 +374,8 @@ Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é f
 alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
 início da próxima, então a emenda fica invisível e o scroll lê como uma
 superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
-Sobre (up), Números (down), Valores (up), Soluções (down), Atendimento (up).
+Sobre (up), Números (down), Valores (up), Soluções (down), Atendimento (up),
+Formulário (down).
 **Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
 duas `down` seguidas cria uma faixa visível na emenda.
 
@@ -425,6 +433,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Nenhuma referência ao latim ("Celer = veloz") — testado e descartado
 - [ ] Linguagem testável pelo "teste do Rodrigo" (seção 2): concreto, sem financês, diferenciado, sustentável na prática
 - [ ] "Nome sujo"/restrição bancária tratado com respeito — nunca como acusação ao cliente
+- [ ] Formulário com aviso de uso dos dados visível abaixo do botão. **Pendência conhecida:** o site não tem página de política de privacidade. O aviso curto foi decisão consciente do cliente em 2026-08-05, ciente de que compliance provavelmente pedirá política completa, base legal declarada e política de retenção
 
 ### Estrutural
 - [ ] CTA final sempre aponta para WhatsApp (`api.whatsapp.com/send?phone=...&text=...`), nunca formulário
