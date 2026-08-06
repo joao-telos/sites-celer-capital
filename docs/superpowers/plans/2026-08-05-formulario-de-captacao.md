@@ -579,19 +579,38 @@ export async function enviarFormulario(
   // Armadilha de tempo. Não é limite de taxa: limite real exigiria estado
   // compartilhado entre instâncias serverless. Segura bot de varredura,
   // que é a ameaça realista aqui.
-  const renderizadoEm = Number(formData.get("renderizadoEm"));
+  /*
+    Number(null) é 0, não NaN — pegadinha clássica de coerção do JS. Se o
+    campo vier ausente ou vazio, um Number() direto daria 0, o decorrido
+    viraria a hora Unix atual em segundos, e a submissão passaria como se
+    fosse humano lento. Isso liberaria justamente o bot mais comum: o que
+    raspa os nomes dos campos e posta sem executar JS nenhum.
+  */
+  const bruto = formData.get("renderizadoEm");
+  const renderizadoEm =
+    typeof bruto === "string" && bruto.trim() !== "" ? Number(bruto) : NaN;
   const decorrido = (Date.now() - renderizadoEm) / 1000;
   if (!Number.isFinite(renderizadoEm) || decorrido < SEGUNDOS_MINIMOS) {
     return { status: "sucesso" };
   }
 
+  /*
+    `formData.get` devolve string ou File. Um File passaria por String()
+    virando "[object File]", que escaparia da checagem de comprimento do
+    nome e sujaria a planilha. Só string interessa aqui.
+  */
+  const texto = (campo: string): string => {
+    const valor = formData.get(campo);
+    return typeof valor === "string" ? valor.trim() : "";
+  };
+
   const dados: DadosFormulario = {
-    nome: String(formData.get("nome") ?? "").trim(),
-    cnpj: String(formData.get("cnpj") ?? "").trim(),
-    empresa: String(formData.get("empresa") ?? "").trim(),
-    whatsapp: String(formData.get("whatsapp") ?? "").trim(),
-    email: String(formData.get("email") ?? "").trim(),
-    faturamento: String(formData.get("faturamento") ?? "").trim(),
+    nome: texto("nome"),
+    cnpj: texto("cnpj"),
+    empresa: texto("empresa"),
+    whatsapp: texto("whatsapp"),
+    email: texto("email"),
+    faturamento: texto("faturamento"),
   };
 
   // Revalidação completa. O cliente já validou, mas qualquer um posta
