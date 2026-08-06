@@ -8,6 +8,7 @@ import { Solucoes } from "@/components/solucoes";
 import { Atendimento } from "@/components/atendimento";
 import { CtaFinal } from "@/components/cta-final";
 import { Footer } from "@/components/footer";
+import { Formulario } from "@/components/formulario";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <Valores />
         <Solucoes />
         <Atendimento />
+        <Formulario />
         <CtaFinal />
       </main>
       <Footer />
