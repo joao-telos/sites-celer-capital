@@ -23,7 +23,13 @@ checa("CNPJ numérico sem máscara", cnpjValido("11222333000181"), true);
 checa("CNPJ com DV errado", cnpjValido("11222333000182"), false);
 checa("CNPJ curto demais", cnpjValido("1122233300018"), false);
 checa("CNPJ todo igual", cnpjValido("00000000000000"), false);
-checa("CNPJ com letra no DV", cnpjValido("11222333000A81"), false);
+checa("CNPJ com letra no DV", cnpjValido("1122233300018A"), false);
+
+// Exemplo alfanumérico resolvido de fonte externa: os pesos derivados da
+// compatibilidade numérica também valem para letras no corpo do CNPJ.
+checa("CNPJ alfanumérico válido", cnpjValido("12.ABC.345/01DE-35"), true);
+checa("CNPJ alfanumérico sem máscara", cnpjValido("12ABC34501DE35"), true);
+checa("CNPJ alfanumérico com DV errado", cnpjValido("12ABC34501DE36"), false);
 
 checa("WhatsApp celular 11 dígitos", whatsappValido("(41) 99569-9494"), true);
 checa("WhatsApp fixo 10 dígitos", whatsappValido("(41) 3569-9494"), true);
@@ -52,6 +58,11 @@ checa(
 checa(
   "Nome vazio é rejeitado",
   validar({ ...completo, nome: "   " }).nome !== undefined,
+  true
+);
+checa(
+  "Vários campos inválidos retornam vários erros",
+  Object.keys(validar({ ...completo, nome: "", email: "x", cnpj: "1" })).length === 3,
   true
 );
 
