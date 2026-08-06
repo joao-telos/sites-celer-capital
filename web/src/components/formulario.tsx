@@ -81,6 +81,38 @@ function formataTelefone(limpo: string): string {
   return segunda ? `(${ddd}) ${primeira}-${segunda}` : `(${ddd}) ${primeira}`;
 }
 
+/*
+  Se vier com +55 na frente (comum ao colar um número direto do WhatsApp),
+  remove o DDI antes de aplicar o teto de 11 dígitos. Só trata como DDI
+  quando o limpo tem 12 ou 13 dígitos e começa com "55": um DDD real —
+  inclusive o DDD 55, do Rio Grande do Sul — nunca produz sozinho um limpo
+  de 12 ou 13 dígitos, então não há colisão possível. Sem essa remoção, o
+  corte de 11 dígitos cortava dentro do número em vez de cortar o DDI,
+  aceitando em silêncio um número diferente do que a pessoa colou.
+*/
+function normalizaWhatsapp(bruto: string): string {
+  let limpo = limpaTelefone(bruto);
+  if ((limpo.length === 12 || limpo.length === 13) && limpo.startsWith("55")) {
+    limpo = limpo.slice(2);
+  }
+  if (limpo.length > 11) {
+    // Não trunca dado real: deixa passar como está para `validar` rejeitar.
+    return limpo;
+  }
+  return formataTelefone(limpo);
+}
+
+/*
+  Tentativa de preservar o caret em edição no meio do campo (contar
+  caracteres significativos antes do caret e recolocá-lo com
+  requestAnimationFrame após a máscara reescrever o valor) foi feita e
+  descartada em 2026-08-06: sob digitação rápida, o rAF de uma tecla podia
+  disparar depois que teclas seguintes já tinham mudado o valor, colapsando
+  uma seleção no momento errado e duplicando o texto digitado. Um caret que
+  pula para o fim em edição no meio do campo é um incômodo Minor; texto
+  duplicado é pior. Ver PR/relatório de 2026-08-06 para o histórico.
+*/
+
 export function Formulario() {
   const [estado, acao, enviando] = useActionState(
     enviarFormulario,
@@ -197,7 +229,7 @@ export function Formulario() {
                     if (campo.nome === "cnpj") {
                       valor = formataCnpj(limpaCnpj(valor).slice(0, 14));
                     } else if (campo.nome === "whatsapp") {
-                      valor = formataTelefone(limpaTelefone(valor).slice(0, 11));
+                      valor = normalizaWhatsapp(valor);
                     }
                     setValores((v) => ({ ...v, [campo.nome]: valor }));
                   };

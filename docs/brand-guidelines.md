@@ -307,7 +307,7 @@ Duas faixas, com critério:
 
 | Faixa | Largura | Onde |
 |---|---|---|
-| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento |
+| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento, Formulário |
 | Texto corrido | 768px (`max-w-3xl`) | CTA Final |
 
 Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.

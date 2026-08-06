@@ -107,10 +107,11 @@ Se a **planilha** falha, é falha dura: a mensagem de erro aponta o usuário par
 
 ## 6. Anti-spam
 
-- **Honeypot:** campo escondido de humanos, preenchido por bot. Envio com ele preenchido é descartado silenciosamente, com resposta de sucesso — bot não deve aprender que falhou.
-- **Armadilha de tempo:** o formulário carrega com o instante de renderização; o servidor rejeita envio em menos de três segundos.
+- **Honeypot:** campo escondido de humanos, preenchido por bot. Envio com ele preenchido é descartado silenciosamente, com resposta de sucesso — bot não deve aprender que falhou. O descarte é registrado no log: descarte silencioso sem sinal nenhum torna um defeito invisível em produção.
 
-**Isto não é limite de taxa.** Limite de taxa real exige estado compartilhado entre instâncias serverless, o que pediria Redis e mais uma conta. Decisão consciente: para o volume de um site institucional, honeypot e armadilha de tempo seguram bot de varredura, que é a ameaça realista. Um ataque direcionado passaria — se acontecer, a saída é Upstash Redis.
+**Revisto em 2026-08-06: a armadilha de tempo foi removida.** O desenho original mandava o formulário carregar com o instante de renderização e o servidor rejeitar envio em menos de três segundos. O instante de renderização vem do relógio do navegador e a comparação acontece no relógio do servidor. Um aparelho com o relógio adiantado — situação comum — tinha o envio descartado em silêncio, recebendo mensagem de sucesso. Reproduzido em navegador com 60 segundos de adiantamento: envio inteiramente válido, resposta de sucesso, nada gravado. Perder lead legítimo é pior que deixar passar bot. **Só o honeypot ficou.**
+
+**Isto não é limite de taxa.** Limite de taxa real exige estado compartilhado entre instâncias serverless, o que pediria Redis e mais uma conta. Decisão consciente: para o volume de um site institucional, o honeypot segura bot de varredura, que é a ameaça realista. Um ataque direcionado passaria — se acontecer, a saída é Upstash Redis, não uma armadilha de relógio.
 
 ## 7. Destinos
 
@@ -126,11 +127,14 @@ Todos em variáveis de ambiente da Vercel. Nenhum no repositório.
 
 ```
 RESEND_API_KEY
+EMAIL_REMETENTE
+EMAILS_DESTINO
 GOOGLE_SERVICE_ACCOUNT_EMAIL
 GOOGLE_PRIVATE_KEY
 PLANILHA_ID
-EMAILS_DESTINO
 ```
+
+`EMAIL_REMETENTE` faltava nesta lista e é obrigatória: é o endereço `@celercapital.com.br` de onde o Resend envia. Os nomes conferem com `web/.env.example`, que carrega os nomes com valor vazio e nenhum segredo.
 
 ## 9. LGPD
 
@@ -162,8 +166,10 @@ Padrão que o projeto já sustenta:
 - Cada campo rejeita entrada inválida no cliente **e**, independentemente, no servidor — testado postando direto na action, sem passar pela UI
 - CNPJ: aceita formato válido, rejeita dígito verificador errado, e **aceita o formato alfanumérico**
 - Faturamento fora da lista das sete faixas é rejeitado pelo servidor
-- Honeypot preenchido resulta em sucesso aparente sem gravar nada
-- Envio antes de três segundos é rejeitado
+- Honeypot preenchido resulta em sucesso aparente sem gravar nada, e deixa registro no log
+- Rejeição do servidor devolve os seis campos preenchidos, não um formulário em branco
+- Máscara de CNPJ e de WhatsApp formatam durante a digitação, e o valor mascarado passa pela validação do servidor
+- Colar `+55 41 99569-9494` resulta em `(41) 99569-9494`, não em outro número
 - Falha simulada da planilha aponta o usuário para o WhatsApp; falha simulada do e-mail não perde o lead
 - Ordem das seções e alternância do wash conferidas por `getComputedStyle`
 - Sem overflow horizontal em 375px, 885px e 1440px

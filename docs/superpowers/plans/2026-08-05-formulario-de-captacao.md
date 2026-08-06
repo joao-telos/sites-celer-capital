@@ -25,6 +25,36 @@
 
 ---
 
+## Emendas pós-implementação (2026-08-06)
+
+Três decisões da revisão final mudam o que este plano manda. **Onde o texto abaixo divergir dos blocos de código mais adiante, o texto abaixo governa** — os blocos originais ficaram no documento como registro do raciocínio, não como instrução.
+
+**1. A armadilha de tempo foi removida. Só o honeypot sobreviveu.**
+
+O plano mandava o formulário carregar com `Date.now()` do navegador e o servidor rejeitar envio em menos de três segundos. Isso compara o relógio do cliente com o do servidor. Um aparelho três segundos adiantado — relógio errado é comum — tinha o envio descartado em silêncio, com mensagem de sucesso na tela. Um aparelho um dia adiantado perderia todo envio, para sempre, sem sinal nenhum.
+
+Reproduzido em navegador: com o relógio 60 segundos adiantado, um envio inteiramente válido devolveu "Recebemos seus dados. Entraremos em contato em breve." e não gravou nada.
+
+Perder lead legítimo é pior que deixar passar bot. Decisão do dono do projeto: remover. Fora do plano ficam `SEGUNDOS_MINIMOS`, o `renderizadoEm` nos dois arquivos e o bloco de guarda inteiro. **Não reintroduza** — o comentário em `enviar-formulario.ts` existe para impedir isso.
+
+O honeypot continua, e agora registra `console.warn` antes de responder sucesso falso: descarte silencioso sem sinal nenhum torna um defeito invisível em produção.
+
+**2. Validação no cliente e máscaras de entrada foram implementadas.**
+
+O spec pedia as duas (§4 e §5.1) e o plano as deixou cair, o que transformou `limpaCnpj` e `limpaTelefone` em exports mortos. Agora `formulario.tsx` mascara CNPJ como `00.000.000/0000-00` — por posição, não por classe de caractere, já que os doze primeiros são alfanuméricos desde 2026 — e WhatsApp como `(00) 00000-0000`, caindo para `(00) 0000-0000` em dez dígitos, e valida no `blur` com o mesmo `validar` do servidor.
+
+**A revalidação no servidor não mudou e continua sendo a única barreira real.** Validação no cliente é conveniência de UX.
+
+Cuidado registrado: a máscara do telefone descarta o código de país `55` quando o valor limpo tem 12 ou 13 dígitos, e **não trunca mais nada**. Truncar cegamente em 11 dígitos fazia `+55 91 98765-4321` virar `(55) 91987-6543` — outro número, válido pela regra de DDD, aceito em silêncio. Valor longo demais tem que ser rejeitado, não encurtado.
+
+**3. Os campos são repovoados quando o servidor rejeita.**
+
+React 19 reseta `<form action={fn}>` sozinho depois que a action confirma. Como nada repovoava, um único dígito verificador errado devolvia o formulário inteiro em branco. O estado de erro passou a carregar os valores enviados.
+
+Um `<select>` controlado precisa de sincronia imperativa nesse caminho: `form.reset()` reposiciona o `<select>` pelo atributo `selected`, que um select controlado nunca escreve. O ajuste vive no mesmo `useEffect` que move o foco.
+
+---
+
 ## Estrutura de arquivos
 
 **Criar:**
