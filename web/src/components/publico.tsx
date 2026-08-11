@@ -15,7 +15,7 @@ import { Reveal } from "@/components/motion/reveal";
 export function Publico() {
   return (
     <section id="publico" className="surface-wash-down">
-      <div className="mx-auto max-w-7xl px-6 py-16 text-center sm:px-10 lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-8 text-center sm:px-10 lg:py-10">
         <Reveal>
           <h2 className="font-heading text-h2 mx-auto max-w-[20ch] font-bold text-navy">
             Pensada para quem decide sozinho.

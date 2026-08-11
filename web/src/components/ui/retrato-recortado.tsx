@@ -11,12 +11,13 @@ interface RetratoRecortadoProps {
 }
 
 /**
- * Retrato sem fundo dentro de um quadrado navy, dissolvendo na base.
+ * Retrato sem fundo sobre um fundo em degradê da marca, com o ícone da
+ * Celer grande atrás, como sombra.
  *
- * A foto chega já recortada (WebP com alfa). O quadrado devolve à imagem
- * o fundo que ela perdeu, agora na cor da marca em vez do cenário
- * original — que era um interior de restaurante e não tinha nada a ver
- * com o público que a seção descreve.
+ * A foto chega já recortada (WebP com alfa). O degradê devolve à imagem o
+ * fundo que ela perdeu, agora na cor da marca em vez do cenário original
+ * — que era um interior de restaurante e não tinha nada a ver com o
+ * público que a seção descreve.
  *
  * Cuidado registrado: o otimizador do Next devolve JPEG para navegador
  * que não anuncia WebP, e JPEG não tem canal alfa. Medido: com
@@ -35,8 +36,15 @@ export function RetratoRecortado({
 }: RetratoRecortadoProps) {
   return (
     <div
+      /*
+        A proporção é a do arquivo (900x1432), não um quadrado. A foto é
+        vertical e precisa aparecer inteira: num quadrado, `cover` cortaria
+        na altura do peito e `contain` deixaria faixas vazias dos dois
+        lados. Com a caixa na proporção da imagem, ela preenche de borda a
+        borda sem perder nada.
+      */
       className={cn(
-        "relative aspect-square overflow-hidden rounded-[2rem]",
+        "relative aspect-[900/1432] overflow-hidden rounded-[2rem]",
         className
       )}
       style={{
@@ -46,7 +54,7 @@ export function RetratoRecortado({
     >
       {/*
         Brilho atrás da cabeça. Sem ele o recorte fica chapado sobre o
-        gradiente: a silhueta some no navy escuro justamente na altura do
+        degradê: a silhueta some no navy escuro justamente na altura do
         terno, que é escuro também.
       */}
       <div
@@ -54,29 +62,48 @@ export function RetratoRecortado({
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(58% 46% at 50% 30%, rgb(255 255 255 / 0.16) 0%, transparent 70%)",
+            "radial-gradient(58% 40% at 50% 26%, rgb(255 255 255 / 0.16) 0%, transparent 70%)",
         }}
       />
 
       {/*
-        object-cover com o topo ancorado: o recorte é retrato (0.6) e o
-        quadrado corta a partir da cintura. A folga acima da cabeça já vem
-        embutida no arquivo, não em padding — assim o enquadramento não
-        depende do tamanho em que o quadrado é renderizado.
+        O ícone da marca como sombra no fundo. Sangra pelas laterais de
+        propósito: em opacidade baixa, um logo inteiro e centrado lê como
+        logo mal posicionado, enquanto um recorte grande lê como textura.
 
-        A máscara dissolve a base. Sem ela a barra de corte apareceria como
-        uma linha reta atravessando o paletó.
+        Fica atrás do recorte na ordem do DOM, então o corpo da pessoa
+        passa por cima da metade de baixo do ícone.
+      */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-[-18%] top-[6%] opacity-[0.15]"
+      >
+        <div className="relative aspect-[377/263] w-full">
+          <Image
+            src="/logo/celer-icon.png"
+            alt=""
+            fill
+            sizes={sizes}
+            className="object-contain"
+          />
+        </div>
+      </div>
+
+      {/*
+        A máscara dissolve só a barra final. A foto termina na cintura, e
+        sem isso o corte apareceria como uma linha reta atravessando o
+        paletó. Começa em 88% para não comer conteúdo.
       */}
       <Image
         src={src}
         alt={alt}
         fill
         sizes={sizes}
-        className="object-cover object-top"
+        className="object-contain"
         style={{
-          maskImage: "linear-gradient(to bottom, #000 62%, transparent 97%)",
+          maskImage: "linear-gradient(to bottom, #000 88%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, #000 62%, transparent 97%)",
+            "linear-gradient(to bottom, #000 88%, transparent 100%)",
         }}
       />
     </div>

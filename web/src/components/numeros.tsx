@@ -46,7 +46,7 @@ const NUMEROS = [
 export function Numeros() {
   return (
     <section id="numeros" className="surface-wash-down">
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:px-10 lg:py-10">
         {/* Sem título visível: a referência do cliente não tem um, e a seção
             funciona como faixa de dados. O sr-only mantém o landmark. */}
         <h2 className="sr-only">Celer Capital em números</h2>

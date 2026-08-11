@@ -34,7 +34,7 @@ export function Atendimento() {
 
   return (
     <section id="atendimento" className="surface-wash-up">
-      <div className="mx-auto max-w-7xl px-6 py-20 text-center sm:px-10 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 py-8 text-center sm:px-10 lg:py-10">
         <h2
           ref={ref}
           className="font-heading text-display font-bold uppercase"

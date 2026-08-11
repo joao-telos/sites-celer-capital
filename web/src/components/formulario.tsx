@@ -55,7 +55,7 @@ export function Formulario() {
 
   return (
     <section id="formulario" className="surface-wash-down">
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:px-10 lg:py-10">
         <Reveal>
           <div className="mx-auto max-w-2xl">
             <h2 className="font-heading text-h2 text-center font-bold text-navy">

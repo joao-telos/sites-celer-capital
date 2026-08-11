@@ -68,6 +68,14 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
 
 4. **As fotos entraram.** Ver "Fotografia" na seção 6, incluindo a exceção à regra de não usar banco de imagens e o método de calibrar o véu por contraste.
 
+5. **O espaçamento entre seções caiu quase pela metade.** O padding externo de toda seção de conteúdo passou a ser `py-8 lg:py-10`, uniforme. O intervalo entre duas seções é a soma do padding de baixo de uma com o de cima da seguinte: era 128px no desktop, virou **80px**. Em volta da tagline era 208px, porque ela carregava `py-20 lg:py-28` — agora segue o mesmo ritmo das outras.
+
+   O padding **interno** das caixas não mudou: a caixa navy da Sobre e a dourada da Números continuam com o próprio respiro. Quem for mexer nisso de novo precisa distinguir os dois: só o externo produz o intervalo.
+
+   A `surface-wash-*` é um gradiente em porcentagem, então ela encolhe junto e não precisa de ajuste.
+
+6. **O retrato do Processo não é mais quadrado.** A caixa usa `aspect-[900/1432]`, que é a proporção do arquivo, para a foto aparecer inteira: num quadrado, `cover` cortava na altura do peito e `contain` deixaria faixas vazias dos lados. Se a foto for trocada, **a proporção da caixa precisa acompanhar o novo arquivo**.
+
 ## ⚠️ Rodada 2026-08-01 — reestruturação visual, Números e tagline (ler antes de implementar UI)
 
 Rodada que mexe na ordem da página e em duas seções específicas — não no
@@ -342,7 +350,7 @@ O cliente forneceu oito fotos e elas estão no ar. **Os slots de placeholder aca
 
 | Onde | Arquivo | Tratamento |
 |---|---|---|
-| Processo, ao lado da linha do tempo | `dono.webp` | Recorte sem fundo dentro de um quadrado navy, dissolvendo na base |
+| Processo, ao lado da linha do tempo | `dono.webp` | Recorte sem fundo sobre degradê navy, com o ícone da Celer grande atrás como sombra |
 | Sobre, a caixa inteira | `sobre-fundo.webp` | Fundo da caixa, desfoque de 3px, véu do gradiente da marca a 0.88 |
 | Valores, os seis painéis | `celeridade`, `confianca`, `compromisso`, `parceria`, `crescimento`, `excelencia` | Fundo do painel, véu do gradiente a 0.86 |
 

@@ -33,7 +33,7 @@ export function Processo() {
         className="pointer-events-none absolute -right-24 -top-24 z-0 size-[400px] rounded-full bg-[radial-gradient(circle,rgba(0,26,75,0.06)_0%,transparent_65%)]"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-8 sm:px-10 lg:py-10">
         <Reveal>
           <div className="mb-14 text-center lg:mb-16">
             <h2 className="font-heading text-h2 font-bold text-navy">

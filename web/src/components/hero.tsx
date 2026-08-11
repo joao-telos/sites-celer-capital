@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 pt-32 pb-20 text-center sm:px-10">
+    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 pt-32 pb-14 text-center sm:px-10">
       <GradientBackground gradient={HERO_GRADIENT} />
 
       <div
