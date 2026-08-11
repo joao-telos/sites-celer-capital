@@ -143,6 +143,10 @@ Isso muda a regra de "convite de baixo atrito, sem formulário" que valia até a
 
 A mudança é deliberada e do cliente: a faixa de faturamento qualifica o lead antes do primeiro contato. **O caminho de baixo atrito não foi removido:** o CTA Final em WhatsApp continua logo abaixo, para quem não quiser preencher. Quem for medir conversão deve comparar os dois, não só o formulário.
 
+**O formulário passou a ser um embed do Tally (2026-08-06).** A implementação própria — Server Action, validação de CNPJ, gravação em planilha do Google e notificação por Resend — foi construída e depois removida, porque o cliente montou o mesmo formulário no Tally, que já resolve armazenamento, notificação e acesso compartilhado. O código está no histórico do git até o commit `f0e29d3`, caso um dia se queira sair do Tally.
+
+Consequência para quem for mexer: **os campos, os rótulos e as sete faixas de faturamento não estão mais neste repositório.** Eles vivem no painel do Tally, no formulário `XxAJGL`. Mudança de campo é lá, não aqui. O que o site controla é a casca da seção: título, subtítulo, largura, wash e o aviso de uso dos dados.
+
 ### Prohibited Terms (Termos proibidos)
 - "instituição financeira" (linguagem genérica do PDF — não reflete o modelo de securitizadora, ver correção de escopo acima)
 - "assessoria de investimentos" (Celer não gerencia investimentos de terceiros)
@@ -433,7 +437,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Nenhuma referência ao latim ("Celer = veloz") — testado e descartado
 - [ ] Linguagem testável pelo "teste do Rodrigo" (seção 2): concreto, sem financês, diferenciado, sustentável na prática
 - [ ] "Nome sujo"/restrição bancária tratado com respeito — nunca como acusação ao cliente
-- [ ] Formulário com aviso de uso dos dados visível abaixo do botão. **Pendência conhecida:** o site não tem página de política de privacidade. O aviso curto foi decisão consciente do cliente em 2026-08-05, ciente de que compliance provavelmente pedirá política completa, base legal declarada e política de retenção
+- [ ] Formulário com aviso de uso dos dados visível abaixo do embed. **Pendência conhecida:** o site não tem página de política de privacidade. O aviso curto foi decisão consciente do cliente em 2026-08-05, ciente de que compliance provavelmente pedirá política completa, base legal declarada e política de retenção. Com o Tally, os dados de quem preenche passam a ficar hospedados num terceiro, o que reforça a pendência em vez de resolvê-la
 
 ### Estrutural
 - [ ] CTA final sempre aponta para WhatsApp (`api.whatsapp.com/send?phone=...&text=...`), nunca formulário

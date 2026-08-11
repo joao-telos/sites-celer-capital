@@ -1,5 +1,7 @@
 # Formulário de captação — Implementation Plan
 
+> **SUPERADO EM 2026-08-06. Não execute este plano.** O formulário virou um embed do Tally e todo o código descrito aqui foi removido do repositório. Ver o aviso no topo do spec correspondente.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Adicionar um formulário de captação qualificada acima do CTA Final, que grava cada envio numa planilha do Google e dispara um e-mail.

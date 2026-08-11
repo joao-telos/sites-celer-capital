@@ -1,6 +1,8 @@
 # Formulário de captação de leads
 
-**Data:** 2026-08-05 · **Status:** Design aprovado pelo usuário, pronto para plano de implementação.
+> **SUPERADO EM 2026-08-06. Não implemente nada daqui.** O cliente montou o formulário no Tally, e a seção `#formulario` passou a ser um embed. Toda a arquitetura descrita abaixo — Server Action, validação de CNPJ, Google Sheets, Resend, honeypot — foi construída, revisada e depois removida. O código vive no histórico do git até o commit `f0e29d3`. O documento fica pelo registro das decisões, sobretudo a ressalva do CNPJ alfanumérico e a exceção ao manual de marca, que continuam valendo.
+
+**Data:** 2026-08-05 · **Status:** Superado pelo embed do Tally em 2026-08-06.
 
 ## Contexto
 
