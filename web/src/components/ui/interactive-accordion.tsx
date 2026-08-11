@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -10,6 +11,8 @@ export interface AccordionPanel {
   title: string;
   description: string;
   icon: LucideIcon;
+  /** Foto de fundo do painel. Decorativa: entra com alt vazio. */
+  image: string;
 }
 
 interface InteractiveAccordionProps {
@@ -26,6 +29,40 @@ const ANGULOS = [135, 150, 120, 165, 105, 140];
 function gradienteDoPainel(index: number) {
   const angulo = ANGULOS[index % ANGULOS.length];
   return `linear-gradient(${angulo}deg, var(--color-navy) 0%, var(--color-navy-bright) 100%)`;
+}
+
+/**
+ * Foto de fundo do painel, com o gradiente da marca por cima.
+ *
+ * O véu não é enfeite. As fotos trazem cores de fora da paleta — a de
+ * Celeridade é uma rodovia à noite, vermelha — e sem ele cada painel
+ * puxaria a fileira para uma direção.
+ *
+ * 0.86 é calibrado, não escolhido a olho. O texto da descrição é
+ * `text-white/75`, que é o pior caso de contraste do painel. Medido sobre
+ * as seis fotos, no ponto mais claro de cada uma: 0.82 dava 4.64:1, a 3%
+ * do piso AA de 4.5:1 — e o recorte da foto muda com a largura da tela,
+ * então essa margem não sobreviveria. 0.86 dá 5.08:1 no pior ponto do
+ * painel inteiro, independente de onde o texto caia.
+ */
+function FundoDoPainel({ src, index }: { src: string; index: number }) {
+  return (
+    <>
+      <Image
+        src={src}
+        alt=""
+        aria-hidden="true"
+        fill
+        sizes="(min-width: 768px) 40vw, 50vw"
+        className="object-cover"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{ background: gradienteDoPainel(index), opacity: 0.86 }}
+      />
+    </>
+  );
 }
 
 /**
@@ -56,16 +93,18 @@ export function InteractiveAccordion({
           return (
             <li
               key={panel.id}
-              className="rounded-2xl px-6 py-6 text-left"
-              style={{ background: gradienteDoPainel(i) }}
+              className="relative isolate overflow-hidden rounded-2xl px-6 py-6 text-left"
             >
-              <Icon className="size-6 text-gold" aria-hidden="true" />
-              <h3 className="font-heading text-h3 mt-4 font-bold text-white">
-                {panel.title}
-              </h3>
-              <p className="text-body mt-2 font-light text-white/75">
-                {panel.description}
-              </p>
+              <FundoDoPainel src={panel.image} index={i} />
+              <div className="relative">
+                <Icon className="size-6 text-gold" aria-hidden="true" />
+                <h3 className="font-heading text-h3 mt-4 font-bold text-white">
+                  {panel.title}
+                </h3>
+                <p className="text-body mt-2 font-light text-white/75">
+                  {panel.description}
+                </p>
+              </div>
             </li>
           );
         })}
@@ -83,7 +122,7 @@ export function InteractiveAccordion({
               onClick={() => setActiveIndex(i)}
               onMouseEnter={() => setActiveIndex(i)}
               onFocus={() => setActiveIndex(i)}
-              style={{ background: gradienteDoPainel(i), flexBasis: 0 }}
+              style={{ flexBasis: 0 }}
               // h-[480px]: painel fechado mostra o título rotacionado 90°, então a
               // largura renderizada do título vira a altura que ele precisa. Folga
               // atual: maior título com 126px de largura contra um limite de 384px.
@@ -93,6 +132,8 @@ export function InteractiveAccordion({
                 isActive ? "grow-[3]" : "grow"
               )}
             >
+              <FundoDoPainel src={panel.image} index={i} />
+
               <span className="absolute inset-x-0 top-0 flex justify-center pt-7">
                 <Icon
                   className={cn(

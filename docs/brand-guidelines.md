@@ -54,13 +54,27 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
    momentos escuros da página continua valendo, porque a seção em si fica no
    wash claro.
 
+## ⚠️ Rodada 2026-08-06 — fotos, e Soluções vira "Para quem" (ler antes de implementar UI)
+
+1. **A seção "Soluções" foi removida.** Era o diagrama de feixes animados ligando duplicatas, notas fiscais, cheques e contratos até a Celer e depois até o cliente. Saiu inteira, junto com o componente `AnimatedBeam`.
+
+   **Os quatro tipos de recebível não se perderam:** o passo 1 da seção Processo já os nomeia ("nota fiscal, cheque pré, duplicata"). Se a página voltar a precisar de um catálogo explícito, é lá que ele encosta — não numa seção nova.
+
+2. **Entrou "Para quem" (`#publico`) no mesmo lugar**, com copy do cliente, verbatim. Herdou o `surface-wash-down` da seção que saiu, para não rederivar a alternância até o CTA Final.
+
+   A copy traz um travessão, que este manual desaconselha em texto visível. **Copy do cliente ganha da regra de estilo** — a regra vale para texto que nós escrevemos.
+
+3. **O link "Soluções" do menu virou "Para quem"**, apontando para `#publico`.
+
+4. **As fotos entraram.** Ver "Fotografia" na seção 6, incluindo a exceção à regra de não usar banco de imagens e o método de calibrar o véu por contraste.
+
 ## ⚠️ Rodada 2026-08-01 — reestruturação visual, Números e tagline (ler antes de implementar UI)
 
 Rodada que mexe na ordem da página e em duas seções específicas — não no
 sistema de gradientes, que já ficou fechado na rodada anterior:
 
 1. **Seção "Para Quem" removida e página reordenada.** Ordem atual: Hero,
-   Processo, Sobre, Números, Valores, Soluções, Atendimento, Formulário, CTA
+   Processo, Sobre, Números, Valores, Para quem, Atendimento, Formulário, CTA
    Final. Isso
    torna histórico o item 5 do pivô v3 (2026-07-12, acima), que descreve o
    conteúdo de "Para Quem" — a seção não existe mais no site.
@@ -246,7 +260,7 @@ A escala vive em tokens no `@theme` do `globals.css`, não em valores espalhados
 | `text-caption` | botões, labels em caixa alta | 12 → 13 | Roboto |
 | `text-body` | corpo de texto | 16 → 17 | Roboto |
 | `text-lead` | parágrafo de destaque | 19 → 21 | Roboto |
-| `text-node` | nó do diagrama de Soluções | 12 → 22 | Roboto |
+| `text-node` | ~~nó do diagrama de Soluções~~ — sem uso desde 2026-08-06, quando a seção saiu | 12 → 22 | Roboto |
 | `text-h3` | H3 de card | 20 → 22 | Roboto e Coolvetica |
 | `text-h2` | título de seção | 32 → 44 | Coolvetica |
 | `text-stat` | numeral da seção Números | 48 → 68 | Coolvetica |
@@ -295,7 +309,7 @@ Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os p
 - Tamanho mínimo digital: ~120px de largura para o lockup horizontal completo; 32px para o ícone isolado (navbar compilada, favicon)
 
 ### Tagline
-**"Conectando Valor, Crescendo Juntos"** — desde 2026-08-01 é uma **seção própria** da página (entre Soluções e o CTA Final), em caixa alta e tipografia grande, com as palavras revelando uma a uma no scroll. Saiu do rodapé na mesma mudança: nos dois lugares, apareceria duas vezes separadas apenas pelo CTA Final.
+**"Conectando Valor, Crescendo Juntos"** — desde 2026-08-01 é uma **seção própria** da página (entre Para quem e o Formulário), em caixa alta e tipografia grande, com as palavras revelando uma a uma no scroll. Saiu do rodapé na mesma mudança: nos dois lugares, apareceria duas vezes separadas apenas pelo CTA Final.
 
 Continua sendo assinatura de marca, não argumento de conversão — não usar como headline de venda. Em materiais fora do site (apresentações, peças institucionais), o uso antigo continua válido: itálico, entre aspas, em `gold-dark` sobre fundo claro.
 
@@ -311,7 +325,7 @@ Duas faixas, com critério:
 
 | Faixa | Largura | Onde |
 |---|---|---|
-| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Soluções, Atendimento, Formulário |
+| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Para quem, Atendimento, Formulário |
 | Texto corrido | 768px (`max-w-3xl`) | CTA Final |
 
 Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
@@ -322,13 +336,27 @@ Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 
 
 **Cuidado com limites internos.** Alargar o container não adianta se o conteúdo tem o próprio teto por dentro. A seção Processo tinha um `max-w-[440px]` no texto de cada passo que precisou sair junto, senão a seção ficaria larga e vazia.
 
-### Slots de fotografia
+### Fotografia (2026-08-06)
 
-Duas seções têm espaço reservado para foto que o cliente ainda não forneceu: Processo (ao lado da linha do tempo) e Sobre (dentro da caixa navy). Ambos usam o componente `PhotoSlot` (`components/ui/photo-slot.tsx`), que renderiza um placeholder visível, com borda tracejada e a descrição do que a foto precisa mostrar. O componente tem uma prop `tone` (`light` | `dark`) que troca a paleta interna conforme o fundo onde o slot vive.
+O cliente forneceu oito fotos e elas estão no ar. **Os slots de placeholder acabaram**, e o componente `PhotoSlot` foi removido.
 
-O placeholder é deliberadamente visível. Um buraco declarado é mais honesto que um bloco cinza mudo, e a decisão de 2026-07-31 de não usar banco de imagens continua valendo: o manual aponta o visual próprio como o diferencial real da marca frente aos concorrentes, e stock genérico trabalha contra isso.
+| Onde | Arquivo | Tratamento |
+|---|---|---|
+| Processo, ao lado da linha do tempo | `dono.webp` | Recorte sem fundo dentro de um quadrado navy, dissolvendo na base |
+| Sobre, a caixa inteira | `sobre-fundo.webp` | Fundo da caixa, desfoque de 3px, véu do gradiente da marca a 0.88 |
+| Valores, os seis painéis | `celeridade`, `confianca`, `compromisso`, `parceria`, `crescimento`, `excelencia` | Fundo do painel, véu do gradiente a 0.86 |
 
-Os painéis da seção Valores também foram desenhados para receber foto no lugar do gradiente, se o cliente fornecer.
+**A regra de 2026-07-31 de não usar banco de imagens caiu.** As oito fotos são de banco. O raciocínio original continua de pé — o visual próprio é o diferencial da marca, e stock genérico trabalha contra isso — mas quem decide o que entra no site é o cliente, e ele escolheu estas. Fica registrado como exceção consciente, não como regra revogada: **fotografia própria continua sendo o alvo**, e substituir estas quando existir material real é melhoria, não retrabalho.
+
+Duas consequências que valem para qualquer foto que entrar depois:
+
+**Toda foto passa por véu do gradiente da marca.** Não é enfeite. As fotos trazem cor de fora da paleta fechada — a de Celeridade é uma rodovia à noite, vermelha — e sem véu cada peça puxa a página para uma direção diferente.
+
+**A opacidade do véu é calibrada por contraste, não escolhida a olho.** O pior caso é sempre o texto `text-white/75` sobre o ponto mais claro da foto. Nos painéis de Valores, 0.82 dava 4.64:1, a 3% do piso AA de 4.5:1 — e o recorte da foto muda com a largura da tela, então essa margem não sobreviveria. 0.86 dá 5.08:1 no pior ponto do painel inteiro. Quem trocar uma foto **precisa refazer essa medição**: o número depende da imagem, não do componente.
+
+**Recorte de fundo depende de canal alfa.** `dono.webp` tem transparência, e o quadrado navy é o fundo que a foto perdeu. O otimizador do Next devolve JPEG para navegador que não anuncia WebP, e JPEG não tem alfa — nesse caminho o recorte viraria um bloco preto. O caminho é inalcançável hoje porque a máscara do fade tem o mesmo suporte de navegador que o WebP, mas a garantia é essa e não outra.
+
+Os arquivos originais em PNG somam 32 MB e **não entram no repositório** — ficam com o cliente. O que está versionado é a saída em WebP, 356 KB no total, em `web/public/fotos/`.
 
 ### Botões — todos pill (`rounded-full`), pivô v2
 | Variante | Uso | Estilo |
@@ -378,7 +406,7 @@ Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é f
 alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
 início da próxima, então a emenda fica invisível e o scroll lê como uma
 superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
-Sobre (up), Números (down), Valores (up), Soluções (down), Atendimento (up),
+Sobre (up), Números (down), Valores (up), Para quem (down), Atendimento (up),
 Formulário (down).
 **Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
 duas `down` seguidas cria uma faixa visível na emenda.

@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
-import { PhotoSlot } from "@/components/ui/photo-slot";
+import { RetratoRecortado } from "@/components/ui/retrato-recortado";
 
 const STEPS = [
   {
@@ -67,9 +67,10 @@ export function Processo() {
             ))}
           </ol>
 
-          <PhotoSlot
-            aspect="aspect-[3/4]"
-            descricao="Retrato de um dono de negócio do perfil da Celer: indústria, metalurgia ou distribuidora. Ambiente real de trabalho, não estúdio."
+          <RetratoRecortado
+            src="/fotos/dono.webp"
+            alt="Dono de empresa segurando um tablet"
+            sizes="(min-width: 1024px) 22rem, 100vw"
             className="lg:sticky lg:top-28"
           />
         </div>

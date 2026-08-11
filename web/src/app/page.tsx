@@ -4,7 +4,7 @@ import { Numeros } from "@/components/numeros";
 import { Processo } from "@/components/processo";
 import { Sobre } from "@/components/sobre";
 import { Valores } from "@/components/valores";
-import { Solucoes } from "@/components/solucoes";
+import { Publico } from "@/components/publico";
 import { Atendimento } from "@/components/atendimento";
 import { CtaFinal } from "@/components/cta-final";
 import { Footer } from "@/components/footer";
@@ -20,7 +20,7 @@ export default function Home() {
         <Sobre />
         <Numeros />
         <Valores />
-        <Solucoes />
+        <Publico />
         <Atendimento />
         <Formulario />
         <CtaFinal />

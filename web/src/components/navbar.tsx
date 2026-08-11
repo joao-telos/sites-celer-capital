@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { href: "#processo", label: "Como funciona" },
   { href: "#sobre", label: "Sobre" },
-  { href: "#solucoes", label: "Soluções" },
+  { href: "#publico", label: "Para quem" },
 ];
 
 // TODO: confirmar com o cliente se esta é a URL definitiva de login da plataforma

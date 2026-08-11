@@ -22,36 +22,42 @@ import {
 const VALORES: AccordionPanel[] = [
   {
     id: "celeridade",
+    image: "/fotos/celeridade.webp",
     title: "Celeridade",
     description: "Agilidade com responsabilidade em cada solução.",
     icon: Zap,
   },
   {
     id: "confianca",
+    image: "/fotos/confianca.webp",
     title: "Confiança",
     description: "Transparência, ética e credibilidade em todas as relações.",
     icon: ShieldCheck,
   },
   {
     id: "compromisso",
+    image: "/fotos/compromisso.webp",
     title: "Compromisso",
     description: "Dedicação para superar expectativas e gerar resultados.",
     icon: Target,
   },
   {
     id: "parceria",
+    image: "/fotos/parceria.webp",
     title: "Parceria",
     description: "Construímos relações sólidas que impulsionam resultados.",
     icon: Handshake,
   },
   {
     id: "crescimento",
+    image: "/fotos/crescimento.webp",
     title: "Crescimento",
     description: "Evoluímos junto com nossos clientes e parceiros.",
     icon: TrendingUp,
   },
   {
     id: "excelencia",
+    image: "/fotos/excelencia.webp",
     title: "Excelência",
     description: "Qualidade e melhoria contínua em tudo o que fazemos.",
     icon: Award,

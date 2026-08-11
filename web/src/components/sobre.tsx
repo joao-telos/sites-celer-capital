@@ -1,6 +1,7 @@
+import Image from "next/image";
+
 import { Reveal } from "@/components/motion/reveal";
 import { SOBRE_BOX_GRADIENT } from "@/components/ui/gradient-background";
-import { PhotoSlot } from "@/components/ui/photo-slot";
 
 /*
   Missão e Visão agora são caixas cream sólidas dentro da caixa navy. Os
@@ -37,11 +38,39 @@ export function Sobre() {
     <section id="sobre" className="surface-wash-up">
       <div className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-16">
         <Reveal>
-          <div
-            className="rounded-[2rem] px-8 py-12 sm:px-12 lg:px-14 lg:py-14"
-            style={{ background: SOBRE_BOX_GRADIENT }}
-          >
-            <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+          <div className="relative isolate overflow-hidden rounded-[2rem] px-8 py-12 sm:px-12 lg:px-14 lg:py-14">
+            {/*
+              A foto é fundo, não conteúdo: aria-hidden e sem alt útil. O
+              desfoque é sutil de propósito — o suficiente para a textura do
+              aperto de mão não competir com o texto, e não tanto que a
+              imagem vire mancha.
+
+              scale-105 existe por causa do blur: o desfoque puxa pixels de
+              fora da borda, e sem a folga aparece uma faixa clara nos
+              quatro lados da caixa.
+            */}
+            <Image
+              src="/fotos/sobre-fundo.webp"
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="(min-width: 1280px) 1216px, 100vw"
+              className="scale-105 object-cover blur-[3px]"
+            />
+
+            {/*
+              O gradiente da marca vira véu por cima da foto, em vez de
+              fundo sólido. Em 0.88 o texto branco continua com o mesmo
+              contraste de antes: o que passa é a forma da imagem, não o
+              brilho dela.
+            */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0"
+              style={{ background: SOBRE_BOX_GRADIENT, opacity: 0.88 }}
+            />
+
+            <div className="relative grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
               <div className="flex flex-col gap-6">
                 <div className="text-left">
                   <h2 className="font-heading text-h2 font-bold text-white">
@@ -58,12 +87,6 @@ export function Sobre() {
                     negócio.
                   </p>
                 </div>
-
-                <PhotoSlot
-                  aspect="aspect-[16/10]"
-                  tone="dark"
-                  descricao="Equipe da Celer ou atendimento acontecendo. Precisa funcionar sobre fundo escuro."
-                />
               </div>
 
               <div className="flex flex-col gap-4">
