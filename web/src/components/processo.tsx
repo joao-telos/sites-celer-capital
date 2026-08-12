@@ -3,25 +3,26 @@ import { RetratoRecortado } from "@/components/ui/retrato-recortado";
 
 const STEPS = [
   {
-    title: "Seu cliente fecha o contrato com parcelamento",
-    text: "Você vende a prazo: nota fiscal, cheque pré, duplicata. O pagamento virá em 30, 60 ou 90 dias. O recebível existe, o caixa ainda não.",
+    title: "Você vende a prazo",
+    text: "Seu cliente compra e paga em 30, 60 ou 90 dias. A venda está feita, a nota está emitida, o dinheiro ainda não chegou.",
   },
   {
-    title: "Você cede os recebíveis à Celer",
-    text: "Nos envia os documentos pelo WhatsApp. Analisamos a qualidade dos recebíveis, não o seu histórico bancário.",
+    title: "Manda os documentos pelo WhatsApp",
+    text: "Duplicata, nota fiscal ou cheque, o que você tiver da venda. A análise é da qualidade do recebível e de quem vai pagar por ele.",
   },
   {
     title: "Proposta em horas, não em dias",
-    text: "Você recebe a proposta com taxa, prazo e valor líquido. Transparente. Se fizer sentido, confirma na hora.",
+    text: "Taxa, prazo e valor líquido na mesma mensagem. Esse é o valor final: não tem taxa de análise, taxa de cadastro nem encargo aparecendo no fechamento. Se fizer sentido, você confirma na hora.",
   },
   {
-    title: "Capital na sua conta",
-    text: "O valor é transferido. Seu negócio volta a ter liquidez para operar, crescer ou aproveitar oportunidades.",
+    title: "O dinheiro na sua conta",
+    text: "Operação confirmada até meio-dia, transferência no mesmo dia. Seu caixa volta a rodar: paga o fornecedor, compra o material, aceita o pedido grande.",
   },
   {
-    // TODO: confirmar com o cliente se a cobrança do devedor no vencimento é feita pela Celer
-    title: "A Celer cuida do restante",
-    text: "No vencimento, cobramos diretamente do seu cliente. Você não precisa se preocupar com a gestão da cobrança.",
+    // A pendência "confirmar se a cobrança no vencimento é feita pela Celer"
+    // foi respondida pelo cliente em 2026-08-06: é.
+    title: "A cobrança é com a gente",
+    text: "No vencimento, a Celer cobra direto do seu cliente. Você não entra nessa conversa.",
   },
 ];
 

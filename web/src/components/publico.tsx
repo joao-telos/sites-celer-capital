@@ -9,8 +9,7 @@ import { Reveal } from "@/components/motion/reveal";
   então trocar o sentido aqui obrigaria a rederivar a alternância até o
   CTA Final.
 
-  A copy é do cliente e é verbatim. Inclusive o travessão, que o manual
-  desaconselha em texto visível: copy do cliente ganha da regra de estilo.
+  A copy é do cliente e é verbatim.
 */
 export function Publico() {
   return (
@@ -40,9 +39,9 @@ export function Publico() {
             Quem chega até a Celer já fechou o pedido, já emitiu a nota e já
             sentiu o prazo de 90 dias apertar o caixa. São donos de indústria e
             distribuidora que resolvem tudo sem comitê, sem sócio pra dividir a
-            decisão, sem tempo pra explicar o negócio duas vezes. A Celer
-            entende que esse dinheiro já é seu — o trabalho é fazer ele chegar
-            antes que o problema apareça.
+            decisão, sem tempo pra explicar o negócio duas vezes. Aqui você
+            explica uma vez, fala direto com quem analisa e resolve pelo
+            WhatsApp.
           </p>
         </Reveal>
       </div>

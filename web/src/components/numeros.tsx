@@ -16,25 +16,25 @@ const NUMEROS = [
     prefixo: "",
     target: 30,
     sufixo: "+",
-    label: "anos de experiência no mercado de recebíveis",
+    label: "anos de experiência dos sócios no mercado de recebíveis",
   },
   {
     prefixo: "",
     target: 9,
     sufixo: "",
-    label: "anos de empresa",
+    label: "anos de Celer Capital",
   },
   {
     prefixo: "R$ ",
     target: 1,
     sufixo: " bi+",
-    label: "antecipado em 9 anos de operação",
+    label: "antecipado desde 2017",
   },
   {
     prefixo: "",
     target: 100,
     sufixo: "+",
-    label: "empresas parceiras atendidas",
+    label: "indústrias e distribuidoras atendidas",
   },
 ];
 

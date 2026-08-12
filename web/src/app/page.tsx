@@ -5,6 +5,7 @@ import { Processo } from "@/components/processo";
 import { Sobre } from "@/components/sobre";
 import { Valores } from "@/components/valores";
 import { Publico } from "@/components/publico";
+import { Faq } from "@/components/faq";
 import { Atendimento } from "@/components/atendimento";
 import { CtaFinal } from "@/components/cta-final";
 import { Footer } from "@/components/footer";
@@ -22,8 +23,9 @@ export default function Home() {
         <Valores />
         <Publico />
         <Atendimento />
-        <Formulario />
+        <Faq />
         <CtaFinal />
+        <Formulario />
       </main>
       <Footer />
     </>

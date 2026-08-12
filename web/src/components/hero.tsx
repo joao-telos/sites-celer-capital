@@ -7,6 +7,7 @@ import {
   HERO_GRADIENT,
 } from "@/components/ui/gradient-background";
 import { buttonVariants } from "@/components/ui/button";
+import { WHATSAPP_URL } from "@/lib/contato";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -35,7 +36,7 @@ export function Hero() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://wa.me/5541995699494?text=Ol%C3%A1%2C%20tudo%20bem%3F%0AVim%20do%20site%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Celer%20Capital!"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={cn(

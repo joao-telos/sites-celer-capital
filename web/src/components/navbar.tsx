@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { useScrolled } from "@/hooks/use-scrolled";
+import { WHATSAPP_URL } from "@/lib/contato";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -87,7 +88,7 @@ export function Navbar() {
             Login
           </a>
           <a
-            href="https://wa.me/5541995699494?text=Ol%C3%A1%2C%20tudo%20bem%3F%0AVim%20do%20site%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Celer%20Capital!"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={cn(

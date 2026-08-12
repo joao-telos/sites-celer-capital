@@ -13,11 +13,11 @@ import { SOBRE_BOX_GRADIENT } from "@/components/ui/gradient-background";
 const PILARES = [
   {
     title: "Missão",
-    text: "Impulsionar empresas por meio da antecipação de recebíveis e de soluções financeiras inteligentes, oferecendo agilidade, segurança e compromisso para fortalecer negócios, gerar oportunidades e construir parcerias duradouras.",
+    text: "Transformar vendas já realizadas em capital disponível, para que pequenas e médias empresas não precisem interromper a operação por causa de um prazo de pagamento. Fazemos isso com processo curto, resposta rápida e uma pessoa acompanhando cada operação do começo ao fim.",
   },
   {
     title: "Visão",
-    text: "Ser a principal parceira financeira das empresas brasileiras, sendo referência em antecipação de recebíveis e reconhecida pela confiança, agilidade e excelência, ampliando nossa atuação com soluções financeiras estratégicas que impulsionem o crescimento sustentável de nossos clientes.",
+    text: "Ser a primeira empresa em que o dono de indústria e de distribuidora do Paraná pensa quando o caixa aperta. Crescer junto com essas empresas, ampliando o que conseguimos oferecer conforme elas crescem, sem abrir mão do atendimento direto que nos trouxe até aqui.",
   },
 ];
 
@@ -81,10 +81,18 @@ export function Sobre() {
                     negócios.
                   </p>
                   <p className="text-body mt-5 max-w-[68ch] font-light text-white/70">
-                    Sua empresa não precisa esperar 30, 60 ou 90 dias para receber
-                    pelas vendas já realizadas. Com a Celer, suas vendas a prazo
-                    se transformam em capital imediato para impulsionar o seu
-                    negócio.
+                    A Celer nasceu em Curitiba, em 2017, dentro de um problema
+                    que os sócios viram de perto ao longo de mais de 30 anos no
+                    mercado de recebíveis: empresa saudável, com pedido fechado
+                    e nota emitida, parada porque o banco olha o score e não
+                    olha a venda.
+                  </p>
+                  <p className="text-body mt-4 max-w-[68ch] font-light text-white/70">
+                    Desde então foram mais de R$ 1 bilhão antecipados para
+                    indústrias e distribuidoras que faturam bem e ainda assim
+                    ficam sem caixa no meio do mês. A operação continua a mesma
+                    de quando começamos: você fala com uma pessoa, não com um
+                    formulário.
                   </p>
                 </div>
               </div>

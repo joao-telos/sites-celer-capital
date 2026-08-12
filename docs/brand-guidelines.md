@@ -54,6 +54,26 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
    momentos escuros da página continua valendo, porque a seção em si fica no
    wash claro.
 
+## ⚠️ Rodada 2026-08-06b — copy do cliente, FAQ e o CTA no meio (ler antes de implementar UI)
+
+Rodada de copy: o cliente reescreveu Processo, Sobre, Números, Valores e o fim de "Para quem", e mandou uma seção nova de FAQ.
+
+1. **O CTA Final deixou de ser a última seção.** A ordem agora é `… Para quem → tagline → FAQ → CTA Final → Formulário → Footer`.
+
+   Isso muda a regra dos **dois bookends escuros**. O Hero continua abrindo a página, mas o bloco escuro do fim passou a ter uma seção clara depois dele. A regra do checklist — "CTA final sempre aponta para WhatsApp, nunca formulário" — **continua intacta**: o CTA é WhatsApp, e o formulário é o caminho alternativo logo abaixo, com a copy "Prefere que a gente ligue?".
+
+   O wash fecha assim: o FAQ termina em cream, o CTA escuro é corte duro dos dois lados, e o Formulário é `surface-wash-down`, começando branco e terminando em cream — que é a cor do `body`, onde o rodapé se apoia.
+
+2. **Seção FAQ nova (`#faq`)**, seis perguntas, `surface-wash-down`. Usa `<details>` nativo, não acordeão em React: abre sem JavaScript, já vem com teclado e papel de acessibilidade corretos, e o Ctrl+F do navegador acha texto dentro de item fechado. Numa seção que existe para responder objeção, ser encontrável vale mais que a animação.
+
+3. **O link do WhatsApp virou constante** em `web/src/lib/contato.ts`. Estava escrito inline em três componentes, e a troca de número desta rodada obrigou a caçar as três cópias. Uma cópia esquecida manda o visitante para um telefone que não atende, sem erro nenhum que denuncie. **Nunca mais escrever o link inline.**
+
+4. **Números que eram placeholder agora vêm do cliente e são verbatim:** fundada em Curitiba em 2017, 30+ anos de experiência dos sócios, 9 anos de Celer, R$ 1 bi+ antecipado desde 2017, 100+ indústrias e distribuidoras atendidas.
+
+5. **Pendência fechada:** a cobrança do devedor no vencimento **é** feita pela Celer. O passo 5 do Processo agora afirma isso, e o `TODO` que marcava a dúvida saiu do código.
+
+**Armadilha de medição registrada.** Ao conferir no navegador que o mais do FAQ vira xis ao abrir, `getComputedStyle(icone).rotate` logo depois de abrir devolve `0deg` — o primeiro quadro da transição, não o valor final. Desligue a transição antes de medir. E não confie em varrer `document.styleSheets` para concluir que uma regra não existe: em dev, as regras do Tailwind não aparecem nessa enumeração mesmo quando estão aplicadas.
+
 ## ⚠️ Rodada 2026-08-06 — fotos, e Soluções vira "Para quem" (ler antes de implementar UI)
 
 1. **A seção "Soluções" foi removida.** Era o diagrama de feixes animados ligando duplicatas, notas fiscais, cheques e contratos até a Celer e depois até o cliente. Saiu inteira, junto com o componente `AnimatedBeam`.
@@ -82,7 +102,7 @@ Rodada que mexe na ordem da página e em duas seções específicas — não no
 sistema de gradientes, que já ficou fechado na rodada anterior:
 
 1. **Seção "Para Quem" removida e página reordenada.** Ordem atual: Hero,
-   Processo, Sobre, Números, Valores, Para quem, Atendimento, Formulário, CTA
+   Processo, Sobre, Números, Valores, Para quem, Atendimento, FAQ, CTA Final, Formulário
    Final. Isso
    torna histórico o item 5 do pivô v3 (2026-07-12, acima), que descreve o
    conteúdo de "Para Quem" — a seção não existe mais no site.
@@ -317,7 +337,7 @@ Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os p
 - Tamanho mínimo digital: ~120px de largura para o lockup horizontal completo; 32px para o ícone isolado (navbar compilada, favicon)
 
 ### Tagline
-**"Conectando Valor, Crescendo Juntos"** — desde 2026-08-01 é uma **seção própria** da página (entre Para quem e o Formulário), em caixa alta e tipografia grande, com as palavras revelando uma a uma no scroll. Saiu do rodapé na mesma mudança: nos dois lugares, apareceria duas vezes separadas apenas pelo CTA Final.
+**"Conectando Valor, Crescendo Juntos"** — desde 2026-08-01 é uma **seção própria** da página (entre Para quem e o FAQ), em caixa alta e tipografia grande, com as palavras revelando uma a uma no scroll. Saiu do rodapé na mesma mudança: nos dois lugares, apareceria duas vezes separadas apenas pelo CTA Final.
 
 Continua sendo assinatura de marca, não argumento de conversão — não usar como headline de venda. Em materiais fora do site (apresentações, peças institucionais), o uso antigo continua válido: itálico, entre aspas, em `gold-dark` sobre fundo claro.
 
@@ -333,7 +353,7 @@ Duas faixas, com critério:
 
 | Faixa | Largura | Onde |
 |---|---|---|
-| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Para quem, Atendimento, Formulário |
+| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Para quem, Atendimento, FAQ, Formulário |
 | Texto corrido | 768px (`max-w-3xl`) | CTA Final |
 
 Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
@@ -414,7 +434,7 @@ Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é f
 alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
 início da próxima, então a emenda fica invisível e o scroll lê como uma
 superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
-Sobre (up), Números (down), Valores (up), Para quem (down), Atendimento (up),
+Sobre (up), Números (down), Valores (up), Para quem (down), Atendimento (up), FAQ (down),
 Formulário (down).
 **Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
 duas `down` seguidas cria uma faixa visível na emenda.

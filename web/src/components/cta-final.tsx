@@ -2,6 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
+import { WHATSAPP_URL } from "@/lib/contato";
 import { cn } from "@/lib/utils";
 import {
   CTA_GRADIENT,
@@ -27,11 +28,11 @@ export function CtaFinal() {
             Quanto capital está parado nos seus recebíveis agora?
           </h2>
           <p className="text-body mt-5 max-w-[68ch] font-light text-white/70">
-            Manda uma mensagem. Analisamos sem compromisso e respondemos
-            rápido com o que é possível fazer.
+            Manda os números pelo WhatsApp. A gente analisa sem compromisso
+            e responde com o que dá para fazer.
           </p>
           <a
-            href="https://wa.me/5541995699494?text=Ol%C3%A1%2C%20tudo%20bem%3F%0AVim%20do%20site%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Celer%20Capital!"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
@@ -43,7 +44,7 @@ export function CtaFinal() {
             Falar pelo WhatsApp
           </a>
           <p className="text-micro mt-5 tracking-wider text-white/70 uppercase">
-            Sem compromisso · Sem consulta de crédito · Resposta rápida
+            Sem compromisso · Resposta no mesmo dia
           </p>
         </div>
       </Reveal>
