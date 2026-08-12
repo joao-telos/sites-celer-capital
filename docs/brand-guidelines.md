@@ -187,7 +187,7 @@ A mudança é deliberada e do cliente: a faixa de faturamento qualifica o lead a
 
 **O formulário passou a ser um embed do Tally (2026-08-06).** A implementação própria — Server Action, validação de CNPJ, gravação em planilha do Google e notificação por Resend — foi construída e depois removida, porque o cliente montou o mesmo formulário no Tally, que já resolve armazenamento, notificação e acesso compartilhado. O código está no histórico do git até o commit `f0e29d3`, caso um dia se queira sair do Tally.
 
-Consequência para quem for mexer: **os campos, os rótulos e as sete faixas de faturamento não estão mais neste repositório.** Eles vivem no painel do Tally, no formulário `XxAJGL`. Mudança de campo é lá, não aqui. O que o site controla é a casca da seção: título, subtítulo, largura, wash e o aviso de uso dos dados.
+Consequência para quem for mexer: **os campos, os rótulos e as sete faixas de faturamento não estão mais neste repositório.** Eles vivem no painel do Tally, no formulário `XxAJGL`. Mudança de campo é lá, não aqui. O que o site controla é a casca da seção: título, subtítulo, largura e wash.
 
 ### Prohibited Terms (Termos proibidos)
 - "instituição financeira" (linguagem genérica do PDF — não reflete o modelo de securitizadora, ver correção de escopo acima)
@@ -493,7 +493,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] Nenhuma referência ao latim ("Celer = veloz") — testado e descartado
 - [ ] Linguagem testável pelo "teste do Rodrigo" (seção 2): concreto, sem financês, diferenciado, sustentável na prática
 - [ ] "Nome sujo"/restrição bancária tratado com respeito — nunca como acusação ao cliente
-- [ ] Formulário com aviso de uso dos dados visível abaixo do embed. **Pendência conhecida:** o site não tem página de política de privacidade. O aviso curto foi decisão consciente do cliente em 2026-08-05, ciente de que compliance provavelmente pedirá política completa, base legal declarada e política de retenção. Com o Tally, os dados de quem preenche passam a ficar hospedados num terceiro, o que reforça a pendência em vez de resolvê-la
+- [ ] **Pendência conhecida, e agora sem nenhuma mitigação na página:** o site não tem política de privacidade, e o aviso curto que ficava abaixo do formulário foi removido a pedido do cliente em 2026-08-12. O formulário coleta nome, e-mail, WhatsApp e CNPJ de pessoa identificável, e com o Tally esses dados ficam hospedados num terceiro. Hoje a página não diz nada sobre isso a quem preenche. Decisão do cliente, registrada aqui para não ser redescoberta como surpresa por um compliance
 
 ### Estrutural
 - [ ] CTA final sempre aponta para WhatsApp (`api.whatsapp.com/send?phone=...&text=...`), nunca formulário

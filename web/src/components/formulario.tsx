@@ -76,11 +76,6 @@ export function Formulario() {
                 className="w-full border-0"
               />
             </div>
-
-            <p className="text-caption mt-8 text-center font-light text-navy/65">
-              Seus dados são usados apenas para o contato comercial da Celer
-              Capital.
-            </p>
           </div>
         </Reveal>
       </div>
