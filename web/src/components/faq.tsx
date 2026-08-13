@@ -3,42 +3,29 @@ import { Plus } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 
 /*
-  Seis perguntas, na ordem em que aparecem na cabeça de quem está
-  decidindo. A terceira é onde o cadastro entra sem virar seção e sem
-  prometer nada que não se cumpra.
-
-  Copy do cliente, verbatim.
+  Quatro perguntas, na ordem em que aparecem na cabeça de quem está
+  decidindo. Copy do cliente, verbatim.
 */
 const PERGUNTAS = [
   {
-    pergunta: "Antecipar recebível é a mesma coisa que empréstimo?",
+    pergunta: "Antecipar recebíveis é a mesma coisa que contratar um empréstimo?",
     resposta:
-      "Não. No empréstimo o banco te dá dinheiro novo e você devolve com juros, e isso entra como dívida. Na antecipação você vende para a Celer um crédito que já é seu, de uma venda que já aconteceu. Não entra dívida nova no balanço e não tem IOF.",
+      "Não. São operações diferentes. A principal diferença está na origem do dinheiro: na antecipação, você adianta um valor que já tem a receber por uma venda a prazo, como boletos ou cartões. No empréstimo, você recebe dinheiro do banco e cria uma nova dívida.",
   },
   {
     pergunta: "Preciso ter score alto ou CNPJ sem restrição?",
     resposta:
-      "A análise principal é do recebível e de quem vai pagar por ele. Muita empresa que ouviu não do banco por causa de score consegue operar com a Celer, porque o que sustenta a operação é a venda que você já fez.",
+      "Não necessariamente. Na antecipação, a análise considera principalmente o recebível e o perfil de quem irá pagá-lo. Por isso, empresas que enfrentam dificuldades para obter crédito tradicional podem ter outras alternativas de acesso a recursos por meio da antecipação de recebíveis.",
   },
   {
-    pergunta: "Quanto tempo leva até o dinheiro cair na conta?",
+    pergunta: "Quais recebíveis a Celer antecipa?",
     resposta:
-      "Operação enviada até meio-dia, transferência no mesmo dia. A primeira operação leva um pouco mais, porque envolve o cadastro da empresa. A partir da segunda, é sempre nesse ritmo.",
+      "Duplicatas, cheques, recebíveis de cartão de crédito e outros contratos. Se sua empresa tem valores a receber, fale com a nossa equipe para avaliar a operação.",
   },
   {
-    pergunta: "Que tipo de recebível a Celer aceita?",
+    pergunta: "Meu cliente vai saber que antecipei?",
     resposta:
-      "Duplicata, nota fiscal e cheque de venda B2B. Se você vendeu para outra empresa com prazo de 30 a 120 dias, provavelmente dá para antecipar. Na dúvida, manda no WhatsApp que a gente olha.",
-  },
-  {
-    pergunta: "Preciso dar algum bem em garantia?",
-    resposta:
-      "Não. O recebível é a garantia da operação. Você não assina alienação de imóvel, de veículo nem de patrimônio pessoal.",
-  },
-  {
-    pergunta: "Meu cliente vai saber que eu antecipei?",
-    resposta:
-      "Sim. A cessão do crédito é formalizada e a cobrança passa a ser feita pela Celer no vencimento. É um procedimento comum entre empresas e não muda nada na relação comercial que você já tem com ele.",
+      "Sim. A cessão do crédito é formalizada e a cobrança do recebível passa a ser realizada pela Celer no vencimento. É um procedimento usual em operações de antecipação e não altera as condições comerciais acordadas com seu cliente.",
   },
 ];
 
@@ -56,11 +43,13 @@ const PERGUNTAS = [
  */
 export function Faq() {
   return (
-    <section id="faq" className="surface-wash-down">
+    <section id="faq" className="surface-wash-up">
       <div className="mx-auto max-w-7xl px-6 py-8 sm:px-10 lg:py-10">
         <Reveal>
-          <h2 className="font-heading text-h2 text-center font-bold text-navy">
-            Perguntas que a gente ouve todo dia
+          {/* Caixa alta pela CSS, não digitada no texto — mesmo motivo do
+              título da seção Processo. */}
+          <h2 className="font-heading text-h2 text-center font-bold text-navy uppercase">
+            Principais dúvidas sobre antecipação de recebíveis
           </h2>
         </Reveal>
 

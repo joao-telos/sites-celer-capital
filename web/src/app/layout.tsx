@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 
+import { WhatsappFlutuante } from "@/components/ui/whatsapp-flutuante";
+
 // Coolvetica (display) é carregada via @font-face em globals.css — não é
 // Google Font, então não passa por next/font/google como o Roboto.
 const roboto = Roboto({
@@ -43,6 +45,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
+        <WhatsappFlutuante />
       </body>
     </html>
   );

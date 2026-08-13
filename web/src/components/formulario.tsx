@@ -59,11 +59,15 @@ export function Formulario() {
         <Reveal>
           <div className="mx-auto max-w-2xl">
             <h2 className="font-heading text-h2 text-center font-bold text-navy">
-              Prefere que a gente ligue?
+              Algo está segurando o ritmo da sua operação?
             </h2>
-            <p className="text-body mx-auto mt-5 max-w-[68ch] text-center font-light text-navy/70">
-              Preencha os dados da sua empresa e o time comercial entra em
-              contato.
+            <p className="text-lead mx-auto mt-5 max-w-[62ch] text-center font-light text-navy/70">
+              Seus recebíveis podem se transformar em capital para sua empresa
+              continuar avançando.
+            </p>
+            <p className="text-body mx-auto mt-4 max-w-[62ch] text-center font-light text-navy/70">
+              Informe os dados da sua empresa e nossa equipe entrará em contato
+              para entender sua necessidade.
             </p>
 
             <div className="mt-10">

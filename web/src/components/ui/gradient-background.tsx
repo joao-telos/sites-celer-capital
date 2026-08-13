@@ -1,15 +1,15 @@
 import { cn } from "@/lib/utils";
 
 /*
-  Gradientes de marca dos dois "bookends" escuros da página. Os dois fazem o
-  mesmo movimento horizontal; o do CTA Final é uma oitava mais escuro, para
-  as duas pontas da página rimarem sem ficarem idênticas.
+  Gradiente de marca do bookend escuro da página.
+
+  Eram dois: o Hero e o CTA Final, que rimavam entre si com o mesmo
+  movimento horizontal. O CTA Final saiu em 2026-08-12, quando o
+  fechamento virou formulário, e com ele saiu o `CTA_GRADIENT`. Hoje a
+  página abre escura e fecha clara.
 */
 export const HERO_GRADIENT =
   "linear-gradient(90deg, var(--color-navy) 0%, var(--color-navy-bright) 100%)";
-
-export const CTA_GRADIENT =
-  "linear-gradient(90deg, var(--color-ink) 0%, var(--color-navy) 100%)";
 
 /*
   Gradientes de "caixa" (2026-08-01): mesma ideia dos bookends acima, mas

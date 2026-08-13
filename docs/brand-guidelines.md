@@ -54,6 +54,26 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
    momentos escuros da página continua valendo, porque a seção em si fica no
    wash claro.
 
+## ⚠️ Rodada 2026-08-12 — o fechamento vira formulário e o WhatsApp vira botão flutuante (ler antes de implementar UI)
+
+Esta rodada revoga duas regras que estavam no checklist desde a v1. Ambas por pedido do cliente.
+
+1. **A seção CTA Final não existe mais.** O checklist mandava "CTA final sempre aponta para WhatsApp, nunca formulário". O fechamento agora **é** o formulário: título "Algo está segurando o ritmo da sua operação?", dois parágrafos e o embed do Tally. O botão de WhatsApp saiu de lá.
+
+2. **O WhatsApp virou botão flutuante**, fixo no canto inferior direito, em toda a página (`components/ui/whatsapp-flutuante.tsx`, montado no `layout.tsx`). É o que preserva o caminho de baixo atrito depois que o CTA saiu — sem ele, a página inteira ficaria com um único caminho de conversão, de seis campos obrigatórios.
+
+   O glifo é desenhado à mão em SVG, não o `MessageCircle` do lucide: o balão genérico não é reconhecido como WhatsApp, e é o reconhecimento imediato que faz esse botão funcionar.
+
+   **O rodapé ganhou `pb-28` por causa dele.** Sendo `fixed`, o botão mora na viewport e não sai de lá: com o padding simétrico anterior, ele cobria o texto do rodapé exatamente quando a pessoa rolava até o fim para ler o CNPJ. Medido em 375px antes da correção: botão de y 732 a 788, texto de 754 a 784. Qualquer elemento fixo novo no rodapé precisa refazer essa conta.
+
+3. **Sobrou um bookend escuro, não dois.** O Hero abre a página escuro e o fim agora é claro. O `CTA_GRADIENT` foi removido de `gradient-background.tsx` por ficar sem uso.
+
+4. **A seção "Para quem" saiu**, e o link do menu que apontava para ela virou "Dúvidas", para `#faq`. Sem a troca, o menu ficaria com um link morto.
+
+5. **Dois H2 em caixa alta:** Processo e FAQ. **A caixa alta vem da CSS (`uppercase`), nunca digitada no texto** — leitor de tela soletra palavra em caixa alta literal, e o Ctrl+F continua achando a frase escrita normalmente. As demais seções seguem em caixa normal, então isto é uma inconsistência deliberada, vinda de como o cliente escreveu os dois títulos.
+
+6. **FAQ reduzido de seis para quatro perguntas**, com copy nova.
+
 ## ⚠️ Rodada 2026-08-06b — copy do cliente, FAQ e o CTA no meio (ler antes de implementar UI)
 
 Rodada de copy: o cliente reescreveu Processo, Sobre, Números, Valores e o fim de "Para quem", e mandou uma seção nova de FAQ.
@@ -102,7 +122,7 @@ Rodada que mexe na ordem da página e em duas seções específicas — não no
 sistema de gradientes, que já ficou fechado na rodada anterior:
 
 1. **Seção "Para Quem" removida e página reordenada.** Ordem atual: Hero,
-   Processo, Sobre, Números, Valores, Para quem, Atendimento, FAQ, CTA Final, Formulário
+   Processo, Sobre, Números, Valores, tagline, FAQ, Formulário
    Final. Isso
    torna histórico o item 5 do pivô v3 (2026-07-12, acima), que descreve o
    conteúdo de "Para Quem" — a seção não existe mais no site.
@@ -337,7 +357,11 @@ Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os p
 - Tamanho mínimo digital: ~120px de largura para o lockup horizontal completo; 32px para o ícone isolado (navbar compilada, favicon)
 
 ### Tagline
-**"Conectando Valor, Crescendo Juntos"** — desde 2026-08-01 é uma **seção própria** da página (entre Para quem e o FAQ), em caixa alta e tipografia grande, com as palavras revelando uma a uma no scroll. Saiu do rodapé na mesma mudança: nos dois lugares, apareceria duas vezes separadas apenas pelo CTA Final.
+**"Com celeridade e compromisso, abrimos portas e impulsionamos negócios."** — a tagline é uma **seção própria** da página (entre Valores e o FAQ), em caixa alta, revelando **uma linha por vez** no scroll.
+
+A frase mudou em 2026-08-12: era "Conectando Valor, Crescendo Juntos". A nova era a linha de apoio da seção Sobre, e **saiu de lá ao virar tagline** — nos dois lugares, apareceria duas vezes na mesma página.
+
+A escala é `text-stat` (48 → 68), não `text-display` (44 → 88): a linha mais longa tem 40 caracteres, e em caixa alta a 88px passaria de 1900px de largura contra 1216px de container. Trocar a frase por uma mais longa exige refazer essa conta.
 
 Continua sendo assinatura de marca, não argumento de conversão — não usar como headline de venda. Em materiais fora do site (apresentações, peças institucionais), o uso antigo continua válido: itálico, entre aspas, em `gold-dark` sobre fundo claro.
 
@@ -353,7 +377,7 @@ Duas faixas, com critério:
 
 | Faixa | Largura | Onde |
 |---|---|---|
-| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, Para quem, Atendimento, FAQ, Formulário |
+| Conteúdo | 1280px (`max-w-7xl`) | Hero, Processo, Sobre, Números, Valores, tagline, FAQ, Formulário |
 | Texto corrido | 768px (`max-w-3xl`) | CTA Final |
 
 Antes desta rodada eram quatro larguras diferentes sem critério: 512, 672, 768 e 1024, o que fazia as seções estreitas deixarem margens laterais grandes e vazias no desktop.
@@ -434,7 +458,7 @@ Caixas usam 135°, bookends usam 90°. A distinção é proposital: bookend é f
 alterna a cada seção, de propósito: a cor do fim de uma seção é a mesma do
 início da próxima, então a emenda fica invisível e o scroll lê como uma
 superfície contínua em vez de faixas empilhadas. Ordem atual: Processo (down),
-Sobre (up), Números (down), Valores (up), Para quem (down), Atendimento (up), FAQ (down),
+Sobre (up), Números (down), Valores (up), tagline (down), FAQ (up),
 Formulário (down).
 **Ao inserir uma seção nova, conferir a alternância das vizinhas** — colocar
 duas `down` seguidas cria uma faixa visível na emenda.
@@ -496,7 +520,7 @@ Títulos de seção e containers centralizados na página (`mx-auto text-center`
 - [ ] **Pendência conhecida, e agora sem nenhuma mitigação na página:** o site não tem política de privacidade, e o aviso curto que ficava abaixo do formulário foi removido a pedido do cliente em 2026-08-12. O formulário coleta nome, e-mail, WhatsApp e CNPJ de pessoa identificável, e com o Tally esses dados ficam hospedados num terceiro. Hoje a página não diz nada sobre isso a quem preenche. Decisão do cliente, registrada aqui para não ser redescoberta como surpresa por um compliance
 
 ### Estrutural
-- [ ] CTA final sempre aponta para WhatsApp (`api.whatsapp.com/send?phone=...&text=...`), nunca formulário
+- [ ] ~~CTA final sempre aponta para WhatsApp, nunca formulário~~ — **regra revogada em 2026-08-12**, ver a rodada no topo. O fechamento da página é o formulário, e o WhatsApp virou botão flutuante presente em toda a página
 - [ ] Nenhuma seção explicando "o que é securitização" — o visitante já chega sabendo que precisa do serviço
 - [ ] Placeholders de dado pendente marcados de forma visível no código (`[confirmar com cliente]`), nunca silenciosamente substituídos por número plausível
 

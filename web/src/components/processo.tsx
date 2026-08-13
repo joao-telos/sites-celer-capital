@@ -3,26 +3,24 @@ import { RetratoRecortado } from "@/components/ui/retrato-recortado";
 
 const STEPS = [
   {
-    title: "Você vende a prazo",
-    text: "Seu cliente compra e paga em 30, 60 ou 90 dias. A venda está feita, a nota está emitida, o dinheiro ainda não chegou.",
+    title: "Venda a prazo",
+    text: "Sua empresa realiza a venda com prazo de recebimento definido, gerando um recebível futuro.",
   },
   {
-    title: "Manda os documentos pelo WhatsApp",
-    text: "Duplicata, nota fiscal ou cheque, o que você tiver da venda. A análise é da qualidade do recebível e de quem vai pagar por ele.",
+    title: "Envio da documentação",
+    text: "Você encaminha os documentos da operação para nossa análise. Avaliamos a qualidade do recebível, os dados da operação e o perfil do sacado.",
   },
   {
-    title: "Proposta em horas, não em dias",
-    text: "Taxa, prazo e valor líquido na mesma mensagem. Esse é o valor final: não tem taxa de análise, taxa de cadastro nem encargo aparecendo no fechamento. Se fizer sentido, você confirma na hora.",
+    title: "Análise e proposta",
+    text: "Após a análise, apresentamos as condições da operação de forma objetiva: prazo, taxa e valor líquido a receber.",
   },
   {
-    title: "O dinheiro na sua conta",
-    text: "Operação confirmada até meio-dia, transferência no mesmo dia. Seu caixa volta a rodar: paga o fornecedor, compra o material, aceita o pedido grande.",
+    title: "Liberação do capital",
+    text: "Com a operação aprovada e formalizada, o recurso é disponibilizado em sua conta, proporcionando liquidez imediata para o seu negócio.",
   },
   {
-    // A pendência "confirmar se a cobrança no vencimento é feita pela Celer"
-    // foi respondida pelo cliente em 2026-08-06: é.
-    title: "A cobrança é com a gente",
-    text: "No vencimento, a Celer cobra direto do seu cliente. Você não entra nessa conversa.",
+    title: "Gestão do recebimento",
+    text: "No vencimento, a Celer conduz o processo de cobrança junto ao sacado, proporcionando mais praticidade e segurança à operação.",
   },
 ];
 
@@ -37,8 +35,11 @@ export function Processo() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-8 sm:px-10 lg:py-10">
         <Reveal>
           <div className="mb-14 text-center lg:mb-16">
-            <h2 className="font-heading text-h2 font-bold text-navy">
-              Do contrato fechado ao capital na conta.
+            {/* Caixa alta pela CSS, não digitada no texto: leitor de tela
+                soletra sigla em caixa alta literal, e o Ctrl+F do
+                navegador continua achando a frase escrita normalmente. */}
+            <h2 className="font-heading text-h2 font-bold text-navy uppercase">
+              Do fechamento do contrato ao capital na conta
             </h2>
           </div>
         </Reveal>

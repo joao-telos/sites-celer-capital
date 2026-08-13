@@ -76,23 +76,25 @@ export function Sobre() {
                   <h2 className="font-heading text-h2 font-bold text-white">
                     Sobre nós
                   </h2>
-                  <p className="text-lead mt-5 font-light text-white">
-                    Com celeridade e compromisso, abrimos portas e impulsionamos
-                    negócios.
-                  </p>
                   <p className="text-body mt-5 max-w-[68ch] font-light text-white/70">
-                    A Celer nasceu em Curitiba, em 2017, dentro de um problema
-                    que os sócios viram de perto ao longo de mais de 30 anos no
-                    mercado de recebíveis: empresa saudável, com pedido fechado
-                    e nota emitida, parada porque o banco olha o score e não
-                    olha a venda.
+                    A Celer nasceu em Curitiba, em 2017, a partir de uma
+                    realidade comum a muitas empresas: vender bem, ter
+                    recebíveis de qualidade e, ainda assim, enfrentar
+                    dificuldades de caixa porque o crédito tradicional nem
+                    sempre acompanha a dinâmica do negócio.
                   </p>
                   <p className="text-body mt-4 max-w-[68ch] font-light text-white/70">
-                    Desde então foram mais de R$ 1 bilhão antecipados para
-                    indústrias e distribuidoras que faturam bem e ainda assim
-                    ficam sem caixa no meio do mês. A operação continua a mesma
-                    de quando começamos: você fala com uma pessoa, não com um
-                    formulário.
+                    Foi para transformar essa realidade que construímos nossa
+                    atuação em antecipação de recebíveis, aproximando empresas
+                    de capital de forma ágil, transparente e personalizada.
+                  </p>
+                  <p className="text-body mt-4 max-w-[68ch] font-light text-white/70">
+                    Ao longo dessa trajetória, já foram mais de R$ 1 bilhão em
+                    recebíveis antecipados, apoiando indústrias e distribuidoras
+                    a transformar vendas a prazo em liquidez para manter a
+                    operação, aproveitar oportunidades e continuar crescendo.
+                    Porque uma venda só se transforma em crescimento quando o
+                    capital chega no momento certo.
                   </p>
                 </div>
               </div>
