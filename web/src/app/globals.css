@@ -258,6 +258,26 @@
   }
   html {
     @apply font-sans;
+
+    /*
+      Rolagem suave para os links de âncora do menu e dos botões. Fica no
+      `html` e não em JavaScript: assim vale também para o link que a
+      pessoa cola na barra de endereço com `#faq`, para o botão voltar do
+      navegador e para o "pular para o conteúdo" do teclado.
+
+      O bloco de `prefers-reduced-motion` mais abaixo devolve isto para
+      `auto`. Rolagem animada é um gatilho real de enjoo em quem tem
+      sensibilidade vestibular, e a preferência do sistema tem que ganhar.
+    */
+    scroll-behavior: smooth;
+
+    /*
+      A navbar é `fixed` e mede 84px. Sem esta folga, pular para uma
+      âncora deixa o título da seção escondido atrás dela — a pessoa
+      chega no lugar certo e vê o parágrafo, não o título. 6rem cobre os
+      84px com respiro.
+    */
+    scroll-padding-top: 6rem;
   }
 }
 

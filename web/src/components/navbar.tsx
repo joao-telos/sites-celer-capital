@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { useScrolled } from "@/hooks/use-scrolled";
-import { WHATSAPP_URL } from "@/lib/contato";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -87,10 +86,10 @@ export function Navbar() {
           >
             Login
           </a>
+          {/* Aponta para o formulário, não mais para o WhatsApp — o
+              WhatsApp virou o botão flutuante, presente em toda a página. */}
           <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#formulario"
             className={cn(
               buttonVariants({ size: "sm" }),
               "h-auto rounded-full bg-gold px-4 py-2 text-caption font-bold tracking-wider text-navy uppercase hover:bg-gold-light"

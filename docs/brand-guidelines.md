@@ -54,6 +54,16 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
    momentos escuros da página continua valendo, porque a seção em si fica no
    wash claro.
 
+## ⚠️ Rodada 2026-08-12b — rolagem suave e CTAs apontando para o formulário
+
+1. **Rolagem suave em toda âncora**, via `scroll-behavior: smooth` no `html` (`globals.css`). Fica na CSS e não em JavaScript: assim vale também para o link colado na barra de endereço com `#faq`, para o botão voltar do navegador e para a navegação por teclado. O bloco de `prefers-reduced-motion` devolve para `auto` — rolagem animada é gatilho real de enjoo em quem tem sensibilidade vestibular.
+
+   **A duração não é ajustável em CSS.** Se o cliente pedir mais rápido ou mais devagar, aí sim entra JavaScript.
+
+2. **`scroll-padding-top: 6rem` no `html`.** A navbar é `fixed` e mede 84px: sem essa folga, pular para uma âncora deixa o título da seção escondido atrás dela, e a pessoa chega no lugar certo mas vê o parágrafo. Medido depois da correção: os títulos param entre 60 e 128px abaixo da navbar. **Se a altura da navbar mudar, esse valor precisa acompanhar.**
+
+3. **"Antecipar agora" e "Antecipar meus recebíveis" passaram a apontar para `#formulario`**, e não mais para o WhatsApp. O `target="_blank"` e o `rel` saíram junto: são atributos de link externo, e âncora interna que abre em aba nova perde a rolagem suave e o histórico.
+
 ## ⚠️ Rodada 2026-08-12 — o fechamento vira formulário e o WhatsApp vira botão flutuante (ler antes de implementar UI)
 
 Esta rodada revoga duas regras que estavam no checklist desde a v1. Ambas por pedido do cliente.
@@ -199,7 +209,9 @@ O manual oficial define o conceito como fusão de **agilidade moderna** com **so
 | CTA / WhatsApp | Convite de baixo atrito — um dos dois caminhos de conversão (ver nota abaixo) | "Manda uma mensagem. Sem compromisso, resposta rápida." |
 | Dado não confirmado | Nunca inventar — usar placeholder explícito | `[prazo de aprovação — confirmar com cliente]` |
 
-**Dois caminhos de conversão (2026-08-05).** O site passou a ter um formulário de captação qualificada, na seção `#formulario`, logo acima do CTA Final. Ele coleta nome, CNPJ, empresa, WhatsApp, e-mail e faixa de faturamento anual, todos obrigatórios.
+**Onde cada caminho vive (revisto em 2026-08-12).** Todo botão de conversão da página — "Antecipar agora" no menu e "Antecipar meus recebíveis" no Hero — aponta para `#formulario`. **O WhatsApp existe num lugar só: o botão flutuante.** Quem for adicionar um CTA novo precisa decidir conscientemente para qual dos dois caminhos ele vai, em vez de copiar o link do vizinho.
+
+**Dois caminhos de conversão (2026-08-05).** O site passou a ter um formulário de captação qualificada, na seção `#formulario`. Ele coleta nome, CNPJ, empresa, WhatsApp, e-mail e faixa de faturamento anual, todos obrigatórios.
 
 Isso muda a regra de "convite de baixo atrito, sem formulário" que valia até aqui. O raciocínio original, ancorado na persona (Rodrigo, 46, dono de metalúrgica, que desconfia de processo lento), era que atrito baixo converte melhor nesse público — e seis campos obrigatórios são atrito alto.
 

@@ -7,7 +7,6 @@ import {
   HERO_GRADIENT,
 } from "@/components/ui/gradient-background";
 import { buttonVariants } from "@/components/ui/button";
-import { WHATSAPP_URL } from "@/lib/contato";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -35,10 +34,13 @@ export function Hero() {
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          {/*
+            Aponta para o formulário, não mais para o WhatsApp. Sem
+            target/rel: são atributos de link externo, e âncora interna que
+            abre em aba nova perde a rolagem suave e o histórico.
+          */}
           <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#formulario"
             className={cn(
               buttonVariants({ size: "lg" }),
               "text-caption h-auto rounded-full bg-gold px-7 py-3.5 font-bold tracking-wider text-navy uppercase hover:bg-gold-light"
