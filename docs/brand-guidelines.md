@@ -361,7 +361,19 @@ Os arquivos fornecidos **só existem na versão branca/clara** (confirmado: os p
 
 A frase mudou em 2026-08-12: era "Conectando Valor, Crescendo Juntos". A nova era a linha de apoio da seção Sobre, e **saiu de lá ao virar tagline** — nos dois lugares, apareceria duas vezes na mesma página.
 
-A escala é `text-stat` (48 → 68), não `text-display` (44 → 88): a linha mais longa tem 40 caracteres, e em caixa alta a 88px passaria de 1900px de largura contra 1216px de container. Trocar a frase por uma mais longa exige refazer essa conta.
+A frase tem **três quebras declaradas**, não deixadas para o navegador:
+
+```
+COM CELERIDADE E COMPROMISSO,
+ABRIMOS PORTAS E
+IMPULSIONAMOS NEGÓCIOS.
+```
+
+A escala é `text-stat` (48 → 68), não `text-display` (44 → 88): medida no navegador, a linha mais longa ocupa 730px com a fonte no teto de 68px.
+
+**As três linhas só aparecem como três a partir de cerca de 810px de viewport.** Medido: 1024px dá três, 768px dá quatro (a primeira reparte), 375px dá sete. Forçar três em qualquer largura exigiria a fonte cair para perto de 21px no celular, menor que o H2 das seções — a assinatura da marca ficaria menor que os títulos.
+
+Trocar a frase exige refazer essa medição.
 
 Continua sendo assinatura de marca, não argumento de conversão — não usar como headline de venda. Em materiais fora do site (apresentações, peças institucionais), o uso antigo continua válido: itálico, entre aspas, em `gold-dark` sobre fundo claro.
 
