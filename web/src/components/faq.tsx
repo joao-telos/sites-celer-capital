@@ -1,31 +1,40 @@
 import { Plus } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
+import { cn } from "@/lib/utils";
 
 /*
   Quatro perguntas, na ordem em que aparecem na cabeça de quem está
   decidindo. Copy do cliente, verbatim.
+
+  `resposta` é uma lista de parágrafos, não uma string: a última tem dois,
+  e emendá-los num parágrafo só mudaria o texto que o cliente escreveu.
 */
-const PERGUNTAS = [
+const PERGUNTAS: Array<{ pergunta: string; resposta: string[] }> = [
   {
     pergunta: "Antecipar recebíveis é a mesma coisa que contratar um empréstimo?",
-    resposta:
+    resposta: [
       "Não. São operações diferentes. A principal diferença está na origem do dinheiro: na antecipação, você adianta um valor que já tem a receber por uma venda a prazo, como boletos ou cartões. No empréstimo, você recebe dinheiro do banco e cria uma nova dívida.",
+    ],
   },
   {
     pergunta: "Preciso ter score alto ou CNPJ sem restrição?",
-    resposta:
+    resposta: [
       "Não necessariamente. Na antecipação, a análise considera principalmente o recebível e o perfil de quem irá pagá-lo. Por isso, empresas que enfrentam dificuldades para obter crédito tradicional podem ter outras alternativas de acesso a recursos por meio da antecipação de recebíveis.",
+    ],
   },
   {
     pergunta: "Quais recebíveis a Celer antecipa?",
-    resposta:
+    resposta: [
       "Duplicatas, cheques, recebíveis de cartão de crédito e outros contratos. Se sua empresa tem valores a receber, fale com a nossa equipe para avaliar a operação.",
+    ],
   },
   {
     pergunta: "Meu cliente vai saber que antecipei?",
-    resposta:
-      "Sim. A cessão do crédito é formalizada e a cobrança do recebível passa a ser realizada pela Celer no vencimento. É um procedimento usual em operações de antecipação e não altera as condições comerciais acordadas com seu cliente.",
+    resposta: [
+      "Depende da modalidade escolhida. Nas operações tradicionais, sim: a cessão do crédito é formalizada e a cobrança passa a ser realizada pela Celer.",
+      "Mas, caso seja necessário manter a antecipação em sigilo, nossa equipe pode avaliar a possibilidade de que a operação seja realizada sem a comunicação direta ao seu cliente.",
+    ],
   },
 ];
 
@@ -81,9 +90,19 @@ export function Faq() {
                     className="size-5 shrink-0 text-gold-dark transition-transform duration-200 group-open:rotate-45"
                   />
                 </summary>
-                <p className="text-body max-w-[68ch] pb-6 font-light text-navy/70">
-                  {resposta}
-                </p>
+                <div className="pb-6">
+                  {resposta.map((paragrafo, i) => (
+                    <p
+                      key={paragrafo}
+                      className={cn(
+                        "text-body max-w-[68ch] font-light text-navy/70",
+                        i > 0 && "mt-3"
+                      )}
+                    >
+                      {paragrafo}
+                    </p>
+                  ))}
+                </div>
               </details>
             ))}
           </div>

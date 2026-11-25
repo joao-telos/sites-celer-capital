@@ -54,6 +54,20 @@ nos pivôs anteriores, só na superfície e em duas seções novas:
    momentos escuros da página continua valendo, porque a seção em si fica no
    wash claro.
 
+## ⚠️ Rodada 2026-11-24 — favicon e a resposta sobre sigilo
+
+1. **O site passou a ter favicon.** Não tinha nenhum, e o navegador mostrava o globo genérico na aba. São `web/src/app/icon.png` (512px) e `apple-icon.png` (180px), gerados a partir de `public/logo/celer-icon.png` pela convenção de arquivo do Next — sem `<link>` escrito à mão.
+
+   O desenho é quadrado navy com a marca em creme por cima. **O ícone sozinho não serve de favicon:** ele é creme claro sobre transparente e sumiria na aba clara do navegador. O navy é o que o torna visível.
+
+   A marca ocupa 86% do quadrado, não menos. Comparado em 16px, que é o tamanho real da aba: em 74% o oval e as barras viram um borrão só; em 94% encosta nos cantos. Quem for trocar o ícone **precisa olhar o resultado em 16px**, não em tamanho cheio.
+
+   O `apple-icon` vai sem canto arredondado e com fundo cheio: a tela inicial do iPhone não respeita alfa e arredonda por conta própria.
+
+2. **A resposta "Meu cliente vai saber que antecipei?" mudou.** Era um "sim" seco; agora distingue a modalidade tradicional da operação em sigilo. Copy do cliente, verbatim.
+
+   O campo `resposta` do FAQ virou lista de parágrafos (`string[]`), porque essa resposta tem dois. Emendar os dois num parágrafo só mudaria o texto que o cliente escreveu.
+
 ## ⚠️ Rodada 2026-08-12b — rolagem suave e CTAs apontando para o formulário
 
 1. **Rolagem suave em toda âncora**, via `scroll-behavior: smooth` no `html` (`globals.css`). Fica na CSS e não em JavaScript: assim vale também para o link colado na barra de endereço com `#faq`, para o botão voltar do navegador e para a navegação por teclado. O bloco de `prefers-reduced-motion` devolve para `auto` — rolagem animada é gatilho real de enjoo em quem tem sensibilidade vestibular.
