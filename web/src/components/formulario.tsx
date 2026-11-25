@@ -7,8 +7,22 @@ import { Reveal } from "@/components/motion/reveal";
 
 const EMBED = "https://tally.so/widgets/embed.js";
 
+/*
+  Formulário trocado em 2026-11-24: era XxAJGL, virou jelVR6.
+
+  O Tally entrega o snippet de página inteira, com `overflow: hidden` no
+  `html` e o iframe em posição absoluta cobrindo a viewport. Aqui o
+  formulário vive dentro de uma seção, então daquele snippet aproveita-se
+  só o id — o resto quebraria a rolagem da página.
+
+  Os parâmetros também são nossos, não os do snippet, que vinha só com
+  `transparentBackground`. `dynamicHeight` é o que faz o iframe crescer
+  conforme o formulário avança; sem ele a altura fixa abaixo corta o
+  conteúdo. Caminho `/embed/`, não `/r/`: é o otimizado para iframe, e foi
+  conferido no navegador com estes mesmos parâmetros.
+*/
 const SRC =
-  "https://tally.so/embed/XxAJGL" +
+  "https://tally.so/embed/jelVR6" +
   "?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1";
 
 declare global {

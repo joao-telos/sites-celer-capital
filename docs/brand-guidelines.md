@@ -233,7 +233,9 @@ A mudança é deliberada e do cliente: a faixa de faturamento qualifica o lead a
 
 **O formulário passou a ser um embed do Tally (2026-08-06).** A implementação própria — Server Action, validação de CNPJ, gravação em planilha do Google e notificação por Resend — foi construída e depois removida, porque o cliente montou o mesmo formulário no Tally, que já resolve armazenamento, notificação e acesso compartilhado. O código está no histórico do git até o commit `f0e29d3`, caso um dia se queira sair do Tally.
 
-Consequência para quem for mexer: **os campos, os rótulos e as sete faixas de faturamento não estão mais neste repositório.** Eles vivem no painel do Tally, no formulário `XxAJGL`. Mudança de campo é lá, não aqui. O que o site controla é a casca da seção: título, subtítulo, largura e wash.
+Consequência para quem for mexer: **os campos, os rótulos e as sete faixas de faturamento não estão mais neste repositório.** Eles vivem no painel do Tally, no formulário **`jelVR6`** (era `XxAJGL` até 2026-11-24). Mudança de campo é lá, não aqui. O que o site controla é a casca da seção: título, subtítulo, largura e wash.
+
+**Ao trocar o formulário, aproveite só o id do snippet que o Tally entrega.** Ele é o de página inteira: põe `overflow: hidden` no `html` e o iframe em posição absoluta cobrindo a viewport, o que quebraria a rolagem do site. Os parâmetros da URL também são nossos — em especial `dynamicHeight=1`, que faz o iframe crescer conforme o formulário avança e que o snippet não traz. Use o caminho `/embed/`, não `/r/`.
 
 ### Prohibited Terms (Termos proibidos)
 - "instituição financeira" (linguagem genérica do PDF — não reflete o modelo de securitizadora, ver correção de escopo acima)
